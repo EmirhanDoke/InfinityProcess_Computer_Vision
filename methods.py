@@ -359,4 +359,10 @@ class DrawHistogramFrame(ProcessFrameBase):
         plt.xlabel('Pixel Intensity')
         plt.ylabel('Frequency')
         plt.show()
-    
+
+
+
+
+
+
+
