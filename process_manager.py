@@ -34,24 +34,29 @@ class ADD_ComboBox:
             if widget != self.combo:                                                            #! Bug olma ihtimali var.
                 widget.destroy()
 
-        # Seçilen işleme göre sınıfı oluştur
-        if self.selected_operator == "2D-Gabor Filter":
-            self.processor = GaborFilterFrame(self.frame)
-        elif self.selected_operator == "Morphological":
-            self.processor = MorphologicalFrame(self.frame)
-        elif self.selected_operator == "Thresholding":
-            self.processor = ThresholdingFrame(self.frame)
-        elif self.selected_operator == "Gamma Transform":
-            self.processor = GammaTransformFrame(self.frame)
-        else: # OFF status #! Buradaki hatayı düzelt
+
+        # Create new Widget
+        match self.selected_operator:
+            case "2D-Gabor Filter":
+                self.processor = GaborFilterFrame(self.frame)
+            case "Morphological":
+                self.processor = MorphologicalFrame(self.frame)
+            case "Thresholding":
+                self.processor = ThresholdingFrame(self.frame)
+            case "Gamma Transform":
+                self.processor = GammaTransformFrame(self.frame)
+            case "Canny Edge Detector":
+                self.processor = CannyEdgeDetectorFrame(self.frame)
             
-            self.processor = None
-            print("Deleted the process.")
-            
-            # Clear widgets of the process
-            for widget in self.frame.winfo_children():
-                if widget != self.combo:
-                    widget.destroy()
+            case "OFF":
+                    
+                self.processor = None
+                print("Deleted the process.")
+                
+                # Clear widgets of the process
+                for widget in self.frame.winfo_children():
+                    if widget != self.combo:
+                        widget.destroy()
         
               
 

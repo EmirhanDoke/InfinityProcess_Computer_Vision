@@ -160,3 +160,51 @@ class GammaTransformFrame(ProcessFrameBase):
         gamma_corrected = np.uint8(gamma_corrected * 255)
         
         return img
+    
+class CannyEdgeDetectorFrame(ProcessFrameBase):
+    def __init__(self, frame):
+        self.frame = frame
+        self.create_widgets()
+        
+    def create_widgets(self):
+        
+        tk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
+        self.ksize_entry = tk.Entry(self.frame)
+        self.ksize_entry.grid(row=1, column=1, padx=2, pady=2)
+        
+        tk.Label(self.frame, text="Low Threshold:").grid(row=2, column=0, padx=2, pady=2)
+        self.low_threshold_entry = tk.Entry(self.frame)
+        self.low_threshold_entry.grid(row=2, column=1, padx=2, pady=2)
+        
+        tk.Label(self.frame, text="Max Threshold:").grid(row=3, column=0, padx=2, pady=2)
+        self.max_threshold_entry = tk.Entry(self.frame)
+        self.max_threshold_entry.grid(row=3, column=1, padx=2, pady=2)
+        
+        tk.Label(self.frame, text="L2gradient:").grid(row=4, column=0, padx=2, pady=2)
+        shape = ["True", "False"]
+        self.l2gradient_combobox = ttk.Combobox(self.frame, values=shape, width=17)
+        self.l2gradient_combobox .grid(row=4, column=1, padx=2, pady=2)
+    
+    def apply(self, img):
+        
+        ksize = int(self.ksize_entry.get())
+        low_threshold = int(self.low_threshold_entry.get())
+        max_threshold = int(self.max_threshold_entry.get())
+        l2gradient = bool(self.l2gradient_combobox.get())
+        
+        detected_edges = cv2.Canny(img, low_threshold, max_threshold, ksize, L2gradient= l2gradient)
+    
+        mask = detected_edges != 0
+        img = img[:,:,None]
+        dst = img * (mask[:,:,None].astype(img.dtype))
+        
+        img = cv2.cvtColor(dst, cv2.COLOR_BGR2RGB)
+        
+        return img
+        
+    
+    
+    
+    
+    
+    
