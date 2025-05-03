@@ -101,7 +101,7 @@ class MorphologicalFrame(ProcessFrameBase):
         self.shapes_combobox.grid(row=2, column=1, padx=2, pady=2)
 
         tk.Label(self.frame, text="Operations:").grid(row=3, column=0, padx=2, pady=2)
-        operations = ["Erode", "Dilation", "Opening", "Closing"]
+        operations = ["Erode", "Dilation", "Opening", "Closing", "Gradient", "Top Hat", "Black Hat",]
         self.operations_combobox = ttk.Combobox(self.frame, values=operations, width=17)
         self.operations_combobox.grid(row=3, column=1, padx=2, pady=2)
 
@@ -124,6 +124,7 @@ class MorphologicalFrame(ProcessFrameBase):
     
             case "Cross":
                 kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (kernel_size,kernel_size))
+                
     
         match operations:
             case "Erode":
@@ -138,6 +139,15 @@ class MorphologicalFrame(ProcessFrameBase):
             case "Closing":
                 img = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel, iterations = iterations_value)
     
+            case "Gradient":
+                img = cv2.morphologyEx(img, cv2.MORPH_GRADIENT, kernel, iterations = iterations_value)
+    
+            case "Top Hat":
+                img = cv2.morphologyEx(img, cv2.MORPH_TOPHAT, kernel, iterations = iterations_value)
+    
+            case "Black Hat":
+                img =  cv2.morphologyEx(img, cv2.MORPH_BLACKHAT, kernel, iterations = iterations_value)
+                
         return img
 
 #! Maybe Not working
@@ -757,3 +767,36 @@ class AdaptiveThresholdFrame(ProcessFrameBase):
 
         return thresholded_image
 
+class OtsuThresholdFrame(ProcessFrameBase):
+
+    def create_widgets(self):
+        # Entry for max value (maximum intensity value to be assigned to pixels)
+        tk.Label(self.frame, text="Max Value:").grid(row=1, column=0, padx=2, pady=2)
+        self.max_value_entry = tk.Entry(self.frame)
+        self.max_value_entry.grid(row=1, column=1, padx=2, pady=2)
+
+        # Combobox for threshold type (Binary or Binary Inverted)
+        tk.Label(self.frame, text="Threshold Type:").grid(row=2, column=0, padx=2, pady=2)
+        self.threshold_type_combobox = ttk.Combobox(self.frame, values=['Binary', 'Binary Inverted'])
+        self.threshold_type_combobox.grid(row=2, column=1, padx=2, pady=2)
+
+    def apply(self, img):
+        max_value = int(self.max_value_entry.get())
+        threshold_type = self.threshold_type_combobox.get()
+
+        # Convert to grayscale if needed
+        if len(img.shape) == 3:
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        else:
+            gray = img.copy()
+
+        # Apply Otsu's thresholding
+        if threshold_type == 'Binary':
+            threshold_type_cv = cv2.THRESH_BINARY
+        else:
+            threshold_type_cv = cv2.THRESH_BINARY_INV
+
+        # Apply threshold using Otsu's method
+        _, otsu_thresholded_image = cv2.threshold(gray, 0, max_value, threshold_type_cv + cv2.THRESH_OTSU)
+
+        return otsu_thresholded_image
