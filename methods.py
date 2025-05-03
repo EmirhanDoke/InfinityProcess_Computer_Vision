@@ -503,3 +503,34 @@ class BilateralFilterFrame(ProcessFrameBase):
 
         return filtered_image
 
+class Filter2DFrame(ProcessFrameBase):
+
+    def create_widgets(self):
+        tk.Label(self.frame, text="3x3 Kernel Values (row-wise):").grid(row=1, column=0, columnspan=2, padx=2, pady=2)
+
+        inner_frame = tk.Frame(self.frame)
+        inner_frame.grid(row=2, column=0)
+        
+        # 3x3 Entry grid for kernel values
+        self.kernel_entries = []
+        for i in range(3):
+            row_entries = []
+            for j in range(3):
+                entry = tk.Entry(inner_frame, width=5)
+                entry.grid(row=i+2, column=j, padx=1, pady=1)
+                entry.insert(0, "0")
+                row_entries.append(entry)
+            self.kernel_entries.append(row_entries)
+
+    def apply(self, img):
+        # Read kernel values from Entry widgets and convert to float
+        kernel = []
+        for row in self.kernel_entries:
+            row_values = [float(entry.get()) for entry in row]
+            kernel.append(row_values)
+        kernel = np.array(kernel, dtype=np.float32)
+
+        # Apply filter2D
+        filtered_image = cv2.filter2D(img, -1, kernel)
+
+        return filtered_image
