@@ -16,7 +16,7 @@ class ADD_ComboBox:
         self.add()
         
     def add(self):
-        available_process = [ "-----Basic Image Operations-----","Color Convert" ,"OFF", "2D-Gabor Filter", "Morphological", 
+        available_process = [ "-----Basic Image Operations-----","Color Convert" ,"Resize Image" ,"OFF", "2D-Gabor Filter", "Morphological", 
                              "Thresholding", "Gamma Transform", "Canny Edge Detector", 
                              "Hough Transform", "Gaussian Blur", "Kitter Illingworth", 
                              "Draw Histogram"]
@@ -57,6 +57,9 @@ class ADD_ComboBox:
                 self.processor_np = DrawHistogramFrame(self.frame)
             case "Color Convert":
                 self.processor = ColorConvertFrame(self.frame)
+            case "Resize Image":
+                self.processor = ResizeFrame(self.frame)    
+                
             case "OFF":
                     
                 self.processor = None

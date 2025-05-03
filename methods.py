@@ -392,7 +392,25 @@ class ColorConvertFrame(ProcessFrameBase):
 
         return converted_image
 
+class ResizeFrame(ProcessFrameBase):
 
+    def create_widgets(self):
+        tk.Label(self.frame, text="Width:").grid(row=1, column=0, padx=2, pady=2)
+        self.width_entry = tk.Entry(self.frame)
+        self.width_entry.grid(row=1, column=1, padx=2, pady=2)
+        
+        tk.Label(self.frame, text="Height:").grid(row=2, column=0, padx=2, pady=2)
+        self.height_entry = tk.Entry(self.frame)
+        self.height_entry.grid(row=2, column=1, padx=2, pady=2)
+
+    def apply(self, img):
+        width = int(self.width_entry.get())
+        height = int(self.height_entry.get())
+
+        # Resize the image
+        resized_image = cv2.resize(img, (width, height))
+
+        return resized_image
 
 
 
