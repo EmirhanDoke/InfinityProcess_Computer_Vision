@@ -52,11 +52,12 @@ class ADD_ComboBox:
             case "Gaussian Blur":
                 self.processor = GaussianBlurFrame(self.frame)
             case "Kitter Illingworth":
-                self.processor = KitterIllingworthFrame(self.frame)
+                self.processor_np = KitterIllingworthFrame(self.frame)
             
             case "OFF":
                     
                 self.processor = None
+                self.processor_np = None
                 print("Deleted the process.")
                 
                 # Clear widgets of the process
@@ -69,17 +70,16 @@ class ADD_ComboBox:
     def apply_process(self):
         if self.processor:
             
-            if hasattr(self, 'update_result') and callable(getattr(self, 'update_result')):
-                self.update_result(self)
-            
-            else:
-                result = self.processor.apply(self.read_img())
-                ADD_ComboBox.images.append(result)
-
-                
+            result = self.processor.apply(self.read_img())
+            ADD_ComboBox.images.append(result)
+  
         else:
             print("No valid processor found.")
 
+        if hasattr(self, 'processor_np'):
+            if self.processor_np:
+                self.processor_np.update_result(self.read_img())
+                ADD_ComboBox.images.append(self.read_img())
 
 #! Utils
 

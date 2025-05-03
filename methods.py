@@ -301,6 +301,7 @@ class GaussianBlurFrame(ProcessFrameBase):
     
         return img
 
+#! Not working
 class KitterIllingworthFrame(ProcessFrameBase):
     
     def create_widgets(self):
