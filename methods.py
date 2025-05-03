@@ -275,6 +275,28 @@ class HoughTransformFrame(ProcessFrameBase):
         
         return copy_img
         
+class GaussianBlurFrame(ProcessFrameBase):
+        
+    def create_widgets(self):
+        
+        tk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
+        self.ksize_entry = tk.Entry(self.frame)
+        self.ksize_entry.grid(row=1, column=1, padx=2, pady=2)
+        
+        tk.Label(self.frame, text="Sigma_X:").grid(row=2, column=0, padx=2, pady=2)
+        self.sigmax_entry = tk.Entry(self.frame)
+        self.sigmax_entry.grid(row=2, column=1, padx=2, pady=2)
+        
+        tk.Label(self.frame, text="Sigma_Y:").grid(row=3, column=0, padx=2, pady=2)
+        self.sigmay_entry = tk.Entry(self.frame)
+        self.sigmay_entry.grid(row=3, column=1, padx=2, pady=2)
     
+    def apply(self, img):
+        
+        ksize = int(self.ksize_entry.get())
+        sigmax = float(self.sigmax_entry.get())
+        sigmay = float(self.sigmay_entry.get())
+        
+        img = cv2.GaussianBlur(img, (ksize, ksize), sigmax, sigmay)
     
-    
+        return img

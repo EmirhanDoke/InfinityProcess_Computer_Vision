@@ -49,6 +49,8 @@ class ADD_ComboBox:
                 self.processor = CannyEdgeDetectorFrame(self.frame)
             case "Hough Transform":
                 self.processor = HoughTransformFrame(self.frame)
+            case "Gaussian Blur":
+                self.processor = GaussianBlurFrame(self.frame)
             
             case "OFF":
                     
