@@ -24,7 +24,7 @@ class ADD_ComboBox:
                              "Harris Corner Detection", "Shi-Tomasi Corner Detection",
                              "-----Thresholding Operations-----", "Thresholding", "Adaptive Thresholding", "Otsu Thresholding", "Kitter Illingworth", "Gamma Transform",
                              "-----Contour Operations-----", "Find Contours", "Draw Contours",
-                             "---Edge Detection and Linear Detection---", "Hough Circular Transform", "Hough Lines Tranform",
+                             "---Edge Detection and Linear Detection---", "Hough Circular Transform", "Hough Lines Transform",
                              "-----Fourier Transform-----", "DFT Transform", "Inverse DFT Transform", "FFT with Numpy",
                              "-----Histogram Operations-----", "Draw Histogram", "Equalize Histogram","CLAHE Adaptive Equalization",
                              
