@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import cv2
+import numpy as np
 
 class ProcessFrameBase:
     def apply(self, img):
@@ -134,6 +135,7 @@ class MorphologicalFrame(ProcessFrameBase):
     
         return img
 
+#! Maybe Not working
 class GammaTransformFrame(ProcessFrameBase):
     def __init__(self, frame):
         self.frame = frame
@@ -142,6 +144,19 @@ class GammaTransformFrame(ProcessFrameBase):
     def create_widgets(self):
         
         tk.Label(self.frame, text="Gamma Value:").grid(row=1, column=0, padx=2, pady=2)
-        self.gamma_transform_var = tk.StringVar()
-        tk.Entry(self.frame, textvariable= self.gamma_transform_var).grid(row=1, column=1, padx=2, pady=2)
+        self.gamma_transform_entry = tk.Entry(self.frame)
+        self.gamma_transform_entry.grid(row=1, column=1, padx=2, pady=2)
 
+    def apply(self, img):
+        gamma_transform_entry = int(self.gamma_transform_entry.get())
+
+        # Normalize the image to the range [0, 1]
+        normalized_image = img / 255.0
+        
+        # Apply gamma transform
+        gamma_corrected = np.power(normalized_image, gamma_transform_entry)
+        
+        # Convert back to range [0, 255] and convert to uint8
+        gamma_corrected = np.uint8(gamma_corrected * 255)
+        
+        return img
