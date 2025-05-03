@@ -24,6 +24,7 @@ class ADD_ComboBox:
                              "-----Thresholding Operations-----", "Thresholding", "Adaptive Thresholding", "Otsu Thresholding",
                              "-----Contour Operations-----", "Find Contours", "Draw Contours",
                              "---Edge Detection and Linear Detection---", "Hough Circular Transform", "Hough Lines Tranform",
+                             "-----Fourier Transform-----", "DFT Transform", "Inverse DFT Transform", "FFT with Numpy",
                              "OFF", "Morphological", 
                              "Gamma Transform",
                             "Kitter Illingworth", 
@@ -97,8 +98,17 @@ class ADD_ComboBox:
                 self.processor = DrawContoursFrame(self.frame)
             case "Hough Lines Transform":
                 self.processor = HoughLinesFrame(self.frame)
+            case "DFT Transform":
+                self.processor = DFTFrame(self.frame)
+            case "Inverse DFT Transform":
+                self.processor = IDFTFrame(self.frame)  
+            case "FFT with Numpy":
+                self.processor = NumpyFFTFrame(self.frame)
             
-                
+            
+            
+            
+              
             case "OFF":
                     
                 self.processor = None
