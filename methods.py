@@ -656,7 +656,48 @@ class CornerHarrisFrame(ProcessFrameBase):
 
         return result_img
 
+class GoodFeaturesToTrackFrame(ProcessFrameBase):
 
+    def create_widgets(self):
+        # Entry for maxCorners (maximum number of corners to return)
+        tk.Label(self.frame, text="Max Corners:").grid(row=1, column=0, padx=2, pady=2)
+        self.max_corners_entry = tk.Entry(self.frame)
+        self.max_corners_entry.grid(row=1, column=1, padx=2, pady=2)
+
+        # Entry for qualityLevel (minimum accepted quality of corners)
+        tk.Label(self.frame, text="Quality Level (0 to 1):").grid(row=2, column=0, padx=2, pady=2)
+        self.quality_level_entry = tk.Entry(self.frame)
+        self.quality_level_entry.grid(row=2, column=1, padx=2, pady=2)
+
+        # Entry for minDistance (minimum possible Euclidean distance between corners)
+        tk.Label(self.frame, text="Min Distance:").grid(row=3, column=0, padx=2, pady=2)
+        self.min_distance_entry = tk.Entry(self.frame)
+        self.min_distance_entry.grid(row=3, column=1, padx=2, pady=2)
+
+    def apply(self, img):
+        max_corners = int(self.max_corners_entry.get())
+        quality_level = float(self.quality_level_entry.get())
+        min_distance = float(self.min_distance_entry.get())
+
+        # Convert to grayscale if needed
+        if len(img.shape) == 3:
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        else:
+            gray = img.copy()
+
+        # Detect good features to track
+        corners = cv2.goodFeaturesToTrack(gray, max_corners, quality_level, min_distance)
+
+        # Copy image to draw results
+        result_img = img.copy()
+
+        # Draw detected corners
+        if corners is not None:
+            for corner in corners:
+                x, y = corner.ravel()
+                cv2.circle(result_img, (int(x), int(y)), 4, (0, 255, 0), -1)
+
+        return result_img
 
 
 

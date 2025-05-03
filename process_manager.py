@@ -19,11 +19,12 @@ class ADD_ComboBox:
         available_process = [ "-----Basic Image Operations-----","Color Convert" ,"Resize Image" ,"Rotate Image", "Flip Image", 
                              "-----Image Filtering Operations-----", "Gaussian Blur", "Median Blur", "Bilateral Filter", "Filter2D",
                              "2D-Gabor Filter",
-                             "-----Edge and Corner Detection-----", "Sobel Filter", "Scharr Filter", "Laplacian", "Canny Edge Detector",
-                             "Harris Corner Detection", 
+                             "-----Edge and Corner Detection-----", "Sobel Filter", "Scharr Filter", "Laplacian", "Canny Edge Detection",
+                             "Harris Corner Detection", "Shi-Tomasi Corner Detection",
+                             "-----Thresholding Operations-----", "Thresholding", "Adaptive Thresholding",
                              
                              "OFF", "Morphological", 
-                             "Thresholding", "Gamma Transform",
+                             "Gamma Transform",
                              "Hough Transform", "Kitter Illingworth", 
                              "Draw Histogram"]
         
@@ -51,7 +52,7 @@ class ADD_ComboBox:
                 self.processor = ThresholdingFrame(self.frame)
             case "Gamma Transform":
                 self.processor = GammaTransformFrame(self.frame)
-            case "Canny Edge Detector":
+            case "Canny Edge Detection":
                 self.processor = CannyEdgeDetectorFrame(self.frame)
             case "Hough Transform":
                 self.processor = HoughTransformFrame(self.frame)
@@ -83,8 +84,10 @@ class ADD_ComboBox:
                 self.processor = LaplacianFrame(self.frame)    
             case "Harris Corner Detection":
                 self.processor = CornerHarrisFrame(self.frame)
-        
-            
+            case "Shi-Tomasi Corner Detection":
+                self.processor = GoodFeaturesToTrackFrame(self.frame)
+            case "Adaptive Thresholding":
+                self.processor = AdaptiveThresholdFrame(self.frame)
             
             
             
