@@ -23,10 +23,10 @@ class ADD_ComboBox:
                              "Harris Corner Detection", "Shi-Tomasi Corner Detection",
                              "-----Thresholding Operations-----", "Thresholding", "Adaptive Thresholding", "Otsu Thresholding",
                              "-----Contour Operations-----", "Find Contours", "Draw Contours",
-                             
+                             "---Edge Detection and Linear Detection---", "Hough Circular Transform", "Hough Lines Tranform",
                              "OFF", "Morphological", 
                              "Gamma Transform",
-                             "Hough Transform", "Kitter Illingworth", 
+                            "Kitter Illingworth", 
                              "Draw Histogram"]
         
         self.combo = ttk.Combobox(self.frame, values=available_process, width=35)
@@ -55,7 +55,7 @@ class ADD_ComboBox:
                 self.processor = GammaTransformFrame(self.frame)
             case "Canny Edge Detection":
                 self.processor = CannyEdgeDetectorFrame(self.frame)
-            case "Hough Transform":
+            case "Hough Circular Transform":
                 self.processor = HoughTransformFrame(self.frame)
             case "Gaussian Blur":
                 self.processor = GaussianBlurFrame(self.frame)
@@ -95,6 +95,9 @@ class ADD_ComboBox:
                 self.processor = FindContoursFrame(self.frame)
             case "Draw Contours":
                 self.processor = DrawContoursFrame(self.frame)
+            case "Hough Lines Transform":
+                self.processor = HoughLinesFrame(self.frame)
+            
                 
             case "OFF":
                     
