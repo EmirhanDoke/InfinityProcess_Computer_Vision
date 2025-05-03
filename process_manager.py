@@ -16,19 +16,19 @@ class ADD_ComboBox:
         self.add()
         
     def add(self):
-        available_process = [ "-----Basic Image Operations-----","Color Convert" ,"Resize Image" ,"Rotate Image", "Flip Image", 
+        available_process = [ "-----Delete The Process-----", "OFF",
+                             "-----Basic Image Operations-----","Color Convert" ,"Resize Image" ,"Rotate Image", "Flip Image", 
                              "-----Image Filtering Operations-----", "Gaussian Blur", "Median Blur", "Bilateral Filter", "Filter2D",
-                             "2D-Gabor Filter",
+                             "2D-Gabor Filter", "Morphological", 
                              "-----Edge and Corner Detection-----", "Sobel Filter", "Scharr Filter", "Laplacian", "Canny Edge Detection",
                              "Harris Corner Detection", "Shi-Tomasi Corner Detection",
-                             "-----Thresholding Operations-----", "Thresholding", "Adaptive Thresholding", "Otsu Thresholding",
+                             "-----Thresholding Operations-----", "Thresholding", "Adaptive Thresholding", "Otsu Thresholding", "Kitter Illingworth", "Gamma Transform",
                              "-----Contour Operations-----", "Find Contours", "Draw Contours",
                              "---Edge Detection and Linear Detection---", "Hough Circular Transform", "Hough Lines Tranform",
                              "-----Fourier Transform-----", "DFT Transform", "Inverse DFT Transform", "FFT with Numpy",
-                             "OFF", "Morphological", 
-                             "Gamma Transform",
-                            "Kitter Illingworth", 
-                             "Draw Histogram", "Equalize Histogram","CLAHE Adaptive Equalization",]
+                             "-----Histogram Operations-----", "Draw Histogram", "Equalize Histogram","CLAHE Adaptive Equalization",
+                             
+                             ]
         
         self.combo = ttk.Combobox(self.frame, values=available_process, width=35)
         self.combo.bind("<<ComboboxSelected>>", self.selected_process)
