@@ -3,6 +3,7 @@ from tkinter import ttk
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+from tkinter_components.tkinter_info_buttom import *
 
 class ProcessFrameBase:
     def __init__(self, frame):
@@ -13,6 +14,23 @@ class ProcessFrameBase:
         raise NotImplementedError("apply method must be implemented in subclass.")
 
 class ThresholdingFrame(ProcessFrameBase):
+    
+    info_text = (
+    "📌 Threshold Bilgisi\n\n"
+    "• Threshold: 0 ile 255 arasında bir değerdir. Bu eşik değeri, görüntüdeki piksellerin ikili hale getirilmesinde kullanılır.\n\n"
+    "• Threshold Type:\n"
+    "  - Binary: Piksel değeri eşikten büyükse 255 (beyaz), küçükse 0 (siyah) yapılır.\n"
+    "  - Binary Inverse: Piksel değeri eşikten büyükse 0 (siyah), küçükse 255 (beyaz) yapılır.\n\n"
+    "🎯 Not: Bu işlem sadece gri tonlamalı (grayscale) görüntüler için geçerlidir.\n\n"
+    "———————————————\n\n"
+    "📌 Threshold Info\n\n"
+    "• Threshold: A value between 0 and 255. It is used to convert pixels into binary form based on this threshold.\n\n"
+    "• Threshold Type:\n"
+    "  - Binary: If the pixel value is greater than the threshold, it becomes 255 (white); otherwise, it becomes 0 (black).\n"
+    "  - Binary Inverse: If the pixel value is greater than the threshold, it becomes 0 (black); otherwise, it becomes 255 (white).\n\n"
+    "🎯 Note: This operation only works on grayscale images."
+)
+
     
     def __init__(self, frame):
         self.frame = frame
@@ -27,6 +45,8 @@ class ThresholdingFrame(ProcessFrameBase):
         threshold_types = ["Binary", "Binary_Inverse"]
         self.threshold_type_combobox = ttk.Combobox(self.frame, values=threshold_types, width=17)
         self.threshold_type_combobox.grid(row=2, column=1, padx=2, pady=2)
+        
+        self.info_buttom = ImageButtonApp(self.frame, text= ThresholdingFrame.info_text)
      
     def apply(self, img):
         threshold_value = self.threshold_entry.get()
