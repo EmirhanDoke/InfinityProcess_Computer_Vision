@@ -51,6 +51,8 @@ class ADD_ComboBox:
                 self.processor = HoughTransformFrame(self.frame)
             case "Gaussian Blur":
                 self.processor = GaussianBlurFrame(self.frame)
+            case "Kitter Illingworth":
+                self.processor = KitterIllingworthFrame(self.frame)
             
             case "OFF":
                     
@@ -66,9 +68,15 @@ class ADD_ComboBox:
 
     def apply_process(self):
         if self.processor:
-            result = self.processor.apply(self.read_img())
-            ADD_ComboBox.images.append(result)
-            # self.show_image()
+            
+            if hasattr(self, 'update_result') and callable(getattr(self, 'update_result')):
+                self.update_result(self)
+            
+            else:
+                result = self.processor.apply(self.read_img())
+                ADD_ComboBox.images.append(result)
+
+                
         else:
             print("No valid processor found.")
 
@@ -112,16 +120,19 @@ class ADD_ComboBox:
             plt.subplot(rows, cols, i + 1)
             
             if len(img.shape) == 2:
-                # if image is grayscale
-                plt.imshow(img, cmap='gray')
+                if isinstance(img, np.ndarray) and img.size > 0:
+                    # if image is grayscale
+                    plt.imshow(img, cmap='gray')
                 
             elif len(img.shape) == 3 and img.shape[2] == 3:
-                # Renkli görüntü
-                img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-                plt.imshow(img_rgb)
+                if isinstance(img, np.ndarray) and img.size > 0:
+                    # Renkli görüntü
+                    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+                    plt.imshow(img_rgb)
             
             else:
-                plt.imshow(img)  # Güvenli varsayım, örneğin RGBA
+                if isinstance(img, np.ndarray) and img.size > 0:
+                    plt.imshow(img)  # Güvenli varsayım, örneğin RGBA
             
             plt.axis('off') 
             plt.title(f"Image {i+1}")

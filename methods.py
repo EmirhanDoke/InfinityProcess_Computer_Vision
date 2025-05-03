@@ -300,3 +300,39 @@ class GaussianBlurFrame(ProcessFrameBase):
         img = cv2.GaussianBlur(img, (ksize, ksize), sigmax, sigmay)
     
         return img
+
+class KitterIllingworthFrame(ProcessFrameBase):
+    
+    def create_widgets(self):
+        
+        tk.Label(self.frame, text="Optimum Threshold:").grid(row=1, column=0, padx=2, pady=2)
+        self.optimum_threshold_label = tk.Label(self.frame)
+        self.optimum_threshold_label.grid(row=1, column=1, padx=2, pady=2)
+        
+    def apply(self, img):
+        
+        # Görüntünün histogramını hesapla
+        hist = cv2.calcHist([img], [0], None, [256], [0,256])
+        hist_norm = hist.ravel()/hist.sum()
+        thresholds = np.array(range(256))
+
+        # Eşik değerleri için Kittler-Illingworth hesaplama
+        def calculate_cost(t):
+            background = hist_norm[:t]
+            foreground = hist_norm[t:]
+            background_mean = np.sum(thresholds[:t]*background)
+            foreground_mean = np.sum(thresholds[t:]*foreground)
+            background_variance = np.sum(((thresholds[:t] - background_mean) ** 2) * background)
+            foreground_variance = np.sum(((thresholds[t:] - foreground_mean) ** 2) * foreground)
+            cost = background_variance * np.log(background_variance if background_variance > 0 else 1) + \
+                foreground_variance * np.log(foreground_variance if foreground_variance > 0 else 1)
+            return cost
+
+        costs = [calculate_cost(t) for t in range(1, 256)]
+        optimal_threshold = np.argmin(costs) + 1
+        print(optimal_threshold)
+        return optimal_threshold
+    
+    def update_result(self, img):
+        threshold = self.apply(img)
+        self.optimum_threshold_label.config(text=str(threshold))
