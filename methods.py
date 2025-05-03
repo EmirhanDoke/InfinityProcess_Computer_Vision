@@ -566,6 +566,35 @@ class SobelFrame(ProcessFrameBase):
 
         return sobel_image
 
+import tkinter as tk
+import cv2
+import numpy as np
+from tkinter import ttk
+
+class ScharrFrame(ProcessFrameBase):
+
+    def create_widgets(self):
+        # dx selecting
+        tk.Label(self.frame, text="dx:").grid(row=1, column=0, padx=2, pady=2)
+        self.dx_combobox = ttk.Combobox(self.frame, values=[0, 1])
+        self.dx_combobox.grid(row=1, column=1, padx=2, pady=2)
+
+        # dy selecting
+        tk.Label(self.frame, text="dy:").grid(row=2, column=0, padx=2, pady=2)
+        self.dy_combobox = ttk.Combobox(self.frame, values=[0, 1])
+        self.dy_combobox.grid(row=2, column=1, padx=2, pady=2)
+
+    def apply(self, img):
+        dx = int(self.dx_combobox.get())
+        dy = int(self.dy_combobox.get())
+
+        # Apply
+        scharr_image = cv2.Scharr(img, cv2.CV_64F, dx, dy)
+
+        # Normalize image and convert to uint8
+        scharr_image = cv2.convertScaleAbs(scharr_image)
+
+        return scharr_image
 
 
 

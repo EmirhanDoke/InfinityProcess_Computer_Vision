@@ -19,7 +19,7 @@ class ADD_ComboBox:
         available_process = [ "-----Basic Image Operations-----","Color Convert" ,"Resize Image" ,"Rotate Image", "Flip Image", 
                              "-----Image Filtering Operations-----", "Gaussian Blur", "Median Blur", "Bilateral Filter", "Filter2D",
                              "2D-Gabor Filter",
-                             "-----Edge and Corner Detection-----", "Sobel Filter",
+                             "-----Edge and Corner Detection-----", "Sobel Filter", "Scharr Filter",
                              
                              "OFF", "Morphological", 
                              "Thresholding", "Gamma Transform", "Canny Edge Detector", 
@@ -76,7 +76,8 @@ class ADD_ComboBox:
                 self.processor = Filter2DFrame(self.frame)    
             case "Sobel Filter":
                 self.processor = SobelFrame(self.frame)    
-                
+            case "Scharr Filter":
+                self.processor = ScharrFrame(self.frame)    
                 
                 
             case "OFF":
