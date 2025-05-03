@@ -28,7 +28,7 @@ class ADD_ComboBox:
                              "OFF", "Morphological", 
                              "Gamma Transform",
                             "Kitter Illingworth", 
-                             "Draw Histogram"]
+                             "Draw Histogram", "Equalize Histogram","CLAHE Adaptive Equalization",]
         
         self.combo = ttk.Combobox(self.frame, values=available_process, width=35)
         self.combo.bind("<<ComboboxSelected>>", self.selected_process)
@@ -104,8 +104,10 @@ class ADD_ComboBox:
                 self.processor = IDFTFrame(self.frame)  
             case "FFT with Numpy":
                 self.processor = NumpyFFTFrame(self.frame)
-            
-            
+            case "Equalize Histogram":
+                self.processor_np = EqualizeHistFrame(self.frame)
+            case "CLAHE Adaptive Equalization":
+                self.processor = CLAHEFrame(self.frame)
             
             
               

@@ -150,7 +150,7 @@ class MorphologicalFrame(ProcessFrameBase):
                 
         return img
 
-#! Maybe Not working
+#! May be Not working
 class GammaTransformFrame(ProcessFrameBase):
     def __init__(self, frame):
         self.frame = frame
@@ -487,7 +487,7 @@ class MedianBlurFrame(ProcessFrameBase):
 
         return blurred_image
 
-#! Maybe not working
+#! May be not working
 class BilateralFilterFrame(ProcessFrameBase):
 
     def create_widgets(self):
@@ -1032,5 +1032,146 @@ class IDFTFrame(ProcessFrameBase):
 
         return result_img    
     
+class NumpyFFTFrame(ProcessFrameBase):
+
+    def create_widgets(self):
+        # Combobox for selecting FFT or IFFT
+        tk.Label(self.frame, text="Transform Type:").grid(row=1, column=0, padx=2, pady=2)
+        self.transform_combobox = ttk.Combobox(self.frame, values=["FFT", "IFFT"])
+        self.transform_combobox.grid(row=1, column=1, padx=2, pady=2)
+
+    def apply(self, img):
+        # Get transform type from combobox
+        transform_type = self.transform_combobox.get()
+
+        # Convert image to grayscale if needed
+        if len(img.shape) == 3:
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        else:
+            gray = img.copy()
+
+        # Convert image to float32
+        gray_float = np.float32(gray)
+
+        # Apply selected transform
+        match transform_type:
+            case "FFT":
+                # Apply FFT and shift zero frequency to center
+                fft = np.fft.fft2(gray_float)
+                fft_shifted = np.fft.fftshift(fft)
+
+                # Calculate magnitude spectrum and normalize
+                magnitude = 20 * np.log(np.abs(fft_shifted) + 1)
+                result_img = np.uint8(cv2.normalize(magnitude, None, 0, 255, cv2.NORM_MINMAX))
+                return result_img
+
+            case "IFFT":
+                # Apply FFT and then IFFT (reverse back to spatial domain)
+                fft = np.fft.fft2(gray_float)
+                img_reconstructed = np.fft.ifft2(fft)
+                img_reconstructed = np.abs(img_reconstructed)
+
+                # Normalize result for display
+                result_img = np.uint8(cv2.normalize(img_reconstructed, None, 0, 255, cv2.NORM_MINMAX))
+                return result_img
+
+            case _:
+                return img  # No change if invalid selection    
+
+class EqualizeHistFrame(ProcessFrameBase):
     
+    def create_widgets(self):
+        pass
     
+    def apply(self, img):
+        
+        if len(img.shape) == 3:
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        
+        equalized_img = cv2.equalizeHist(img)
+        return equalized_img
+    
+    def update_result(self, img):
+        result = self.apply(img)
+        
+        
+        plt.figure(figsize=(12,5))
+        
+        plt.subplot(1, 2, 1)
+        plt.title("Original Histogram")
+        plt.hist(img.ravel(), bins=256, range=[0,256], color='gray')
+        
+        plt.subplot(1, 2, 2)
+        plt.title("Equalized Histogram")
+        plt.hist(result.ravel(), bins=256, range=[0,256], color='black')
+        
+        plt.tight_layout()
+        plt.show() 
+#! may be malfunctioning
+class CLAHEFrame(ProcessFrameBase):
+    
+    def create_widgets(self):
+        self.clip_limit = tk.DoubleVar(value=2.0)
+        self.tile_grid_size = tk.IntVar(value=8)
+        
+        tk.Label(self.frame, text="Clip Limit:").grid(row=1, column=0, padx=2, pady=2)
+        tk.Scale(self.frame, from_=1.0, to=16.0, resolution=0.1,
+                variable=self.clip_limit, orient="horizontal").grid(row=1, column=1, padx=2, pady=2)
+        
+        tk.Label(self.frame, text="Tile Grid Size:").grid(row=2, column=0, padx=2, pady=2)
+        tk.Scale(self.frame, from_=1, to=32, variable=self.tile_grid_size,
+                orient="horizontal").grid(row=2, column=1, padx=2, pady=2)
+    
+    def apply(self, img):
+        # Convert color image to LAB color space if needed
+        is_color = len(img.shape) == 3 and img.shape[2] == 3
+        
+        # Create CLAHE object
+        clahe = cv2.createCLAHE(
+            clipLimit=self.clip_limit.get(),
+            tileGridSize=(self.tile_grid_size.get(), self.tile_grid_size.get())
+        )
+        
+        if is_color:
+            # Convert BGR to LAB
+            lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
+            l, a, b = cv2.split(lab)
+            # Apply CLAHE to the L channel
+            l_clahe = clahe.apply(l)
+            # Merge and convert back to BGR
+            lab_clahe = cv2.merge((l_clahe, a, b))
+            result = cv2.cvtColor(lab_clahe, cv2.COLOR_LAB2BGR)
+        else:
+            # For grayscale image, apply CLAHE directly
+            result = clahe.apply(img)
+        
+        return result
+    
+    def update_result(self, img):
+        result = self.apply(img)
+        
+        # Show input and output images side by side
+        plt.figure(figsize=(12, 5))
+        
+        plt.subplot(1, 2, 1)
+        plt.title("Original Image")
+        if len(img.shape) == 2:
+            plt.imshow(img, cmap='gray')
+        else:
+            plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+        plt.axis('off')
+        
+        plt.subplot(1, 2, 2)
+        plt.title("CLAHE Result")
+        if len(result.shape) == 2:
+            plt.imshow(result, cmap='gray')
+        else:
+            plt.imshow(cv2.cvtColor(result, cv2.COLOR_BGR2RGB))
+        plt.axis('off')
+        
+        plt.tight_layout()
+        plt.show()
+
+
+
+   
