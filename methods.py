@@ -102,29 +102,29 @@ class MorphologicalFrame(ProcessFrameBase):
         kernel_size = int(self.kernelsize.get())
         iterations_value = int(self.iterations.get())
         
+        match kernel_shape:
+            case "Rectangular":
+                kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (kernel_size,kernel_size))
         
-        if kernel_shape == "Rectangular":
-            kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (kernel_size,kernel_size))
-        
-        elif kernel_shape == "Ellipse":
-            kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (kernel_size,kernel_size))
+            case "Ellipse":
+                kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (kernel_size,kernel_size))
     
-        elif kernel_shape == "Cross":
-            kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (kernel_size,kernel_size))
+            case "Cross":
+                kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (kernel_size,kernel_size))
     
-        if operations == "Erode":
-            img = cv2.morphologyEx(img, cv2.MORPH_ERODE, kernel, iterations = iterations_value) 
+        match operations:
+            case "Erode":
+                img = cv2.morphologyEx(img, cv2.MORPH_ERODE, kernel, iterations = iterations_value) 
         
-        elif operations == "Diletion":
-            img = cv2.morphologyEx(img, cv2.MORPH_DILATE, kernel, iterations = iterations_value)
+            case  "Diletion":
+                img = cv2.morphologyEx(img, cv2.MORPH_DILATE, kernel, iterations = iterations_value)
 
-        elif operations == "Opening":
-            img = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel, iterations = iterations_value)
+            case "Opening":
+                img = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel, iterations = iterations_value)
     
-        elif operations == "Closing":
-            img = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel, iterations = iterations_value)
+            case "Closing":
+                img = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel, iterations = iterations_value)
     
-        # ADD_ComboBox.images.append(img)
         return img
 
 class GammaTransformFrame(ProcessFrameBase):
