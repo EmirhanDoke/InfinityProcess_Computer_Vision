@@ -11,8 +11,7 @@ class ThresholdingFrame(ProcessFrameBase):
     def __init__(self, frame):
         self.frame = frame
         self.create_widgets()
-
-        
+ 
     def create_widgets(self):
         tk.Label(self.frame, text="Threshold:").grid(row=1, column=0, padx=2, pady=2)
         self.threshold_entry = tk.Entry(self.frame)
@@ -26,7 +25,6 @@ class ThresholdingFrame(ProcessFrameBase):
     def apply(self, img):
         threshold_value = self.threshold_entry.get()
         threshold_type = self.threshold_type_combobox.get()
-        # Functions
         
         if threshold_type == "Binary":
             threshold_type = cv2.THRESH_BINARY
@@ -36,18 +34,8 @@ class ThresholdingFrame(ProcessFrameBase):
             threshold_type = cv2.THRESH_BINARY_INV
             ret, img = cv2.threshold(img, int(threshold_value), 255, threshold_type)
     
-        # ADD_ComboBox.images.append(img)
         return img
-    
-        # cv2.imshow("Original Image",ADD_ComboBox.images[-2])
-        # cv2.imshow("Thresholding Image",ADD_ComboBox.images[-1])
-        # print(len(ADD_ComboBox.images))
-        
-        # for imge in range(len(ADD_ComboBox.images)):
-        #     cv2.imshow(f"Image{imge}",ADD_ComboBox.images[imge])
-        
-        # return img
-        
+          
 class GaborFilterFrame(ProcessFrameBase):
     def __init__(self, frame):
         self.frame = frame
@@ -55,22 +43,41 @@ class GaborFilterFrame(ProcessFrameBase):
 
     def create_widgets(self):
         tk.Label(self.frame, text="Ksize:").grid(row=1, column=0, padx=2, pady=2)
-        tk.Entry(self.frame).grid(row=1, column=1, padx=2, pady=2)
+        self.ksize_entry = tk.Entry(self.frame)
+        self.ksize_entry.grid(row=1, column=1, padx=2, pady=2)
 
         tk.Label(self.frame, text="Sigma:").grid(row=2, column=0, padx=2, pady=2)
-        tk.Entry(self.frame).grid(row=2, column=1, padx=2, pady=2)
+        self.sigma_entry = tk.Entry(self.frame)
+        self.sigma_entry.grid(row=2, column=1, padx=2, pady=2)
 
         tk.Label(self.frame, text="Theta:").grid(row=3, column=0, padx=2, pady=2)
-        tk.Entry(self.frame).grid(row=3, column=1, padx=2, pady=2)
-
+        self.theta_entry = tk.Entry(self.frame)
+        self.theta_entry.grid(row=3, column=1, padx=2, pady=2)
+        
         tk.Label(self.frame, text="Lambda:").grid(row=4, column=0, padx=2, pady=2)
-        tk.Entry(self.frame).grid(row=4, column=1, padx=2, pady=2)
+        self.lambda_frame = tk.Entry(self.frame)
+        self.lambda_frame.grid(row=4, column=1, padx=2, pady=2)
 
         tk.Label(self.frame, text="Gamma:").grid(row=5, column=0, padx=2, pady=2)
-        tk.Entry(self.frame).grid(row=5, column=1, padx=2, pady=2)
-
+        self.gamma_entry = tk.Entry(self.frame)
+        self.gamma_entry.grid(row=5, column=1, padx=2, pady=2)
+        
         tk.Label(self.frame, text="Phi:").grid(row=6, column=0, padx=2, pady=2)
-        tk.Entry(self.frame).grid(row=6, column=1, padx=2, pady=2)
+        self.phi_entry = tk.Entry(self.frame)
+        self.phi_entry.grid(row=6, column=1, padx=2, pady=2)
+
+    def apply(self, img):
+        
+        ksize = int(self.ksize_entry.get())
+        sigma = int(self.sigma_entry.get())
+        theta = int(self.theta_entry.get())
+        lamda = int(self.lambda_frame.get())
+        gamma = int(self.gamma_entry.get())
+        phi = int(self.phi_entry.get())
+                
+        ht_kernel = cv2.getGaborKernel((ksize, ksize), sigma, theta, lamda, gamma, phi, ktype=cv2.CV_32F)
+        img = cv2.filter2D(img, cv2.CV_8UC3, ht_kernel)
+        return img
 
 class MorphologicalFrame(ProcessFrameBase):
     def __init__(self, frame):
@@ -138,4 +145,3 @@ class GammaTransformFrame(ProcessFrameBase):
         self.gamma_transform_var = tk.StringVar()
         tk.Entry(self.frame, textvariable= self.gamma_transform_var).grid(row=1, column=1, padx=2, pady=2)
 
-    
