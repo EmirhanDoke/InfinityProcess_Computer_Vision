@@ -566,11 +566,6 @@ class SobelFrame(ProcessFrameBase):
 
         return sobel_image
 
-import tkinter as tk
-import cv2
-import numpy as np
-from tkinter import ttk
-
 class ScharrFrame(ProcessFrameBase):
 
     def create_widgets(self):
@@ -596,7 +591,24 @@ class ScharrFrame(ProcessFrameBase):
 
         return scharr_image
 
+class LaplacianFrame(ProcessFrameBase):
 
+    def create_widgets(self):
+        # Entry for kernel size (must be odd and positive)
+        tk.Label(self.frame, text="Kernel Size (e.g., 1, 3, 5):").grid(row=1, column=0, padx=2, pady=2)
+        self.ksize_entry = tk.Entry(self.frame)
+        self.ksize_entry.grid(row=1, column=1, padx=2, pady=2)
+
+    def apply(self, img):
+        ksize = int(self.ksize_entry.get())
+
+        # Apply Laplacian operator using 64-bit float depth
+        laplacian_image = cv2.Laplacian(img, cv2.CV_64F, ksize=ksize)
+
+        # Convert the result to 8-bit absolute values for display
+        laplacian_image = cv2.convertScaleAbs(laplacian_image)
+
+        return laplacian_image
 
 
 
