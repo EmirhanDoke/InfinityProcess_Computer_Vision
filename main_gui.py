@@ -43,7 +43,7 @@ class Application:
         # Scrollbar
         scrollbar = tk.Scrollbar(self.root, orient="vertical", command=self.canvas.yview)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-        self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
+        self.canvas.bind("<MouseWheel>", self._on_mousewheel)
    
         self.canvas.configure(yscrollcommand=scrollbar.set)
    
