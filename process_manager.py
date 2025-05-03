@@ -16,7 +16,7 @@ class ADD_ComboBox:
         self.add()
         
     def add(self):
-        available_process = ["OFF", "2D-Gabor Filter", "Morphological", 
+        available_process = [ "-----Basic Image Operations-----","Color Convert" ,"OFF", "2D-Gabor Filter", "Morphological", 
                              "Thresholding", "Gamma Transform", "Canny Edge Detector", 
                              "Hough Transform", "Gaussian Blur", "Kitter Illingworth", 
                              "Draw Histogram"]
@@ -55,7 +55,8 @@ class ADD_ComboBox:
                 self.processor_np = KitterIllingworthFrame(self.frame)
             case "Draw Histogram":
                 self.processor_np = DrawHistogramFrame(self.frame)
-            
+            case "Color Convert":
+                self.processor = ColorConvertFrame(self.frame)
             case "OFF":
                     
                 self.processor = None
@@ -100,7 +101,7 @@ class ADD_ComboBox:
             ADD_ComboBox.file_path = ADD_ComboBox.file_path_selecter()
         
         if not ADD_ComboBox.images:
-            img = cv2.imread(ADD_ComboBox.file_path, cv2.IMREAD_GRAYSCALE)
+            img = cv2.imread(ADD_ComboBox.file_path)
             print("Resim Okundu")
             ADD_ComboBox.images.append(img)
         

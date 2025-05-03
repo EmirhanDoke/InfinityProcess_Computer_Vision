@@ -360,7 +360,37 @@ class DrawHistogramFrame(ProcessFrameBase):
         plt.ylabel('Frequency')
         plt.show()
 
+class ColorConvertFrame(ProcessFrameBase):
 
+    def create_widgets(self):
+        tk.Label(self.frame, text="Select Color Conversion:").grid(row=1, column=0, padx=2, pady=2)
+        
+        # Combobox for color conversion type
+        self.color_convert_combobox = ttk.Combobox(self.frame, values=["RGB to Grayscale", "Grayscale to RGB", "RGB to HSV", "HSV to RGB"])
+        self.color_convert_combobox.grid(row=1, column=1, padx=2, pady=2)
+        self.color_convert_combobox.set("RGB to Grayscale")
+
+    def apply(self, img):
+        conversion_type = self.color_convert_combobox.get()
+
+        match conversion_type:
+            case "RGB to Grayscale":
+                # Convert image from RGB to Grayscale
+                converted_image = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+            case "Grayscale to RGB":
+                # Convert image from Grayscale to RGB
+                converted_image = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+            case "RGB to HSV":
+                # Convert image from RGB to HSV
+                converted_image = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
+            case "HSV to RGB":
+                # Convert image from HSV to RGB
+                converted_image = cv2.cvtColor(img, cv2.COLOR_HSV2RGB)
+            case _:
+                # Default case if no match
+                converted_image = img
+
+        return converted_image
 
 
 
