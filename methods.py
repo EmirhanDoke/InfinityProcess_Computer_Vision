@@ -412,5 +412,52 @@ class ResizeFrame(ProcessFrameBase):
 
         return resized_image
 
+class RotateFrame(ProcessFrameBase):
 
+    def create_widgets(self):
+        tk.Label(self.frame, text="Select Rotation Angle:").grid(row=1, column=0, padx=2, pady=2)
+        
+        # Combobox for rotation angles
+        self.rotation_combobox = ttk.Combobox(self.frame, values=["90", "180", "270"])
+        self.rotation_combobox.grid(row=1, column=1, padx=2, pady=2)
+        self.rotation_combobox.set("90")
 
+    def apply(self, img):
+        rotation_angle = int(self.rotation_combobox.get())
+
+        match rotation_angle:
+            case 90:
+                rotated_image = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+            case 180:
+                rotated_image = cv2.rotate(img, cv2.ROTATE_180)
+            case 270:
+                rotated_image = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
+            case _:
+                rotated_image = img
+
+        return rotated_image
+
+class FlipFrame(ProcessFrameBase):
+
+    def create_widgets(self):
+        tk.Label(self.frame, text="Select Flip Direction:").grid(row=1, column=0, padx=2, pady=2)
+        
+        # Combobox for flip directions
+        self.flip_combobox = ttk.Combobox(self.frame, values=["Horizontal", "Vertical", "Both"])
+        self.flip_combobox.grid(row=1, column=1, padx=2, pady=2)
+        self.flip_combobox.set("Horizontal")
+
+    def apply(self, img):
+        flip_direction = self.flip_combobox.get()
+
+        match flip_direction:
+            case "Horizontal":
+                flipped_image = cv2.flip(img, 1)  # Flip horizontally
+            case "Vertical":
+                flipped_image = cv2.flip(img, 0)  # Flip vertically
+            case "Both":
+                flipped_image = cv2.flip(img, -1)  # Flip both horizontally and vertically
+            case _:
+                flipped_image = img
+
+        return flipped_image
