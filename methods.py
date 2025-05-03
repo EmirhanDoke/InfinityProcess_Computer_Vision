@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 
 class ProcessFrameBase:
     def __init__(self, frame):
@@ -301,7 +302,6 @@ class GaussianBlurFrame(ProcessFrameBase):
     
         return img
 
-#! Not working
 class KitterIllingworthFrame(ProcessFrameBase):
     
     def create_widgets(self):
@@ -337,3 +337,26 @@ class KitterIllingworthFrame(ProcessFrameBase):
     def update_result(self, img):
         threshold = self.apply(img)
         self.optimum_threshold_label.config(text=str(threshold))
+
+class DrawHistogramFrame(ProcessFrameBase):
+    
+    def create_widgets(self):
+        pass
+    
+    def apply(self, img):
+        
+        histogram, bins = np.histogram(img.flatten(), bins=256, range=[0,256])
+    
+        return histogram, bins
+    
+    def update_result(self, img):
+        
+        histogram, bins = self.apply(img)
+        
+        plt.figure(figsize=(10,6))
+        plt.plot(bins[:-1], histogram, color='black')
+        plt.title('Image Histogram')
+        plt.xlabel('Pixel Intensity')
+        plt.ylabel('Frequency')
+        plt.show()
+    

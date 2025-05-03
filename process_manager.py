@@ -19,7 +19,7 @@ class ADD_ComboBox:
         available_process = ["OFF", "2D-Gabor Filter", "Morphological", 
                              "Thresholding", "Gamma Transform", "Canny Edge Detector", 
                              "Hough Transform", "Gaussian Blur", "Kitter Illingworth", 
-                             "Histogram"]
+                             "Draw Histogram"]
         
         self.combo = ttk.Combobox(self.frame, values=available_process, width=25)
         self.combo.bind("<<ComboboxSelected>>", self.selected_process)
@@ -53,6 +53,8 @@ class ADD_ComboBox:
                 self.processor = GaussianBlurFrame(self.frame)
             case "Kitter Illingworth":
                 self.processor_np = KitterIllingworthFrame(self.frame)
+            case "Draw Histogram":
+                self.processor_np = DrawHistogramFrame(self.frame)
             
             case "OFF":
                     
