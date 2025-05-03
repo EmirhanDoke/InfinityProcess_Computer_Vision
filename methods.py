@@ -800,3 +800,54 @@ class OtsuThresholdFrame(ProcessFrameBase):
         _, otsu_thresholded_image = cv2.threshold(gray, 0, max_value, threshold_type_cv + cv2.THRESH_OTSU)
 
         return otsu_thresholded_image
+    
+class FindContoursFrame(ProcessFrameBase):
+
+    def create_widgets(self):
+        # Combobox for contour retrieval mode (e.g., external or all)
+        tk.Label(self.frame, text="Retrieval Mode:").grid(row=1, column=0, padx=2, pady=2)
+        self.retrieval_mode_combobox = ttk.Combobox(self.frame, values=['RETR_EXTERNAL', 'RETR_LIST', 'RETR_TREE'])
+        self.retrieval_mode_combobox.grid(row=1, column=1, padx=2, pady=2)
+
+        # Combobox for contour approximation method (e.g., simple or accurate)
+        tk.Label(self.frame, text="Approximation Method:").grid(row=2, column=0, padx=2, pady=2)
+        self.approximation_method_combobox = ttk.Combobox(self.frame, values=['CHAIN_APPROX_SIMPLE', 'CHAIN_APPROX_NONE'])
+        self.approximation_method_combobox.grid(row=2, column=1, padx=2, pady=2)
+
+    def apply(self, img):
+        # Get user selections for retrieval mode and approximation method
+        retrieval_mode = self.retrieval_mode_combobox.get()
+        approximation_method = self.approximation_method_combobox.get()
+
+        # Convert to grayscale if needed
+        if len(img.shape) == 3:
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        else:
+            gray = img.copy()
+
+        # Apply binary thresholding to create a binary image for contour detection
+        _, thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+        # Convert user input into OpenCV constants
+        retrieval_mode_cv = getattr(cv2, retrieval_mode)
+        approximation_method_cv = getattr(cv2, approximation_method)
+
+        # Find contours in the binary image
+        contours, hierarchy = cv2.findContours(thresh, retrieval_mode_cv, approximation_method_cv)
+
+        # Draw the contours on the original image
+        result_img = img.copy()
+        cv2.drawContours(result_img, contours, -1, (0, 255, 0), 2)
+
+        return result_img    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

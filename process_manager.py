@@ -22,6 +22,7 @@ class ADD_ComboBox:
                              "-----Edge and Corner Detection-----", "Sobel Filter", "Scharr Filter", "Laplacian", "Canny Edge Detection",
                              "Harris Corner Detection", "Shi-Tomasi Corner Detection",
                              "-----Thresholding Operations-----", "Thresholding", "Adaptive Thresholding", "Otsu Thresholding",
+                             "-----Contour Operations-----", "Find Contours",
                              
                              "OFF", "Morphological", 
                              "Gamma Transform",
@@ -90,7 +91,8 @@ class ADD_ComboBox:
                 self.processor = AdaptiveThresholdFrame(self.frame)
             case "Otsu Thresholding":
                 self.processor = OtsuThresholdFrame(self.frame)
-            
+            case "Find Contours":
+                self.processor = FindContoursFrame(self.frame)
             
                 
             case "OFF":
