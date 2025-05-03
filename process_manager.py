@@ -17,7 +17,7 @@ class ADD_ComboBox:
         
     def add(self):
         available_process = [ "-----Basic Image Operations-----","Color Convert" ,"Resize Image" ,"Rotate Image", "Flip Image", 
-                             "-----Image Filtering Operations-----", "Gaussian Blur", "Median Blur",
+                             "-----Image Filtering Operations-----", "Gaussian Blur", "Median Blur", "Bilateral Filter",
                              "OFF", "2D-Gabor Filter", "Morphological", 
                              "Thresholding", "Gamma Transform", "Canny Edge Detector", 
                              "Hough Transform", "Kitter Illingworth", 
@@ -67,6 +67,8 @@ class ADD_ComboBox:
                 self.processor = FlipFrame(self.frame)    
             case "Median Blur":
                 self.processor = MedianBlurFrame(self.frame)    
+            case "Bilateral Filter":
+                self.processor = BilateralFilterFrame(self.frame)
                 
             case "OFF":
                     

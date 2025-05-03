@@ -477,5 +477,29 @@ class MedianBlurFrame(ProcessFrameBase):
 
         return blurred_image
 
+#! Maybe not working
+class BilateralFilterFrame(ProcessFrameBase):
 
+    def create_widgets(self):
+        tk.Label(self.frame, text="Diameter:").grid(row=1, column=0, padx=2, pady=2)
+        self.d_entry = tk.Entry(self.frame)
+        self.d_entry.grid(row=1, column=1, padx=2, pady=2)
+
+        tk.Label(self.frame, text="Sigma Color:").grid(row=2, column=0, padx=2, pady=2)
+        self.sigma_color_entry = tk.Entry(self.frame)
+        self.sigma_color_entry.grid(row=2, column=1, padx=2, pady=2)
+
+        tk.Label(self.frame, text="Sigma Space:").grid(row=3, column=0, padx=2, pady=2)
+        self.sigma_space_entry = tk.Entry(self.frame)
+        self.sigma_space_entry.grid(row=3, column=1, padx=2, pady=2)
+
+    def apply(self, img):
+        d = int(self.d_entry.get())
+        sigma_color = float(self.sigma_color_entry.get())
+        sigma_space = float(self.sigma_space_entry.get())
+
+        # Apply Bilateral Filter
+        filtered_image = cv2.bilateralFilter(img, d, sigma_color, sigma_space)
+
+        return filtered_image
 
