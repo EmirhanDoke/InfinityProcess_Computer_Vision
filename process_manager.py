@@ -16,12 +16,14 @@ class ADD_ComboBox:
         self.add()
         
     def add(self):
-        available_process = [ "-----Basic Image Operations-----","Color Convert" ,"Resize Image" ,"Rotate Image", "Flip Image", "OFF", "2D-Gabor Filter", "Morphological", 
+        available_process = [ "-----Basic Image Operations-----","Color Convert" ,"Resize Image" ,"Rotate Image", "Flip Image", 
+                             "-----Image Filtering Operations-----", "Gaussian Blur", "Median Blur",
+                             "OFF", "2D-Gabor Filter", "Morphological", 
                              "Thresholding", "Gamma Transform", "Canny Edge Detector", 
-                             "Hough Transform", "Gaussian Blur", "Kitter Illingworth", 
+                             "Hough Transform", "Kitter Illingworth", 
                              "Draw Histogram"]
         
-        self.combo = ttk.Combobox(self.frame, values=available_process, width=25)
+        self.combo = ttk.Combobox(self.frame, values=available_process, width=35)
         self.combo.bind("<<ComboboxSelected>>", self.selected_process)
         self.combo.grid(row=0, column=0, padx=2, pady=2)
         
@@ -63,7 +65,8 @@ class ADD_ComboBox:
                 self.processor = RotateFrame(self.frame)
             case "Flip Image":
                 self.processor = FlipFrame(self.frame)    
-                
+            case "Median Blur":
+                self.processor = MedianBlurFrame(self.frame)    
                 
             case "OFF":
                     

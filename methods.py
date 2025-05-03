@@ -461,3 +461,21 @@ class FlipFrame(ProcessFrameBase):
                 flipped_image = img
 
         return flipped_image
+    
+class MedianBlurFrame(ProcessFrameBase):
+
+    def create_widgets(self):
+        tk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
+        self.kernel_size_entry = tk.Entry(self.frame)
+        self.kernel_size_entry.grid(row=1, column=1, padx=2, pady=2)
+
+    def apply(self, img):
+        kernel_size = int(self.kernel_size_entry.get())
+
+        # Apply Median Blur
+        blurred_image = cv2.medianBlur(img, kernel_size)
+
+        return blurred_image
+
+
+
