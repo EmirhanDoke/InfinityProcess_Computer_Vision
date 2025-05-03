@@ -19,10 +19,11 @@ class ADD_ComboBox:
         available_process = [ "-----Basic Image Operations-----","Color Convert" ,"Resize Image" ,"Rotate Image", "Flip Image", 
                              "-----Image Filtering Operations-----", "Gaussian Blur", "Median Blur", "Bilateral Filter", "Filter2D",
                              "2D-Gabor Filter",
-                             "-----Edge and Corner Detection-----", "Sobel Filter", "Scharr Filter", "Laplacian",
+                             "-----Edge and Corner Detection-----", "Sobel Filter", "Scharr Filter", "Laplacian", "Canny Edge Detector",
+                             "Harris Corner Detection", 
                              
                              "OFF", "Morphological", 
-                             "Thresholding", "Gamma Transform", "Canny Edge Detector", 
+                             "Thresholding", "Gamma Transform",
                              "Hough Transform", "Kitter Illingworth", 
                              "Draw Histogram"]
         
@@ -80,6 +81,13 @@ class ADD_ComboBox:
                 self.processor = ScharrFrame(self.frame)    
             case "Laplacian":
                 self.processor = LaplacianFrame(self.frame)    
+            case "Harris Corner Detection":
+                self.processor = CornerHarrisFrame(self.frame)
+        
+            
+            
+            
+            
                 
             case "OFF":
                     

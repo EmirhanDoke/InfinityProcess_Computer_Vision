@@ -610,7 +610,51 @@ class LaplacianFrame(ProcessFrameBase):
 
         return laplacian_image
 
+class CornerHarrisFrame(ProcessFrameBase):
 
+    def create_widgets(self):
+        # Entry for block size (neighborhood size)
+        tk.Label(self.frame, text="Block Size:").grid(row=1, column=0, padx=2, pady=2)
+        self.block_size_entry = tk.Entry(self.frame)
+        self.block_size_entry.grid(row=1, column=1, padx=2, pady=2)
+
+        # Entry for ksize (aperture parameter of Sobel)
+        tk.Label(self.frame, text="Sobel Kernel Size:").grid(row=2, column=0, padx=2, pady=2)
+        self.ksize_entry = tk.Entry(self.frame)
+        self.ksize_entry.grid(row=2, column=1, padx=2, pady=2)
+
+        # Entry for Harris detector free parameter k
+        tk.Label(self.frame, text="Harris k value (e.g., 0.04):").grid(row=3, column=0, padx=2, pady=2)
+        self.k_entry = tk.Entry(self.frame)
+        self.k_entry.grid(row=3, column=1, padx=2, pady=2)
+
+    def apply(self, img):
+        block_size = int(self.block_size_entry.get())
+        ksize = int(self.ksize_entry.get())
+        k = float(self.k_entry.get())
+
+        # Convert image to grayscale if not already
+        if len(img.shape) == 3:
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        else:
+            gray = img.copy()
+
+        # Convert grayscale to float32 as required by cornerHarris
+        gray = np.float32(gray)
+
+        # Apply Harris corner detection
+        dst = cv2.cornerHarris(gray, block_size, ksize, k)
+
+        # Dilate result for marking the corners (visual enhancement)
+        dst = cv2.dilate(dst, None)
+
+        # Create a copy of original image for marking corners
+        result_img = img.copy()
+
+        # Threshold to mark strong corners in red
+        result_img[dst > 0.01 * dst.max()] = [0, 0, 255]
+
+        return result_img
 
 
 
