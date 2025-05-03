@@ -699,5 +699,61 @@ class GoodFeaturesToTrackFrame(ProcessFrameBase):
 
         return result_img
 
+class AdaptiveThresholdFrame(ProcessFrameBase):
 
+    def create_widgets(self):
+        # Entry for max value (maximum intensity value to be assigned to pixels)
+        tk.Label(self.frame, text="Max Value:").grid(row=1, column=0, padx=2, pady=2)
+        self.max_value_entry = tk.Entry(self.frame)
+        self.max_value_entry.grid(row=1, column=1, padx=2, pady=2)
+
+        # Combobox for adaptive method (Mean or Gaussian)
+        tk.Label(self.frame, text="Adaptive Method:").grid(row=2, column=0, padx=2, pady=2)
+        self.adaptive_method_combobox = ttk.Combobox(self.frame, values=['Mean', 'Gaussian'])
+        self.adaptive_method_combobox.grid(row=2, column=1, padx=2, pady=2)
+
+        # Combobox for threshold type (Binary or Binary Inverted)
+        tk.Label(self.frame, text="Threshold Type:").grid(row=3, column=0, padx=2, pady=2)
+        self.threshold_type_combobox = ttk.Combobox(self.frame, values=['Binary', 'Binary Inverted'])
+        self.threshold_type_combobox.grid(row=3, column=1, padx=2, pady=2)
+
+        # Entry for block size (size of local region for thresholding)
+        tk.Label(self.frame, text="Block Size (odd > 1):").grid(row=4, column=0, padx=2, pady=2)
+        self.block_size_entry = tk.Entry(self.frame)
+        self.block_size_entry.grid(row=4, column=1, padx=2, pady=2)
+
+        # Entry for C value (constant to subtract from mean or weighted mean)
+        tk.Label(self.frame, text="C (constant):").grid(row=5, column=0, padx=2, pady=2)
+        self.c_entry = tk.Entry(self.frame)
+        self.c_entry.grid(row=5, column=1, padx=2, pady=2)
+
+    def apply(self, img):
+        max_value = int(self.max_value_entry.get())
+        adaptive_method = self.adaptive_method_combobox.get()
+        threshold_type = self.threshold_type_combobox.get()
+        block_size = int(self.block_size_entry.get())
+        c = int(self.c_entry.get())
+
+        # Convert to grayscale if needed
+        if len(img.shape) == 3:
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        else:
+            gray = img.copy()
+
+        # Apply adaptive thresholding
+        if adaptive_method == 'Mean':
+            adaptive_method_cv = cv2.ADAPTIVE_THRESH_MEAN_C
+        else:
+            adaptive_method_cv = cv2.ADAPTIVE_THRESH_GAUSSIAN_C
+
+        if threshold_type == 'Binary':
+            threshold_type_cv = cv2.THRESH_BINARY
+        else:
+            threshold_type_cv = cv2.THRESH_BINARY_INV
+
+        # Apply adaptive thresholding with specified parameters
+        thresholded_image = cv2.adaptiveThreshold(gray, max_value, adaptive_method_cv,
+                                                 threshold_type_cv, block_size, c)
+
+        return thresholded_image
 

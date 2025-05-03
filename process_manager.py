@@ -21,7 +21,7 @@ class ADD_ComboBox:
                              "2D-Gabor Filter",
                              "-----Edge and Corner Detection-----", "Sobel Filter", "Scharr Filter", "Laplacian", "Canny Edge Detection",
                              "Harris Corner Detection", "Shi-Tomasi Corner Detection",
-                             "-----Thresholding Operations-----", "Thresholding", "Adaptive Thresholding",
+                             "-----Thresholding Operations-----", "Thresholding", "Adaptive Thresholding", "Otsu Thresholding",
                              
                              "OFF", "Morphological", 
                              "Gamma Transform",
@@ -88,7 +88,8 @@ class ADD_ComboBox:
                 self.processor = GoodFeaturesToTrackFrame(self.frame)
             case "Adaptive Thresholding":
                 self.processor = AdaptiveThresholdFrame(self.frame)
-            
+            case "Otsu Thresholding":
+                self.processor = OtsuThresholdFrame(self.frame)
             
             
                 
