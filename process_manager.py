@@ -47,6 +47,8 @@ class ADD_ComboBox:
                 self.processor = GammaTransformFrame(self.frame)
             case "Canny Edge Detector":
                 self.processor = CannyEdgeDetectorFrame(self.frame)
+            case "Hough Transform":
+                self.processor = HoughTransformFrame(self.frame)
             
             case "OFF":
                     
@@ -75,7 +77,7 @@ class ADD_ComboBox:
     def file_path_selecter(cls):
         
         ADD_ComboBox.images = []
-        cls.file_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg *.png *.bmp")])
+        cls.file_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg *.png *.bmp *.jpeg")])
         print(cls.file_path)
         return cls.file_path
     

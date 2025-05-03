@@ -4,6 +4,10 @@ import cv2
 import numpy as np
 
 class ProcessFrameBase:
+    def __init__(self, frame):
+        self.frame = frame
+        self.create_widgets()
+    
     def apply(self, img):
         raise NotImplementedError("apply method must be implemented in subclass.")
 
@@ -201,10 +205,76 @@ class CannyEdgeDetectorFrame(ProcessFrameBase):
         img = cv2.cvtColor(dst, cv2.COLOR_BGR2RGB)
         
         return img
+
+class HoughTransformFrame(ProcessFrameBase):
         
+    def create_widgets(self):
+        
+        tk.Label(self.frame, text="Dp:").grid(row=1, column=0, padx=2, pady=2)
+        self.dp_entry = tk.Entry(self.frame)
+        self.dp_entry.grid(row=1, column=1, padx=2, pady=2)
+        
+        tk.Label(self.frame, text="Minimum Distance:").grid(row=2, column=0, padx=2, pady=2)
+        self.minimum_distance_entry = tk.Entry(self.frame)
+        self.minimum_distance_entry.grid(row=2, column=1, padx=2, pady=2)
+        
+        tk.Label(self.frame, text="Param1:").grid(row=3, column=0, padx=2, pady=2)
+        self.param1_entry = tk.Entry(self.frame)
+        self.param1_entry.grid(row=3, column=1, padx=2, pady=2)
+        
+        tk.Label(self.frame, text="Param2:").grid(row=4, column=0, padx=2, pady=2)
+        self.param2_entry = tk.Entry(self.frame)
+        self.param2_entry.grid(row=4, column=1, padx=2, pady=2)
+        
+        tk.Label(self.frame, text="Minimum Radius:").grid(row=5, column=0, padx=2, pady=2)
+        self.minimum_radius_entry = tk.Entry(self.frame)
+        self.minimum_radius_entry.grid(row=5, column=1, padx=2, pady=2)
+        
+        tk.Label(self.frame, text="Maximum Radius:").grid(row=6, column=0, padx=2, pady=2)
+        self.maximum_radius_entry = tk.Entry(self.frame)
+        self.maximum_radius_entry.grid(row=6, column=1, padx=2, pady=2)
+        
+        tk.Label(self.frame, text="Mark Color:").grid(row=7, column=0, padx=2, pady=2)
+        ope2 = ["Red", "Blue"]
+        self.mark_color_combobox = ttk.Combobox(self.frame, values=ope2, width=17)
+        self.mark_color_combobox.grid(row=7, column=1, padx=2, pady=2)
     
+    def apply(self, img):
+        
+        dp = int(self.dp_entry.get())
+        minimum_distance = int(self.minimum_distance_entry.get())
+        param1 = int(self.param1_entry.get())
+        param2 = int(self.param2_entry.get())
+        minimum_radius = int(self.minimum_radius_entry.get())
+        maximum_radius = int(self.maximum_radius_entry.get())
+        mark_color = str(self.mark_color_combobox.get())
+        copy_img = img.copy()
+        
+        
+        if mark_color == "Red":
+            mark_color1 = 0
+            mark_color2 = 0
+            mark_color3 = 255
+        
+        elif mark_color == "Blue":
+            mark_color1 = 255
+            mark_color2 = 0
+            mark_color3 = 0
+        
+        circles = cv2.HoughCircles(
+        img, 
+        cv2.HOUGH_GRADIENT, dp = dp, minDist = minimum_distance, param1 = param1, param2 = param2, minRadius = minimum_radius, maxRadius = maximum_radius 
+    )
     
-    
+        if circles is not None:
+            circles = np.uint16(np.around(circles))
+            for circle in circles[0, :]:
+                center = (circle[0], circle[1])
+                radius = circle[2]
+                cv2.circle(copy_img, center, radius, (mark_color1, mark_color2, mark_color3), 2)
+        
+        return copy_img
+        
     
     
     
