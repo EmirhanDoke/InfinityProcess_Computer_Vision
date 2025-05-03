@@ -534,3 +534,44 @@ class Filter2DFrame(ProcessFrameBase):
         filtered_image = cv2.filter2D(img, -1, kernel)
 
         return filtered_image
+
+class SobelFrame(ProcessFrameBase):
+
+    def create_widgets(self):
+        # dx selecting
+        tk.Label(self.frame, text="dx:").grid(row=1, column=0, padx=2, pady=2)
+        self.dx_combobox = ttk.Combobox(self.frame, values=[0, 1])
+        self.dx_combobox.grid(row=1, column=1, padx=2, pady=2)
+
+        # dy selecting
+        tk.Label(self.frame, text="dy:").grid(row=2, column=0, padx=2, pady=2)
+        self.dy_combobox = ttk.Combobox(self.frame, values=[0, 1])
+        self.dy_combobox.grid(row=2, column=1, padx=2, pady=2)
+
+        # Ksize
+        tk.Label(self.frame, text="Kernel Size (odd, e.g. 1, 3, 5):").grid(row=3, column=0, padx=2, pady=2)
+        self.ksize_entry = tk.Entry(self.frame)
+        self.ksize_entry.grid(row=3, column=1, padx=2, pady=2)
+
+    def apply(self, img):
+        dx = int(self.dx_combobox.get())
+        dy = int(self.dy_combobox.get())
+        ksize = int(self.ksize_entry.get())
+
+        # Apply
+        sobel_image = cv2.Sobel(img, cv2.CV_64F, dx, dy, ksize=ksize)
+
+        # Normalize image and convert to uint8
+        sobel_image = cv2.convertScaleAbs(sobel_image)
+
+        return sobel_image
+
+
+
+
+
+
+
+
+
+
