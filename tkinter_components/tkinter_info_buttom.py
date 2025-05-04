@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import Toplevel
 from PIL import Image, ImageTk
+import sys
+import os
 
 class ImageButtonApp:
     def __init__(self, frame, text):
@@ -15,6 +17,9 @@ class ImageButtonApp:
     def load_image(self, path):
         """Buton için resmi yükler."""
         try:
+            
+            path = ImageButtonApp.resource_path("tkinter_components\info.png")
+            
             image = Image.open(path)
             image = image.resize((24, 24))  # Boyutu isteğe göre ayarlayabilirsin
             self.button_image = ImageTk.PhotoImage(image)
@@ -36,6 +41,14 @@ class ImageButtonApp:
         top = Toplevel(self.frame)
         top.title("Info Window")
         tk.Label(top, text=self.text, font=("Arial", 12, "bold"), wraplength=750, justify="left").pack(padx=20, pady=20)
+    
+    @classmethod
+    def resource_path(cls, relative_path):
+        try:
+            base_path = sys._MEIPASS  # pyinstaller'ın geçici klasörü
+        except Exception:
+            base_path = os.path.abspath(".")  # normal çalışma
+        return os.path.join(base_path, relative_path)
 
 
 if __name__ == "__main__":
