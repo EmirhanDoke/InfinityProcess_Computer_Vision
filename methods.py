@@ -569,8 +569,7 @@ class DrawHistogramFrame(ProcessFrameBase):
         plt.plot(bins[:-1], histogram, color='black')
         plt.title('Image Histogram')
         plt.xlabel('Pixel Intensity')
-        plt.ylabel('Frequency')
-        plt.show()
+        plt.ylabel('Frequency')    
 
 class ColorConvertFrame(ProcessFrameBase):
 
@@ -1669,7 +1668,6 @@ class EqualizeHistFrame(ProcessFrameBase):
     def update_result(self, img):
         result = self.apply(img)
         
-        
         plt.figure(figsize=(12,5))
         
         plt.subplot(1, 2, 1)
@@ -1680,8 +1678,7 @@ class EqualizeHistFrame(ProcessFrameBase):
         plt.title("Equalized Histogram")
         plt.hist(result.ravel(), bins=256, range=[0,256], color='black')
         
-        plt.tight_layout()
-        plt.show() 
+        plt.tight_layout()   
 #! may be malfunctioning
 class CLAHEFrame(ProcessFrameBase):
     
@@ -1764,8 +1761,3 @@ class CLAHEFrame(ProcessFrameBase):
         plt.axis('off')
         
         plt.tight_layout()
-        plt.show()
-
-
-
-   

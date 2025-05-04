@@ -9,6 +9,7 @@ class ADD_ComboBox:
     
     images = []
     file_path = None
+    hist_list = []
     
     def __init__(self, frame):
         self.frame = frame
@@ -42,7 +43,6 @@ class ADD_ComboBox:
         for widget in self.frame.winfo_children():
             if widget != self.combo:                                                            #! Bug olma ihtimali var.
                 widget.destroy()
-
 
         # Create new Widget
         match self.selected_operator:
@@ -108,9 +108,6 @@ class ADD_ComboBox:
                 self.processor_np = EqualizeHistFrame(self.frame)
             case "CLAHE Adaptive Equalization":
                 self.processor = CLAHEFrame(self.frame)
-            
-            
-              
             case "OFF":
                     
                 self.processor = None
@@ -151,6 +148,7 @@ class ADD_ComboBox:
     @classmethod
     def read_img(cls):
         
+        
         if ADD_ComboBox.file_path is None:
             ADD_ComboBox.file_path = ADD_ComboBox.file_path_selecter()
         
@@ -189,11 +187,11 @@ class ADD_ComboBox:
             
             else:
                 if isinstance(img, np.ndarray) and img.size > 0:
-                    plt.imshow(img)  # Güvenli varsayım, örneğin RGBA
+                    plt.imshow(img) 
             
             plt.axis('off') 
-            plt.title(f"Image {i+1}")
-            
+            plt.title(f"Image {i+1}")  
+        
         plt.tight_layout()
         plt.show()
         
