@@ -31,7 +31,7 @@ class ADD_ComboBox:
                              
                              ]
         
-        self.combo = ttk.Combobox(self.frame, values=available_process, width=35)
+        self.combo = ttk.Combobox(self.frame, values=available_process, width=35, height=25)
         self.combo.bind("<<ComboboxSelected>>", self.selected_process)
         self.combo.grid(row=0, column=0, padx=2, pady=2)
         
