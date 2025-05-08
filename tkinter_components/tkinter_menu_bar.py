@@ -5,6 +5,7 @@ import os
 import sys
 import json
 from tkinter import ttk
+from utils import Utils
 
 class menu_bar():
     def __init__(self, root):
@@ -74,18 +75,24 @@ class menu_bar():
         self.root.attributes('-topmost', False)
         
     def save_user_settings(self):
+        
+        path = Utils.resource_path(Utils.settings_file)
+        
         # Checkbutton durumunu bir dict olarak kaydet
         settings = {
             "show_image_flag": self.show_image_flag.get(),
             "language": self.language_select.get()
         }
-        with open(self.settings_file, "w") as file:
+        with open(path, "w") as file:
             json.dump(settings, file, indent=4)
     
     def load_user_settings(self):
+        
+        path = Utils.resource_path(Utils.settings_file)
+        
         # Ayarları dosyadan yükle
-        if os.path.exists(self.settings_file):
-            with open(self.settings_file, "r") as file:
+        if os.path.exists(path):
+            with open(path, "r") as file:
                 settings = json.load(file)
                 self.show_image_flag.set(settings.get("show_image_flag", True))
                 self.language_select.set(settings.get("language", "English"))
