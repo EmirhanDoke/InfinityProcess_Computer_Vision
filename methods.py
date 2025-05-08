@@ -4,11 +4,13 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from tkinter_components.tkinter_info_buttom import *
+from utils import Utils
 
 class ProcessFrameBase:
     def __init__(self, frame):
         self.frame = frame
         self.create_widgets()
+        self.language = Utils.load_user_settings("language")
     
     def apply(self, img):
         raise NotImplementedError("apply method must be implemented in subclass.")
@@ -607,7 +609,7 @@ class ColorConvertFrame(ProcessFrameBase):
         self.color_convert_combobox.grid(row=1, column=1, padx=2, pady=2)
         self.color_convert_combobox.set("RGB to Grayscale")
 
-        self.info_buttom = ImageButtonApp(self.frame, text= ColorConvertFrame.info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text= ColorConvertFrame.info_text_en)
 
     def apply(self, img):
         conversion_type = self.color_convert_combobox.get()

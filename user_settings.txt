@@ -1,3 +1,4 @@
 {
-    "show_image_flag": true
+    "show_image_flag": true,
+    "language": "English"
 }

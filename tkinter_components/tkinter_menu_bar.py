@@ -4,6 +4,7 @@ from tkinter import font
 import os
 import sys
 import json
+from tkinter import ttk
 
 class menu_bar():
     def __init__(self, root):
@@ -11,7 +12,9 @@ class menu_bar():
         self.root = root
         self.settings_file = "user_settings.txt"  # Ayarların kaydedileceği dosya
         self.show_image_flag = tk.BooleanVar()
+        self.language_select = tk.StringVar()
         self.load_user_settings()
+        
         
         menu_cubugu = tk.Menu(self.root)
         
@@ -54,6 +57,9 @@ class menu_bar():
         show_image = tk.Checkbutton(lowwer_frame, text="Show Load Image Details", font=("Arial", 10), variable=self.show_image_flag)
         show_image.grid(row=1, column=0, padx=5, pady=5)
         
+        language_select = ttk.Combobox(lowwer_frame, values=["English", "Turkish"], font=("Arial", 10), textvariable=self.language_select)
+        language_select.grid(row=2, column=0, padx=5, pady=5)
+        
         save_buttom = tk.Button(settings_win, text="Save", font=("Arial", 10), command=self.save_user_settings)
         save_buttom.pack(side=tk.BOTTOM, padx=5, pady=5)
         
@@ -70,7 +76,8 @@ class menu_bar():
     def save_user_settings(self):
         # Checkbutton durumunu bir dict olarak kaydet
         settings = {
-            "show_image_flag": self.show_image_flag.get()
+            "show_image_flag": self.show_image_flag.get(),
+            "language": self.language_select.get()
         }
         with open(self.settings_file, "w") as file:
             json.dump(settings, file, indent=4)
@@ -81,3 +88,4 @@ class menu_bar():
             with open(self.settings_file, "r") as file:
                 settings = json.load(file)
                 self.show_image_flag.set(settings.get("show_image_flag", True))
+                self.language_select.set(settings.get("language", "English"))

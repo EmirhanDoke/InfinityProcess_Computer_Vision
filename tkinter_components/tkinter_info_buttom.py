@@ -3,6 +3,7 @@ from tkinter import Toplevel
 from PIL import Image, ImageTk
 import sys
 import os
+from utils import Utils
 
 class ImageButtonApp:
     def __init__(self, frame, text):
@@ -40,6 +41,7 @@ class ImageButtonApp:
         """Yeni bir üst pencere (top-level) açar."""
         top = Toplevel(self.frame)
         top.title("Info Window")
+        
         tk.Label(top, text=self.text, font=("Arial", 12, "bold"), wraplength=750, justify="left").pack(padx=20, pady=20)
     
     @classmethod
