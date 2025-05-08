@@ -122,7 +122,7 @@ class ADD_ComboBox:
                 for widget in self.frame.winfo_children():
                     if widget != self.combo:
                         widget.destroy()
-        
+                                        
     def apply_process(self):
         if self.processor:
             
