@@ -76,7 +76,10 @@ class Application:
         # print(f"Number of eleman in images list: {len(ADD_ComboBox.images)}")
         for process_box in self.process_frame_data:
             process_box.apply_process()
-            process_names.append(process_box.processor.name)
+            if process_box.processor and hasattr(process_box.processor, 'name'):
+                process_names.append(process_box.processor.name)
+            else:
+                process_names.append("Nameless")
 
         ADD_ComboBox.show_image(names = process_names)
         

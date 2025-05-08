@@ -39,6 +39,10 @@ class ADD_ComboBox:
         self.selected_operator = event.widget.get()
         print(f"Selected operator: {self.selected_operator}")
 
+        self.processor = None
+        self.processor_np = None
+        print("Deleted the old process.")
+
         # Remove old widgets
         for widget in self.frame.winfo_children():
             if widget != self.combo:                                                            #! Bug olma ihtimali var.
@@ -112,7 +116,6 @@ class ADD_ComboBox:
                     
                 self.processor = None
                 self.processor_np = None
-                print("Deleted the process.")
                 
                 # Clear widgets of the process
                 for widget in self.frame.winfo_children():
