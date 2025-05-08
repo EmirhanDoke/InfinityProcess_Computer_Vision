@@ -41,7 +41,7 @@ class ADD_ComboBox:
 
         self.processor = None
         self.processor_np = None
-        print("Deleted the old process.")
+        # print("Deleted the old process.")
 
         # Remove old widgets
         for widget in self.frame.winfo_children():
@@ -116,6 +116,7 @@ class ADD_ComboBox:
                     
                 self.processor = None
                 self.processor_np = None
+                print("Deleted the process.")
                 
                 # Clear widgets of the process
                 for widget in self.frame.winfo_children():
@@ -127,14 +128,14 @@ class ADD_ComboBox:
             
             result = self.processor.apply(self.read_img())
             ADD_ComboBox.images.append(result)
-  
-        else:
-            print("No valid processor found.")
 
-        if hasattr(self, 'processor_np'):
+        elif hasattr(self, 'processor_np'):
             if self.processor_np:
                 self.processor_np.update_result(self.read_img())
-                ADD_ComboBox.images.append(self.read_img())
+                # ADD_ComboBox.images.append(self.read_img())
+        
+        else:
+            print("No valid processor found.")
 
 #! Utils
 
