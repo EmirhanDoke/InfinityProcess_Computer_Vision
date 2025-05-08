@@ -158,7 +158,7 @@ class ADD_ComboBox:
         return ADD_ComboBox.images[-1]
     
     @classmethod
-    def show_image(cls):
+    def show_image(cls, names=None):
         if len(ADD_ComboBox.images) <= 4:
             cols = 2
         else:
@@ -188,7 +188,7 @@ class ADD_ComboBox:
                     plt.imshow(img) 
             
             plt.axis('off') 
-            plt.title(f"Image {i+1}")  
+            plt.title(names[i])  
         
         plt.tight_layout()
         plt.show()

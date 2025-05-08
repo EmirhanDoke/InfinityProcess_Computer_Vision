@@ -70,12 +70,15 @@ class Application:
     
     def apply_all_processes(self):
         
+        process_names = ["Original Image"]
+        
         ADD_ComboBox.images[-(len(ADD_ComboBox.images) - 1):] = []
         # print(f"Number of eleman in images list: {len(ADD_ComboBox.images)}")
         for process_box in self.process_frame_data:
             process_box.apply_process()
-        
-        ADD_ComboBox.show_image()
+            process_names.append(process_box.processor.name)
+
+        ADD_ComboBox.show_image(names = process_names)
         
     @classmethod
     def frame_placer(cls):
