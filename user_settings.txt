@@ -1,0 +1,3 @@
+{
+    "show_image_flag": true
+}

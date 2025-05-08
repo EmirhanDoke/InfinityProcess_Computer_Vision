@@ -3,13 +3,16 @@ from tkinter import messagebox
 from tkinter import font
 import os
 import sys
+import json
 
 class menu_bar():
     def __init__(self, root):
         
         self.root = root
+        self.settings_file = "user_settings.txt"  # Ayarların kaydedileceği dosya
+        self.show_image_flag = tk.BooleanVar()
+        self.load_user_settings()
         
-
         menu_cubugu = tk.Menu(self.root)
         
         # Settings Menu
@@ -48,9 +51,12 @@ class menu_bar():
         lowwer_frame = tk.Frame(settings_win, borderwidth=2, relief="solid")
         lowwer_frame.pack(side = "top", padx=2, pady=2, fill=tk.X)
         
-        show_image = tk.Checkbutton(lowwer_frame, text="Show Load Image Details", font=("Arial", 10))
+        show_image = tk.Checkbutton(lowwer_frame, text="Show Load Image Details", font=("Arial", 10), variable=self.show_image_flag)
         show_image.grid(row=1, column=0, padx=5, pady=5)
-    
+        
+        save_buttom = tk.Button(settings_win, text="Save", font=("Arial", 10), command=self.save_user_settings)
+        save_buttom.pack(side=tk.BOTTOM, padx=5, pady=5)
+        
     def restart_app(self):
         # Restart the application
         python = sys.executable
@@ -60,3 +66,18 @@ class menu_bar():
         self.root.lift()
         self.root.attributes('-topmost', True)
         self.root.attributes('-topmost', False)
+        
+    def save_user_settings(self):
+        # Checkbutton durumunu bir dict olarak kaydet
+        settings = {
+            "show_image_flag": self.show_image_flag.get()
+        }
+        with open(self.settings_file, "w") as file:
+            json.dump(settings, file, indent=4)
+    
+    def load_user_settings(self):
+        # Ayarları dosyadan yükle
+        if os.path.exists(self.settings_file):
+            with open(self.settings_file, "r") as file:
+                settings = json.load(file)
+                self.show_image_flag.set(settings.get("show_image_flag", True))

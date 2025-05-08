@@ -4,6 +4,7 @@ import cv2
 from PIL import Image, ImageTk
 from methods import *
 import matplotlib.pyplot as plt
+from utils import Utils
 
 class ADD_ComboBox:
     
@@ -146,7 +147,8 @@ class ADD_ComboBox:
         cls.file_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg *.png *.bmp *.jpeg")])
         print(cls.file_path)
         
-        ADD_ComboBox.show_image_details(cls.file_path)
+        if Utils.load_user_settings("show_image_flag") == True:
+            ADD_ComboBox.show_image_details(cls.file_path)
         
         return cls.file_path
     

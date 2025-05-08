@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from process_manager import ADD_ComboBox
 from tkinter_components.tkinter_menu_bar import menu_bar
+from utils import Utils
 
 # Ana uygulama sınıfı
 class Application:
@@ -17,7 +18,6 @@ class Application:
         self.process_frame_data = []
         
         self.menu_bar = menu_bar(self.root)
-        
         
         self.buttom_frame = tk.Frame(self.root, bg="lightblue")
         self.buttom_frame.pack(side = "top", fill=tk.X, ipadx=20, ipady=20)
