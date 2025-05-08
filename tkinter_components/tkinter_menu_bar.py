@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import font
+import os
+import sys
 
 class menu_bar():
     def __init__(self, root):
@@ -13,17 +15,18 @@ class menu_bar():
         # Settings Menu
         settings_menu = tk.Menu(menu_cubugu, tearoff=0)
         settings_menu.add_command(label="Settings", command=self.open_settings_window)
-        
         # Ana menüye "Settings" menüsünü ekle
         menu_cubugu.add_cascade(label="Settings", menu=settings_menu, font = ("Ariel", 12))
         
+        restart_menu = tk.Menu(menu_cubugu, tearoff=0)
+        restart_menu.add_command(label="Are you sure for restart?", command=self.restart_app)
+        menu_cubugu.add_cascade(label="Restart", menu=restart_menu, font = ("Ariel", 12))
         
         # Info Menu
-        info_menu = tk.Menu(menu_cubugu, tearoff=0)
-        info_menu.add_command(label="Info")
-        
-        # Ana menüye "Info" menüsünü ekle
-        menu_cubugu.add_cascade(label="Info", menu=info_menu, font = ("Ariel", 12))
+        About_menu = tk.Menu(menu_cubugu, tearoff=0)
+        About_menu.add_command(label="About")
+        # Ana menüye "About" menüsünü ekle
+        menu_cubugu.add_cascade(label="About", menu=About_menu, font = ("Ariel", 12))
         
 
         root.config(menu=menu_cubugu)
@@ -34,4 +37,14 @@ class menu_bar():
         settings_win.geometry("400x300")
         
         tk.Label(settings_win, text="Ayarlar Penceresi", font=("Arial", 14)).pack(pady=20)
-        # Buraya diğer ayar bileşenlerini ekleyebilirsin
+        
+    
+    def restart_app(self):
+        # Restart the application
+        python = sys.executable
+        os.execl(python, python, *sys.argv)
+        
+        # Move to the top of the screen
+        self.root.lift()
+        self.root.attributes('-topmost', True)
+        self.root.attributes('-topmost', False)
