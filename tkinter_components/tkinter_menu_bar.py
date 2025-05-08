@@ -22,6 +22,10 @@ class menu_bar():
         restart_menu.add_command(label="Are you sure for restart?", command=self.restart_app)
         menu_cubugu.add_cascade(label="Restart", menu=restart_menu, font = ("Ariel", 12))
         
+        tools_menu = tk.Menu(menu_cubugu, tearoff=0)
+        tools_menu.add_command(label="Tool 1")
+        menu_cubugu.add_cascade(label="Tools", menu=tools_menu, font = ("Ariel", 12))
+        
         # Info Menu
         About_menu = tk.Menu(menu_cubugu, tearoff=0)
         About_menu.add_command(label="About")
