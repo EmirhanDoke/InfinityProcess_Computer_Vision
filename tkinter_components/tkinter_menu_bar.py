@@ -38,10 +38,18 @@ class menu_bar():
     def open_settings_window(self):
         settings_win = tk.Toplevel(self.root)
         settings_win.title("Settings")
-        settings_win.geometry("400x300")
+        settings_win.geometry("600x400")
+        settings_win.resizable(False, False)
         
-        tk.Label(settings_win, text="Ayarlar Penceresi", font=("Arial", 14)).pack(pady=20)
+        upper_frame = tk.Frame(settings_win, bg="lightblue")
+        upper_frame.pack(side="top", padx=2, pady=2, fill=tk.X)
+        tk.Label(upper_frame, text="User Settings", font=("Arial", 12), bg="lightblue").pack(side=tk.LEFT, expand=True, fill=tk.BOTH, padx=10, pady=10)
         
+        lowwer_frame = tk.Frame(settings_win, borderwidth=2, relief="solid")
+        lowwer_frame.pack(side = "top", padx=2, pady=2, fill=tk.X)
+        
+        show_image = tk.Checkbutton(lowwer_frame, text="Show Load Image Details", font=("Arial", 10))
+        show_image.grid(row=1, column=0, padx=5, pady=5)
     
     def restart_app(self):
         # Restart the application
