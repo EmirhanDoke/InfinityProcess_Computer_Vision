@@ -28,12 +28,12 @@ jobs:
 
     - name: EXE dosyasını oluştur
       run: |
-        pyinstaller --onefile main.py
+        pyinstaller --onefile InfinityProcess_Computer_Vision/main.py  # Doğru yol (main.py dosyasının bulunduğu dizin)
         ls dist/
 
     - name: EXE dosyasını GitHub Release'e yükle
       uses: softprops/action-gh-release@v1
       with:
-        files: dist/your_script.exe
+        files: dist/main.exe  # Çıktı dosyasının yolu
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
