@@ -1617,10 +1617,7 @@ class NumpyFFTFrame(ProcessFrameBase):
 
                 # Normalize result for display
                 result_img = np.uint8(cv2.normalize(img_reconstructed, None, 0, 255, cv2.NORM_MINMAX))
-                return result_img
-
-            case _:
-                return img  # No change if invalid selection    
+                return result_img   
 
 class EqualizeHistFrame(ProcessFrameBase):
     name = "Histogram Equalization"
