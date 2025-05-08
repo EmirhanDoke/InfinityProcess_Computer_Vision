@@ -1255,13 +1255,24 @@ class FindContoursFrame(ProcessFrameBase):
         self.approximation_method_combobox = ttk.Combobox(self.frame, values=['CHAIN_APPROX_SIMPLE', 'CHAIN_APPROX_NONE'])
         self.approximation_method_combobox.grid(row=2, column=1, padx=2, pady=2)
 
+        tk.Label(self.frame, text="Color:").grid(row=3, column=0, padx=2, pady=2)
+        self.color_combobox = ttk.Combobox(self.frame, values=["Red", "Green", "Blue"])
+        self.color_combobox.grid(row=3, column=1, padx=2, pady=2)
+
         self.info_buttom = ImageButtonApp(self.frame, text= FindContoursFrame.info_text)
 
     def apply(self, img):
         # Get user selections for retrieval mode and approximation method
         retrieval_mode = self.retrieval_mode_combobox.get()
         approximation_method = self.approximation_method_combobox.get()
-
+        color = self.color_combobox.get()
+        
+        colors = {
+            "Blue": (255, 0, 0),
+            "Green": (0, 255, 0),
+            "Red": (0, 0, 255)
+            }
+        
         # Convert to grayscale if needed
         if len(img.shape) == 3:
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -1280,7 +1291,7 @@ class FindContoursFrame(ProcessFrameBase):
 
         # Draw the contours on the original image
         result_img = img.copy()
-        cv2.drawContours(result_img, contours, -1, (0, 255, 0), 1)
+        cv2.drawContours(result_img, contours, -1, colors[color], 2)
 
         return result_img    
 
@@ -1309,25 +1320,22 @@ class DrawContoursFrame(ProcessFrameBase):
         self.thickness_entry = tk.Entry(self.frame)
         self.thickness_entry.grid(row=1, column=1, padx=2, pady=2)
 
-        # Combobox for contour color (select a color for the contours)
-        tk.Label(self.frame, text="Contour Color:").grid(row=2, column=0, padx=2, pady=2)
-        self.color_combobox = ttk.Combobox(self.frame, values=['Green', 'Red', 'Blue'])
-        self.color_combobox.grid(row=2, column=1, padx=2, pady=2)
+        tk.Label(self.frame, text="Color:").grid(row=3, column=0, padx=2, pady=2)
+        self.color_combobox = ttk.Combobox(self.frame, values=["Red", "Green", "Blue"])
+        self.color_combobox.grid(row=3, column=1, padx=2, pady=2)
         
         self.info_buttom = ImageButtonApp(self.frame, text= DrawContoursFrame.info_text)
 
     def apply(self, img):
         # Get user input for thickness and color
         thickness = int(self.thickness_entry.get())
-        contour_color_str = self.color_combobox.get()
+        color = self.color_combobox.get()
 
-        # Set color based on user selection
-        if contour_color_str == 'Green':
-            contour_color = (0, 255, 0)
-        elif contour_color_str == 'Red':
-            contour_color = (0, 0, 255)
-        else:
-            contour_color = (255, 0, 0)
+        colors = {
+            "Blue": (255, 0, 0),
+            "Green": (0, 255, 0),
+            "Red": (0, 0, 255)
+            }
 
         # Convert to grayscale if needed
         if len(img.shape) == 3:
@@ -1335,15 +1343,12 @@ class DrawContoursFrame(ProcessFrameBase):
         else:
             gray = img.copy()
 
-        # Apply binary thresholding to create a binary image for contour detection
-        # _, thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
-
         # Find contours
         contours, _ = cv2.findContours(gray, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         # Draw the contours on the original image
         result_img = img.copy()
-        cv2.drawContours(result_img, contours, -1, contour_color, thickness)
+        cv2.drawContours(result_img, contours, -1, colors[color], thickness)
 
         return result_img 
 #? Del canny side of houghlines    
