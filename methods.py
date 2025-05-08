@@ -1227,6 +1227,7 @@ class OtsuThresholdFrame(ProcessFrameBase):
 
         # Apply threshold using Otsu's method
         _, otsu_thresholded_image = cv2.threshold(gray, 0, max_value, threshold_type_cv + cv2.THRESH_OTSU)
+        print(_)
 
         return otsu_thresholded_image
 #! Needed update for contours    
@@ -1280,18 +1281,18 @@ class FindContoursFrame(ProcessFrameBase):
             gray = img.copy()
 
         # Apply binary thresholding to create a binary image for contour detection
-        _, thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+        # _, thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 
         # Convert user input into OpenCV constants
         retrieval_mode_cv = getattr(cv2, retrieval_mode)
         approximation_method_cv = getattr(cv2, approximation_method)
 
         # Find contours in the binary image
-        contours, hierarchy = cv2.findContours(thresh, retrieval_mode_cv, approximation_method_cv)
+        contours, hierarchy = cv2.findContours(gray, retrieval_mode_cv, approximation_method_cv)
 
         # Draw the contours on the original image
         result_img = img.copy()
-        cv2.drawContours(result_img, contours, -1, (0, 255, 0), 2)
+        cv2.drawContours(result_img, contours, -1, (0, 255, 0), 1)
 
         return result_img    
     
@@ -1347,10 +1348,10 @@ class DrawContoursFrame(ProcessFrameBase):
             gray = img.copy()
 
         # Apply binary thresholding to create a binary image for contour detection
-        _, thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+        # _, thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 
         # Find contours
-        contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contours, _ = cv2.findContours(gray, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         # Draw the contours on the original image
         result_img = img.copy()

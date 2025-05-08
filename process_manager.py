@@ -44,6 +44,10 @@ class ADD_ComboBox:
             if widget != self.combo:                                                            #! Bug olma ihtimali var.
                 widget.destroy()
 
+        # Delete old object
+        self.processor = None
+        self.processor_np = None
+
         # Create new Widget
         match self.selected_operator:
             case "2D-Gabor Filter":
