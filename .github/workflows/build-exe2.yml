@@ -28,7 +28,7 @@ jobs:
 
     - name: EXE dosyasını oluştur
       run: |
-        pyinstaller --onefile InfinityProcess_Computer_Vision/main.py  # Doğru yol (main.py dosyasının bulunduğu dizin)
+        pyinstaller --onefile main.py # Doğru yol (main.py dosyasının bulunduğu dizin)
         ls dist/
 
     - name: EXE dosyasını GitHub Release'e yükle
