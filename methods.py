@@ -1273,6 +1273,9 @@ class FindContoursFrame(ProcessFrameBase):
             "Red": (0, 0, 255)
             }
         
+        # Add layer for drawing contours
+        img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+        
         # Convert to grayscale if needed
         if len(img.shape) == 3:
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -1336,6 +1339,9 @@ class DrawContoursFrame(ProcessFrameBase):
             "Green": (0, 255, 0),
             "Red": (0, 0, 255)
             }
+
+        # Add layer for drawing contours
+        img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
 
         # Convert to grayscale if needed
         if len(img.shape) == 3:
