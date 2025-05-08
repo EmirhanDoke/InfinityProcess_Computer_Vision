@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, filedialog
 import cv2
-from PIL import Image
+from PIL import Image, ImageTk
 from methods import *
 import matplotlib.pyplot as plt
 
@@ -145,18 +145,20 @@ class ADD_ComboBox:
         ADD_ComboBox.images = []
         cls.file_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg *.png *.bmp *.jpeg")])
         print(cls.file_path)
+        
+        ADD_ComboBox.show_image_details(cls.file_path)
+        
         return cls.file_path
     
     @classmethod
     def read_img(cls):
-        
         
         if ADD_ComboBox.file_path is None:
             ADD_ComboBox.file_path = ADD_ComboBox.file_path_selecter()
         
         if not ADD_ComboBox.images:
             img = cv2.imread(ADD_ComboBox.file_path)
-            print("Resim Okundu")
+            print("The Image is read")
             ADD_ComboBox.images.append(img)
         
         return ADD_ComboBox.images[-1]
@@ -196,4 +198,40 @@ class ADD_ComboBox:
         
         plt.tight_layout()
         plt.show()
+    
+    @classmethod
+    def show_image_details(cls, path):
         
+        img = cv2.imread(path)
+        
+        if img is None:
+            print("No image loaded.")
+            return
+        
+        # Get image details
+        height, width = img.shape[:2]
+        channels = img.shape[2] if len(img.shape) == 3 else 1
+        img_type = "Grayscale" if channels == 1 else "Color"
+        
+        # Create a new tkinter window
+        details_window = tk.Toplevel()
+        details_window.title("Image Details")
+        
+        # Display image details
+        details_label = tk.Label(details_window, text=f"Image Details:\n"
+                                                       f"Width: {width} px\n"
+                                                       f"Height: {height} px\n"
+                                                       f"Channels: {channels}\n"
+                                                       f"Type: {img_type}")
+        details_label.pack(pady=10)
+        
+        # Convert the image to a format tkinter can display
+        if channels == 3:  # Convert BGR to RGB for color images
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img_pil = Image.fromarray(img)
+        img_tk = ImageTk.PhotoImage(img_pil)
+        
+        # Display the image
+        img_label = tk.Label(details_window, image=img_tk)
+        img_label.image = img_tk  # Keep a reference to avoid garbage collection
+        img_label.pack(pady=10)
