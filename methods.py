@@ -331,7 +331,8 @@ class CannyEdgeDetectorFrame(ProcessFrameBase):
         img = img[:,:,None]
         dst = img * (mask[:,:,None].astype(img.dtype))
         
-        img = cv2.cvtColor(dst, cv2.COLOR_BGR2RGB)
+        #Convert 3 layer to 2 layer image
+        img = np.squeeze(dst)
         
         return img
 
