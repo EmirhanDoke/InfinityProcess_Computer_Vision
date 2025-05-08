@@ -218,14 +218,18 @@ class ADD_ComboBox:
         # Create a new tkinter window
         details_window = tk.Toplevel()
         details_window.title("Image Details")
+        details_window.resizable(False, False)
         
         # Display image details
-        details_label = tk.Label(details_window, text=f"Image Details:\n"
-                                                       f"Width: {width} px\n"
-                                                       f"Height: {height} px\n"
-                                                       f"Channels: {channels}\n"
-                                                       f"Type: {img_type}")
-        details_label.pack(pady=10)
+        details_label = tk.Label(details_window, justify="left" , font=("Ariel",14) ,text=f"Image Details:\n"
+                                                       f"{'Width:':<15}{width} px\n"
+                                                       f"{'Height:':<15}{height} px\n"
+                                                       f"{'Channels:':<15}{channels}\n"
+                                                       f"{'Type:':<15}{img_type}")
+        details_label.pack(padx = 20, pady=10, side=tk.RIGHT)
+        
+        image_ratio = width / height
+        img = cv2.resize(img, (256, int(256/image_ratio)))
         
         # Convert the image to a format tkinter can display
         if channels == 3:  # Convert BGR to RGB for color images
@@ -236,4 +240,4 @@ class ADD_ComboBox:
         # Display the image
         img_label = tk.Label(details_window, image=img_tk)
         img_label.image = img_tk  # Keep a reference to avoid garbage collection
-        img_label.pack(pady=10)
+        img_label.pack(padx = 10, pady=10, side=tk.LEFT)
