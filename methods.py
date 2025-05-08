@@ -1196,39 +1196,29 @@ class OtsuThresholdFrame(ProcessFrameBase):
 
 
     def create_widgets(self):
-        # Entry for max value (maximum intensity value to be assigned to pixels)
-        tk.Label(self.frame, text="Max Value:").grid(row=1, column=0, padx=2, pady=2)
-        self.max_value_entry = tk.Entry(self.frame)
-        self.max_value_entry.grid(row=1, column=1, padx=2, pady=2)
-
-        # Combobox for threshold type (Binary or Binary Inverted)
-        tk.Label(self.frame, text="Threshold Type:").grid(row=2, column=0, padx=2, pady=2)
-        self.threshold_type_combobox = ttk.Combobox(self.frame, values=['Binary', 'Binary Inverted'])
-        self.threshold_type_combobox.grid(row=2, column=1, padx=2, pady=2)
-
+        
+        tk.Label(self.frame, text="OTSU Threshold:").grid(row=1, column=0, padx=2, pady=2)
+        self.otsu_threshold_label = tk.Label(self.frame)
+        self.otsu_threshold_label.grid(row=1, column=1, padx=2, pady=2)
+        
         self.info_buttom = ImageButtonApp(self.frame, text= OtsuThresholdFrame.info_text)
-
+        
     def apply(self, img):
-        max_value = int(self.max_value_entry.get())
-        threshold_type = self.threshold_type_combobox.get()
-
-        # Convert to grayscale if needed
+        # Griye çevir (gerekiyorsa)
         if len(img.shape) == 3:
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         else:
             gray = img.copy()
 
-        # Apply Otsu's thresholding
-        if threshold_type == 'Binary':
-            threshold_type_cv = cv2.THRESH_BINARY
-        else:
-            threshold_type_cv = cv2.THRESH_BINARY_INV
+        # Otsu'nun yöntemini uygula, yalnızca eşik değeri döndürülür
+        otsu_thresh_value, _ = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-        # Apply threshold using Otsu's method
-        _, otsu_thresholded_image = cv2.threshold(gray, 0, max_value, threshold_type_cv + cv2.THRESH_OTSU)
-        print(_)
-
-        return otsu_thresholded_image
+        return int(otsu_thresh_value)
+    
+    def update_result(self, img):
+        threshold = self.apply(img)
+        self.otsu_threshold_label.config(text=str(threshold))
+    
 #! Needed update for contours    
 class FindContoursFrame(ProcessFrameBase):
     name = "Find Contours"
