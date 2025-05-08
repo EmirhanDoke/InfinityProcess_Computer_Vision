@@ -14,7 +14,7 @@ class ProcessFrameBase:
         raise NotImplementedError("apply method must be implemented in subclass.")
 
 class ThresholdingFrame(ProcessFrameBase):
-    
+    name = "Thresholding"
     info_text = (
     "📌 Threshold Bilgisi\n\n"
     "• Threshold: 0 ile 255 arasında bir değerdir. Bu eşik değeri, görüntüdeki piksellerin ikili hale getirilmesinde kullanılır.\n\n"
@@ -63,7 +63,7 @@ class ThresholdingFrame(ProcessFrameBase):
         return img
           
 class GaborFilterFrame(ProcessFrameBase):
-    
+    name = "Gabor Filter"
     info_text = (
     "📌 Gabor Filtresi Parametreleri\n\n"
     "• Ksize: Çekirdeğin (kernel) boyutu. Tek sayı ve pozitif olmalıdır. Örn: 3, 5, 7...\n"
@@ -130,7 +130,7 @@ class GaborFilterFrame(ProcessFrameBase):
         return img
 
 class MorphologicalFrame(ProcessFrameBase):
-    
+    name = "Morphological" 
     info_text = (
     "📌 Morfolojik İşlemler Parametreleri\n\n"
     "• Kernel Size: Yapısal elemanın boyutudur. Pozitif ve tek sayı olmalıdır. Örn: 3, 5, 7...\n"
@@ -227,10 +227,9 @@ class MorphologicalFrame(ProcessFrameBase):
                 img =  cv2.morphologyEx(img, cv2.MORPH_BLACKHAT, kernel, iterations = iterations_value)
                 
         return img
-
 #! May be Not working
 class GammaTransformFrame(ProcessFrameBase):
-    
+    name = "Gamma Transform"
     info_text = (
     "📌 Gamma Dönüşümü Parametreleri\n\n"
     "• Gamma Value: Görüntünün parlaklığını ayarlayan pozitif bir değerdir. Genellikle 0.1 ile 5.0 arasında olur.\n"
@@ -274,7 +273,7 @@ class GammaTransformFrame(ProcessFrameBase):
         return img
     
 class CannyEdgeDetectorFrame(ProcessFrameBase):
-    
+    name = "Canny Edge Detection"
     info_text = (
     "📌 Canny Kenar Algılama Parametreleri\n\n"
     "• Kernel Size: Canny algılama çekirdeğinin boyutudur. Pozitif ve tek sayı olmalıdır. Örn: 3, 5, 7...\n"
@@ -337,7 +336,7 @@ class CannyEdgeDetectorFrame(ProcessFrameBase):
         return img
 
 class HoughTransformFrame(ProcessFrameBase):
-        
+    name = "Hough Transform"   
     info_text = (
     "📌 Hough Dönüşümü ile Çevre Algılama Parametreleri\n\n"
     "• Dp: Hough dönüşümünde kullanılan çözünürlük parametresidir. Genellikle 1.0 veya daha büyük bir değer olmalıdır.\n"
@@ -433,7 +432,7 @@ class HoughTransformFrame(ProcessFrameBase):
         return copy_img
         
 class GaussianBlurFrame(ProcessFrameBase):
-        
+    name = "Gaussian Blur"    
     info_text = (
     "📌 Hough Dönüşümü ile Çevre Algılama Parametreleri\n\n"
     "• Dp: Hough dönüşümünde kullanılan çözünürlük parametresidir. Genellikle 1.0 veya daha büyük bir değer olmalıdır.\n"
@@ -484,7 +483,7 @@ class GaussianBlurFrame(ProcessFrameBase):
         return img
 
 class KitterIllingworthFrame(ProcessFrameBase):
-    
+    name = "Kittler-Illingworth"
     info_text = (
     "📌 Kittler-Illingworth Optimum Eşik Değeri Parametreleri\n\n"
     "• Optimum Threshold: Kittler-Illingworth yöntemine dayalı olarak görüntüdeki optimum eşik değeri.\n"
@@ -536,7 +535,7 @@ class KitterIllingworthFrame(ProcessFrameBase):
         self.optimum_threshold_label.config(text=str(threshold))
 
 class DrawHistogramFrame(ProcessFrameBase):
-    
+    name = "Draw Histogram"
     info_text = (
     "📌 Görüntü Histogramı Çizimi Parametreleri\n\n"
     "• Görüntü Histogramı: Görüntüdeki piksellerin renk yoğunluklarını gösteren bir grafiktir.\n"
@@ -572,7 +571,7 @@ class DrawHistogramFrame(ProcessFrameBase):
         plt.ylabel('Frequency')    
 
 class ColorConvertFrame(ProcessFrameBase):
-
+    name = "Color Conversion"
     info_text = (
     "📌 Renk Dönüşümü Parametreleri\n\n"
     "• RGB'den Grayscale'e: Renkli bir görüntüyü gri tonlara dönüştürür. Her pikselin gri ton değeri hesaplanır.\n"
@@ -623,7 +622,7 @@ class ColorConvertFrame(ProcessFrameBase):
         return converted_image
 
 class ResizeFrame(ProcessFrameBase):
-
+    name = "Resize"
     info_text = (
     "📌 Görüntü Yeniden Boyutlandırma Parametreleri\n\n"
     "• Width (Genişlik): Görüntünün yeni genişliği. Pozitif bir tamsayı değeri olmalıdır.\n"
@@ -658,7 +657,7 @@ class ResizeFrame(ProcessFrameBase):
         return resized_image
 
 class RotateFrame(ProcessFrameBase):
-
+    name = "Rotate"
     info_text = (
     "📌 Görüntü Döndürme Parametreleri\n\n"
     "• Rotation Angle (Dönme Açısı): Görüntünün döneceği açı. Seçenekler: 90°, 180°, 270°.\n\n"
@@ -696,7 +695,7 @@ class RotateFrame(ProcessFrameBase):
         return rotated_image
 
 class FlipFrame(ProcessFrameBase):
-
+    name = "Flip"
     info_text = (
     "📌 Görüntü Çevirme Parametreleri\n\n"
     "• Flip Direction (Çevirme Yönü): Görüntünün hangi yönde çevrileceği. Seçenekler: Yatay (Horizontal), Dikey (Vertical), Her İki Yön (Both).\n\n"
@@ -734,7 +733,7 @@ class FlipFrame(ProcessFrameBase):
         return flipped_image
     
 class MedianBlurFrame(ProcessFrameBase):
-
+    name = "Median Blur"
     info_text = (
     "📌 Median Blur (Medyan Bulanıklığı) Parametreleri\n\n"
     "• Kernel Size (Çekirdek Boyutu): Median bulanıklık algoritmasında kullanılan çekirdek boyutudur. Genellikle tek sayılar (3, 5, 7 vb.) kullanılır.\n\n"
@@ -763,7 +762,7 @@ class MedianBlurFrame(ProcessFrameBase):
 
 #! May be not working
 class BilateralFilterFrame(ProcessFrameBase):
-
+    name = "Bilateral Filter"
     info_text = (
     "📌 Bilateral Filter (İki Taraflı Filtre) Parametreleri\n\n"
     "• Diameter: Filtreleme sırasında her pikselin çevresinde kullanılacak piksel komşuluğunun çapı. Pozitif bir tamsayı olmalıdır.\n"
@@ -805,7 +804,7 @@ class BilateralFilterFrame(ProcessFrameBase):
         return filtered_image
 
 class Filter2DFrame(ProcessFrameBase):
-
+    name = "Filter2D"
     info_text = (
     "📌 filter2D Konvolüsyon İşlemi Parametreleri\n\n"
     "• 3x3 Kernel: Görüntü üzerine uygulanacak çekirdek (kernel) değerlerini ifade eder.\n"
@@ -856,7 +855,7 @@ class Filter2DFrame(ProcessFrameBase):
         return filtered_image
 
 class SobelFrame(ProcessFrameBase):
-
+    name = "Sobel Edge Detection"
     info_text = (
     "📌 Sobel Kenar Algılama Parametreleri\n\n"
     "• dx: x ekseni yönünde türev alınıp alınmayacağını belirtir. 1 ise x yönlü kenarları algılar.\n"
@@ -904,7 +903,7 @@ class SobelFrame(ProcessFrameBase):
         return sobel_image
 
 class ScharrFrame(ProcessFrameBase):
-
+    name = "Scharr Edge Detection"
     info_text = (
     "📌 Scharr Kenar Algılama Parametreleri\n\n"
     "• dx: x ekseni yönünde türev alınıp alınmayacağını belirtir. 1 seçilirse yatay kenarları algılar.\n"
@@ -944,7 +943,7 @@ class ScharrFrame(ProcessFrameBase):
         return scharr_image
 
 class LaplacianFrame(ProcessFrameBase):
-
+    name = "Laplacian Edge Detection"
     info_text = (
     "📌 Laplace Kenar Algılama Parametresi\n\n"
     "• Kernel Size: Türevi alırken kullanılan çekirdek (kernel) boyutu. Tek sayı ve pozitif olmalıdır (örn. 1, 3, 5).\n"
@@ -978,7 +977,7 @@ class LaplacianFrame(ProcessFrameBase):
         return laplacian_image
 
 class CornerHarrisFrame(ProcessFrameBase):
-
+    name = "Harris Corner Detection"
     info_text = (
     "📌 Harris Köşe Algılama Parametreleri\n\n"
     "• Block Size: Her piksel için köşe algılamada kullanılan komşuluk boyutu.\n"
@@ -1041,7 +1040,7 @@ class CornerHarrisFrame(ProcessFrameBase):
         return result_img
 
 class GoodFeaturesToTrackFrame(ProcessFrameBase):
-
+    name = "Shi-Tomasi Corner Detection"
     info_text = (
     "📌 Köşe Algılama: goodFeaturesToTrack\n\n"
     "• Max Corners: Algılanacak maksimum köşe sayısı.\n"
@@ -1101,7 +1100,7 @@ class GoodFeaturesToTrackFrame(ProcessFrameBase):
         return result_img
 
 class AdaptiveThresholdFrame(ProcessFrameBase):
-
+    name = "Adaptive Thresholding"
     info_text = (
     "📌 Adaptif Eşikleme: adaptiveThreshold\n\n"
     "• Max Value: Eşik üstündeki piksellere verilecek maksimum değer.\n"
@@ -1180,7 +1179,7 @@ class AdaptiveThresholdFrame(ProcessFrameBase):
         return thresholded_image
 
 class OtsuThresholdFrame(ProcessFrameBase):
-
+    name = "Otsu Thresholding"
     info_text = (
     "📌 Otsu Eşikleme: cv2.threshold + THRESH_OTSU\n\n"
     "• Max Value: Eşik üstü piksellere atanacak maksimum değer.\n"
@@ -1232,7 +1231,7 @@ class OtsuThresholdFrame(ProcessFrameBase):
         return otsu_thresholded_image
 #! Needed update for contours    
 class FindContoursFrame(ProcessFrameBase):
-
+    name = "Find Contours"
     info_text = (
     "📌 Kenar Bulma (FindContours): cv2.findContours\n\n"
     "• Retrieval Mode:\n"
@@ -1254,7 +1253,6 @@ class FindContoursFrame(ProcessFrameBase):
     "   - CHAIN_APPROX_NONE: Stores all contour points.\n\n"
     "📄 Input image is converted to grayscale and thresholded to binary."
 )
-
 
     def create_widgets(self):
         # Combobox for contour retrieval mode (e.g., external or all)
@@ -1295,9 +1293,9 @@ class FindContoursFrame(ProcessFrameBase):
         cv2.drawContours(result_img, contours, -1, (0, 255, 0), 1)
 
         return result_img    
-    
-class DrawContoursFrame(ProcessFrameBase):
 
+class DrawContoursFrame(ProcessFrameBase):
+    name = "Draw Contours"
     info_text = (
     "📌 Konturları Çizme (DrawContours): cv2.drawContours\n\n"
     "• Kontur Kalınlığı:\n"
@@ -1357,10 +1355,10 @@ class DrawContoursFrame(ProcessFrameBase):
         result_img = img.copy()
         cv2.drawContours(result_img, contours, -1, contour_color, thickness)
 
-        return result_img    
+        return result_img 
 #? Del canny side of houghlines    
 class HoughLinesFrame(ProcessFrameBase):
-
+    name = "Hough Line Transform"
     info_text = (
     "📌 Hough Doğrusu Dönüşümü (HoughLines): cv2.HoughLines\n\n"
     "• Rho (Mesafe Çözünürlüğü):\n"
@@ -1433,7 +1431,7 @@ class HoughLinesFrame(ProcessFrameBase):
         return result_img    
     
 class DFTFrame(ProcessFrameBase):
-
+    name = "Discrete Fourier Transform (DFT)"
     info_text = (
     "📌 Discrete Fourier Transform (DFT): cv2.dft\n\n"
     "• DFT Boyutu:\n"
@@ -1500,7 +1498,7 @@ class DFTFrame(ProcessFrameBase):
         return result_img    
     
 class IDFTFrame(ProcessFrameBase):
-
+    name = "Inverse Discrete Fourier Transform (IDFT)"
     info_text = (
         "📌 Inverse Discrete Fourier Transform (IDFT): cv2.idft\n\n"
         "• IDFT Boyutu:\n"
@@ -1570,7 +1568,7 @@ class IDFTFrame(ProcessFrameBase):
         return result_img    
     
 class NumpyFFTFrame(ProcessFrameBase):
-
+    name = "Numpy FFT (Fast Fourier Transform)"
     info_text = (
     "📌 Fourier Dönüşümü (FFT) ve Ters Fourier Dönüşümü (IFFT): np.fft.fft2, np.fft.ifft2\n\n"
     "• Dönüşüm Tipi:\n"
@@ -1635,7 +1633,7 @@ class NumpyFFTFrame(ProcessFrameBase):
                 return img  # No change if invalid selection    
 
 class EqualizeHistFrame(ProcessFrameBase):
-    
+    name = "Histogram Equalization"
     info_text = (
     "📌 Histogram Eşitleme (EqualizeHist): cv2.equalizeHist\n\n"
     "• Görüntü Gri Tonlamaya Dönüştürülür:\n"
@@ -1682,7 +1680,7 @@ class EqualizeHistFrame(ProcessFrameBase):
         plt.tight_layout()   
 #! may be malfunctioning
 class CLAHEFrame(ProcessFrameBase):
-    
+    name = "CLAHE (Contrast Limited Adaptive Histogram Equalization)"
     info_text = (
     "📌 CLAHE (Contrast Limited Adaptive Histogram Equalization): cv2.createCLAHE\n\n"
     "• Clip Limit:\n"

@@ -51,14 +51,12 @@ class Application:
         self.canvas.create_window((0, 0), window=self.process_frame, anchor="nw")
         self.process_frame.bind("<Configure>", self.on_frame_configure)
     
-    
     def on_frame_configure(self, event):
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
         
     def _on_mousewheel(self, event):
         self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-    
-   
+       
     def create_frames(self):
         
         row, column = Application.frame_placer()
