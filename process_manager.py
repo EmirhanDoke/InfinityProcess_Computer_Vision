@@ -47,6 +47,7 @@ class ADD_ComboBox:
         # Delete old object
         self.processor = None
         self.processor_np = None
+        print("Deleted the old object")
 
         # Create new Widget
         match self.selected_operator:
@@ -130,14 +131,14 @@ class ADD_ComboBox:
             
             result = self.processor.apply(self.read_img())
             ADD_ComboBox.images.append(result)
-  
-        else:
-            print("No valid processor found.")
 
-        if hasattr(self, 'processor_np'):
+        elif hasattr(self, 'processor_np'):
             if self.processor_np:
                 self.processor_np.update_result(self.read_img())
-                ADD_ComboBox.images.append(self.read_img())
+                # ADD_ComboBox.images.append(self.read_img())
+        
+        else:
+            print("No valid processor found.")
 
 #! Utils
 
