@@ -5,13 +5,27 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tkinter_components.tkinter_info_buttom import *
 from utils import Utils
-
+import importlib
 
 class ProcessFrameBase:
     def __init__(self, frame):
         self.frame = frame
         self.language = Utils.load_user_settings("language")
+        self.translations = self.load_translations()
         self.create_widgets()
+
+    def load_translations(self):
+        # Load translations based on the selected language
+        try:
+            lang_module = importlib.import_module(f"languages.{self.language.lower()}")
+            return lang_module.translations
+        except ModuleNotFoundError:
+            print(f"Translation file for language '{self.language}' not found.")
+            return {}
+
+    def get_translation(self, key):
+        # Get the translation for the given key
+        return self.translations.get(key, "Translation not available.")
 
     def apply(self, img):
         raise NotImplementedError("apply method must be implemented in subclass.")
@@ -50,12 +64,13 @@ class ThresholdingFrame(ProcessFrameBase):
         )
         self.threshold_type_combobox.grid(row=2, column=1, padx=2, pady=2)
 
-        info_text = (
-            ThresholdingFrame.info_text_en
-            if self.language == "English"
-            else ThresholdingFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        # info_text = (
+        #     ThresholdingFrame.info_text_en
+        #     if self.language == "English"
+        #     else ThresholdingFrame.info_text_tr
+        # )
+        
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         threshold_value = self.threshold_entry.get()
