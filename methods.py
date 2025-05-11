@@ -1,11 +1,12 @@
-import tkinter as tk
-from tkinter import ttk
+import tkinter as ttk
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from tkinter_components.tkinter_info_buttom import *
 from utils import Utils
 import importlib
+import ttkbootstrap as ttk
+from ttkbootstrap.constants import *
 
 class ProcessFrameBase:
     def __init__(self, frame):
@@ -35,11 +36,11 @@ class ThresholdingFrame(ProcessFrameBase):
     name = "Thresholding"
 
     def create_widgets(self):
-        tk.Label(self.frame, text="Threshold:").grid(row=1, column=0, padx=2, pady=2)
-        self.threshold_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Threshold:").grid(row=1, column=0, padx=2, pady=2)
+        self.threshold_entry = ttk.Entry(self.frame)
         self.threshold_entry.grid(row=1, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Threshold Type:").grid(
+        ttk.Label(self.frame, text="Threshold Type:").grid(
             row=2, column=0, padx=2, pady=2
         )
         threshold_types = ["Binary", "Binary_Inverse"]
@@ -69,28 +70,28 @@ class GaborFilterFrame(ProcessFrameBase):
     name = "Gabor Filter"
 
     def create_widgets(self):
-        tk.Label(self.frame, text="Ksize:").grid(row=1, column=0, padx=2, pady=2)
-        self.ksize_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Ksize:").grid(row=1, column=0, padx=2, pady=2)
+        self.ksize_entry = ttk.Entry(self.frame)
         self.ksize_entry.grid(row=1, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Sigma:").grid(row=2, column=0, padx=2, pady=2)
-        self.sigma_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Sigma:").grid(row=2, column=0, padx=2, pady=2)
+        self.sigma_entry = ttk.Entry(self.frame)
         self.sigma_entry.grid(row=2, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Theta:").grid(row=3, column=0, padx=2, pady=2)
-        self.theta_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Theta:").grid(row=3, column=0, padx=2, pady=2)
+        self.theta_entry = ttk.Entry(self.frame)
         self.theta_entry.grid(row=3, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Lambda:").grid(row=4, column=0, padx=2, pady=2)
-        self.lambda_frame = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Lambda:").grid(row=4, column=0, padx=2, pady=2)
+        self.lambda_frame = ttk.Entry(self.frame)
         self.lambda_frame.grid(row=4, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Gamma:").grid(row=5, column=0, padx=2, pady=2)
-        self.gamma_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Gamma:").grid(row=5, column=0, padx=2, pady=2)
+        self.gamma_entry = ttk.Entry(self.frame)
         self.gamma_entry.grid(row=5, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Phi:").grid(row=6, column=0, padx=2, pady=2)
-        self.phi_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Phi:").grid(row=6, column=0, padx=2, pady=2)
+        self.phi_entry = ttk.Entry(self.frame)
         self.phi_entry.grid(row=6, column=1, padx=2, pady=2)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
@@ -115,16 +116,16 @@ class MorphologicalFrame(ProcessFrameBase):
     name = "Morphological"
 
     def create_widgets(self):
-        tk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
-        self.kernelsize = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
+        self.kernelsize = ttk.Entry(self.frame)
         self.kernelsize.grid(row=1, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Kernel Shape:").grid(row=2, column=0, padx=2, pady=2)
+        ttk.Label(self.frame, text="Kernel Shape:").grid(row=2, column=0, padx=2, pady=2)
         shapes = ["Rectangular", "Ellipse", "Cross"]
         self.shapes_combobox = ttk.Combobox(self.frame, values=shapes, width=17)
         self.shapes_combobox.grid(row=2, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Operations:").grid(row=3, column=0, padx=2, pady=2)
+        ttk.Label(self.frame, text="Operations:").grid(row=3, column=0, padx=2, pady=2)
         operations = [
             "Erode",
             "Dilation",
@@ -137,8 +138,8 @@ class MorphologicalFrame(ProcessFrameBase):
         self.operations_combobox = ttk.Combobox(self.frame, values=operations, width=17)
         self.operations_combobox.grid(row=3, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Iterations:").grid(row=4, column=0, padx=2, pady=2)
-        self.iterations = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Iterations:").grid(row=4, column=0, padx=2, pady=2)
+        self.iterations = ttk.Entry(self.frame)
         self.iterations.grid(row=4, column=1, padx=2, pady=2)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
@@ -210,8 +211,8 @@ class GammaTransformFrame(ProcessFrameBase):
 
     def create_widgets(self):
 
-        tk.Label(self.frame, text="Gamma Value:").grid(row=1, column=0, padx=2, pady=2)
-        self.gamma_transform_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Gamma Value:").grid(row=1, column=0, padx=2, pady=2)
+        self.gamma_transform_entry = ttk.Entry(self.frame)
         self.gamma_transform_entry.grid(row=1, column=1, padx=2, pady=2)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
@@ -236,23 +237,23 @@ class CannyEdgeDetectorFrame(ProcessFrameBase):
 
     def create_widgets(self):
 
-        tk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
-        self.ksize_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
+        self.ksize_entry = ttk.Entry(self.frame)
         self.ksize_entry.grid(row=1, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Low Threshold:").grid(
+        ttk.Label(self.frame, text="Low Threshold:").grid(
             row=2, column=0, padx=2, pady=2
         )
-        self.low_threshold_entry = tk.Entry(self.frame)
+        self.low_threshold_entry = ttk.Entry(self.frame)
         self.low_threshold_entry.grid(row=2, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Max Threshold:").grid(
+        ttk.Label(self.frame, text="Max Threshold:").grid(
             row=3, column=0, padx=2, pady=2
         )
-        self.max_threshold_entry = tk.Entry(self.frame)
+        self.max_threshold_entry = ttk.Entry(self.frame)
         self.max_threshold_entry.grid(row=3, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="L2gradient:").grid(row=4, column=0, padx=2, pady=2)
+        ttk.Label(self.frame, text="L2gradient:").grid(row=4, column=0, padx=2, pady=2)
         shape = ["True", "False"]
         self.l2gradient_combobox = ttk.Combobox(self.frame, values=shape, width=17)
         self.l2gradient_combobox.grid(row=4, column=1, padx=2, pady=2)
@@ -285,37 +286,37 @@ class HoughTransformFrame(ProcessFrameBase):
 
     def create_widgets(self):
 
-        tk.Label(self.frame, text="Dp:").grid(row=1, column=0, padx=2, pady=2)
-        self.dp_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Dp:").grid(row=1, column=0, padx=2, pady=2)
+        self.dp_entry = ttk.Entry(self.frame)
         self.dp_entry.grid(row=1, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Minimum Distance:").grid(
+        ttk.Label(self.frame, text="Minimum Distance:").grid(
             row=2, column=0, padx=2, pady=2
         )
-        self.minimum_distance_entry = tk.Entry(self.frame)
+        self.minimum_distance_entry = ttk.Entry(self.frame)
         self.minimum_distance_entry.grid(row=2, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Param1:").grid(row=3, column=0, padx=2, pady=2)
-        self.param1_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Param1:").grid(row=3, column=0, padx=2, pady=2)
+        self.param1_entry = ttk.Entry(self.frame)
         self.param1_entry.grid(row=3, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Param2:").grid(row=4, column=0, padx=2, pady=2)
-        self.param2_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Param2:").grid(row=4, column=0, padx=2, pady=2)
+        self.param2_entry = ttk.Entry(self.frame)
         self.param2_entry.grid(row=4, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Minimum Radius:").grid(
+        ttk.Label(self.frame, text="Minimum Radius:").grid(
             row=5, column=0, padx=2, pady=2
         )
-        self.minimum_radius_entry = tk.Entry(self.frame)
+        self.minimum_radius_entry = ttk.Entry(self.frame)
         self.minimum_radius_entry.grid(row=5, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Maximum Radius:").grid(
+        ttk.Label(self.frame, text="Maximum Radius:").grid(
             row=6, column=0, padx=2, pady=2
         )
-        self.maximum_radius_entry = tk.Entry(self.frame)
+        self.maximum_radius_entry = ttk.Entry(self.frame)
         self.maximum_radius_entry.grid(row=6, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Mark Color:").grid(row=7, column=0, padx=2, pady=2)
+        ttk.Label(self.frame, text="Mark Color:").grid(row=7, column=0, padx=2, pady=2)
         ope2 = ["Red", "Blue"]
         self.mark_color_combobox = ttk.Combobox(self.frame, values=ope2, width=17)
         self.mark_color_combobox.grid(row=7, column=1, padx=2, pady=2)
@@ -372,16 +373,16 @@ class GaussianBlurFrame(ProcessFrameBase):
     name = "Gaussian Blur"
 
     def create_widgets(self):
-        tk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
-        self.ksize_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
+        self.ksize_entry = ttk.Entry(self.frame)
         self.ksize_entry.grid(row=1, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Sigma_X:").grid(row=2, column=0, padx=2, pady=2)
-        self.sigmax_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Sigma_X:").grid(row=2, column=0, padx=2, pady=2)
+        self.sigmax_entry = ttk.Entry(self.frame)
         self.sigmax_entry.grid(row=2, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Sigma_Y:").grid(row=3, column=0, padx=2, pady=2)
-        self.sigmay_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Sigma_Y:").grid(row=3, column=0, padx=2, pady=2)
+        self.sigmay_entry = ttk.Entry(self.frame)
         self.sigmay_entry.grid(row=3, column=1, padx=2, pady=2)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
@@ -402,10 +403,10 @@ class KitterIllingworthFrame(ProcessFrameBase):
 
     def create_widgets(self):
 
-        tk.Label(self.frame, text="Optimum Threshold:").grid(
+        ttk.Label(self.frame, text="Optimum Threshold:").grid(
             row=1, column=0, padx=2, pady=2
         )
-        self.optimum_threshold_label = tk.Label(self.frame)
+        self.optimum_threshold_label = ttk.Label(self.frame)
         self.optimum_threshold_label.grid(row=1, column=1, padx=2, pady=2)
         
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
@@ -490,7 +491,7 @@ class ColorConvertFrame(ProcessFrameBase):
     name = "Color Conversion"
 
     def create_widgets(self):
-        tk.Label(self.frame, text="Select Color Conversion:").grid(
+        ttk.Label(self.frame, text="Select Color Conversion:").grid(
             row=1, column=0, padx=2, pady=2
         )
 
@@ -531,12 +532,12 @@ class ResizeFrame(ProcessFrameBase):
     name = "Resize"
 
     def create_widgets(self):
-        tk.Label(self.frame, text="Width:").grid(row=1, column=0, padx=2, pady=2)
-        self.width_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Width:").grid(row=1, column=0, padx=2, pady=2)
+        self.width_entry = ttk.Entry(self.frame)
         self.width_entry.grid(row=1, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Height:").grid(row=2, column=0, padx=2, pady=2)
-        self.height_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Height:").grid(row=2, column=0, padx=2, pady=2)
+        self.height_entry = ttk.Entry(self.frame)
         self.height_entry.grid(row=2, column=1, padx=2, pady=2)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
@@ -555,7 +556,7 @@ class RotateFrame(ProcessFrameBase):
     name = "Rotate"
 
     def create_widgets(self):
-        tk.Label(self.frame, text="Select Rotation Angle:").grid(
+        ttk.Label(self.frame, text="Select Rotation Angle:").grid(
             row=1, column=0, padx=2, pady=2
         )
 
@@ -586,7 +587,7 @@ class FlipFrame(ProcessFrameBase):
     name = "Flip"
 
     def create_widgets(self):
-        tk.Label(self.frame, text="Select Flip Direction:").grid(
+        ttk.Label(self.frame, text="Select Flip Direction:").grid(
             row=1, column=0, padx=2, pady=2
         )
 
@@ -621,8 +622,8 @@ class MedianBlurFrame(ProcessFrameBase):
     name = "Median Blur"
 
     def create_widgets(self):
-        tk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
-        self.kernel_size_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
+        self.kernel_size_entry = ttk.Entry(self.frame)
         self.kernel_size_entry.grid(row=1, column=1, padx=2, pady=2)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
@@ -641,16 +642,16 @@ class BilateralFilterFrame(ProcessFrameBase):
     name = "Bilateral Filter"
 
     def create_widgets(self):
-        tk.Label(self.frame, text="Diameter:").grid(row=1, column=0, padx=2, pady=2)
-        self.d_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Diameter:").grid(row=1, column=0, padx=2, pady=2)
+        self.d_entry = ttk.Entry(self.frame)
         self.d_entry.grid(row=1, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Sigma Color:").grid(row=2, column=0, padx=2, pady=2)
-        self.sigma_color_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Sigma Color:").grid(row=2, column=0, padx=2, pady=2)
+        self.sigma_color_entry = ttk.Entry(self.frame)
         self.sigma_color_entry.grid(row=2, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Sigma Space:").grid(row=3, column=0, padx=2, pady=2)
-        self.sigma_space_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Sigma Space:").grid(row=3, column=0, padx=2, pady=2)
+        self.sigma_space_entry = ttk.Entry(self.frame)
         self.sigma_space_entry.grid(row=3, column=1, padx=2, pady=2)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
@@ -670,13 +671,13 @@ class Filter2DFrame(ProcessFrameBase):
     name = "Filter2D"
 
     def create_widgets(self):
-        tk.Label(self.frame, text="3x3 Kernel Values (row-wise):").grid(
+        ttk.Label(self.frame, text="3x3 Kernel Values (row-wise):").grid(
             row=1, column=0, columnspan=2, padx=2, pady=2
         )
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
-        inner_frame = tk.Frame(self.frame)
+        inner_frame = ttk.Frame(self.frame)
         inner_frame.grid(row=2, column=0)
 
         # 3x3 Entry grid for kernel values
@@ -684,7 +685,7 @@ class Filter2DFrame(ProcessFrameBase):
         for i in range(3):
             row_entries = []
             for j in range(3):
-                entry = tk.Entry(inner_frame, width=5)
+                entry = ttk.Entry(inner_frame, width=5)
                 entry.grid(row=i + 2, column=j, padx=1, pady=1)
                 entry.insert(0, "0")
                 row_entries.append(entry)
@@ -709,20 +710,20 @@ class SobelFrame(ProcessFrameBase):
 
     def create_widgets(self):
         # dx selecting
-        tk.Label(self.frame, text="dx:").grid(row=1, column=0, padx=2, pady=2)
+        ttk.Label(self.frame, text="dx:").grid(row=1, column=0, padx=2, pady=2)
         self.dx_combobox = ttk.Combobox(self.frame, values=[0, 1])
         self.dx_combobox.grid(row=1, column=1, padx=2, pady=2)
 
         # dy selecting
-        tk.Label(self.frame, text="dy:").grid(row=2, column=0, padx=2, pady=2)
+        ttk.Label(self.frame, text="dy:").grid(row=2, column=0, padx=2, pady=2)
         self.dy_combobox = ttk.Combobox(self.frame, values=[0, 1])
         self.dy_combobox.grid(row=2, column=1, padx=2, pady=2)
 
         # Ksize
-        tk.Label(self.frame, text="Kernel Size (odd, e.g. 1, 3, 5):").grid(
+        ttk.Label(self.frame, text="Kernel Size (odd, e.g. 1, 3, 5):").grid(
             row=3, column=0, padx=2, pady=2
         )
-        self.ksize_entry = tk.Entry(self.frame)
+        self.ksize_entry = ttk.Entry(self.frame)
         self.ksize_entry.grid(row=3, column=1, padx=2, pady=2)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
@@ -746,12 +747,12 @@ class ScharrFrame(ProcessFrameBase):
 
     def create_widgets(self):
         # dx selecting
-        tk.Label(self.frame, text="dx:").grid(row=1, column=0, padx=2, pady=2)
+        ttk.Label(self.frame, text="dx:").grid(row=1, column=0, padx=2, pady=2)
         self.dx_combobox = ttk.Combobox(self.frame, values=[0, 1])
         self.dx_combobox.grid(row=1, column=1, padx=2, pady=2)
 
         # dy selecting
-        tk.Label(self.frame, text="dy:").grid(row=2, column=0, padx=2, pady=2)
+        ttk.Label(self.frame, text="dy:").grid(row=2, column=0, padx=2, pady=2)
         self.dy_combobox = ttk.Combobox(self.frame, values=[0, 1])
         self.dy_combobox.grid(row=2, column=1, padx=2, pady=2)
 
@@ -775,10 +776,10 @@ class LaplacianFrame(ProcessFrameBase):
 
     def create_widgets(self):
         # Entry for kernel size (must be odd and positive)
-        tk.Label(self.frame, text="Kernel Size (e.g., 1, 3, 5):").grid(
+        ttk.Label(self.frame, text="Kernel Size (e.g., 1, 3, 5):").grid(
             row=1, column=0, padx=2, pady=2
         )
-        self.ksize_entry = tk.Entry(self.frame)
+        self.ksize_entry = ttk.Entry(self.frame)
         self.ksize_entry.grid(row=1, column=1, padx=2, pady=2)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
@@ -800,22 +801,22 @@ class CornerHarrisFrame(ProcessFrameBase):
 
     def create_widgets(self):
         # Entry for block size (neighborhood size)
-        tk.Label(self.frame, text="Block Size:").grid(row=1, column=0, padx=2, pady=2)
-        self.block_size_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Block Size:").grid(row=1, column=0, padx=2, pady=2)
+        self.block_size_entry = ttk.Entry(self.frame)
         self.block_size_entry.grid(row=1, column=1, padx=2, pady=2)
 
         # Entry for ksize (aperture parameter of Sobel)
-        tk.Label(self.frame, text="Sobel Kernel Size:").grid(
+        ttk.Label(self.frame, text="Sobel Kernel Size:").grid(
             row=2, column=0, padx=2, pady=2
         )
-        self.ksize_entry = tk.Entry(self.frame)
+        self.ksize_entry = ttk.Entry(self.frame)
         self.ksize_entry.grid(row=2, column=1, padx=2, pady=2)
 
         # Entry for Harris detector free parameter k
-        tk.Label(self.frame, text="Harris k value (e.g., 0.04):").grid(
+        ttk.Label(self.frame, text="Harris k value (e.g., 0.04):").grid(
             row=3, column=0, padx=2, pady=2
         )
-        self.k_entry = tk.Entry(self.frame)
+        self.k_entry = ttk.Entry(self.frame)
         self.k_entry.grid(row=3, column=1, padx=2, pady=2)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
@@ -857,20 +858,20 @@ class GoodFeaturesToTrackFrame(ProcessFrameBase):
 
     def create_widgets(self):
         # Entry for maxCorners (maximum number of corners to return)
-        tk.Label(self.frame, text="Max Corners:").grid(row=1, column=0, padx=2, pady=2)
-        self.max_corners_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Max Corners:").grid(row=1, column=0, padx=2, pady=2)
+        self.max_corners_entry = ttk.Entry(self.frame)
         self.max_corners_entry.grid(row=1, column=1, padx=2, pady=2)
 
         # Entry for qualityLevel (minimum accepted quality of corners)
-        tk.Label(self.frame, text="Quality Level (0 to 1):").grid(
+        ttk.Label(self.frame, text="Quality Level (0 to 1):").grid(
             row=2, column=0, padx=2, pady=2
         )
-        self.quality_level_entry = tk.Entry(self.frame)
+        self.quality_level_entry = ttk.Entry(self.frame)
         self.quality_level_entry.grid(row=2, column=1, padx=2, pady=2)
 
         # Entry for minDistance (minimum possible Euclidean distance between corners)
-        tk.Label(self.frame, text="Min Distance:").grid(row=3, column=0, padx=2, pady=2)
-        self.min_distance_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Min Distance:").grid(row=3, column=0, padx=2, pady=2)
+        self.min_distance_entry = ttk.Entry(self.frame)
         self.min_distance_entry.grid(row=3, column=1, padx=2, pady=2)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
@@ -911,12 +912,12 @@ class AdaptiveThresholdFrame(ProcessFrameBase):
 
     def create_widgets(self):
         # Entry for max value (maximum intensity value to be assigned to pixels)
-        tk.Label(self.frame, text="Max Value:").grid(row=1, column=0, padx=2, pady=2)
-        self.max_value_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="Max Value:").grid(row=1, column=0, padx=2, pady=2)
+        self.max_value_entry = ttk.Entry(self.frame)
         self.max_value_entry.grid(row=1, column=1, padx=2, pady=2)
 
         # Combobox for adaptive method (Mean or Gaussian)
-        tk.Label(self.frame, text="Adaptive Method:").grid(
+        ttk.Label(self.frame, text="Adaptive Method:").grid(
             row=2, column=0, padx=2, pady=2
         )
         self.adaptive_method_combobox = ttk.Combobox(
@@ -925,7 +926,7 @@ class AdaptiveThresholdFrame(ProcessFrameBase):
         self.adaptive_method_combobox.grid(row=2, column=1, padx=2, pady=2)
 
         # Combobox for threshold type (Binary or Binary Inverted)
-        tk.Label(self.frame, text="Threshold Type:").grid(
+        ttk.Label(self.frame, text="Threshold Type:").grid(
             row=3, column=0, padx=2, pady=2
         )
         self.threshold_type_combobox = ttk.Combobox(
@@ -934,15 +935,15 @@ class AdaptiveThresholdFrame(ProcessFrameBase):
         self.threshold_type_combobox.grid(row=3, column=1, padx=2, pady=2)
 
         # Entry for block size (size of local region for thresholding)
-        tk.Label(self.frame, text="Block Size (odd > 1):").grid(
+        ttk.Label(self.frame, text="Block Size (odd > 1):").grid(
             row=4, column=0, padx=2, pady=2
         )
-        self.block_size_entry = tk.Entry(self.frame)
+        self.block_size_entry = ttk.Entry(self.frame)
         self.block_size_entry.grid(row=4, column=1, padx=2, pady=2)
 
         # Entry for C value (constant to subtract from mean or weighted mean)
-        tk.Label(self.frame, text="C (constant):").grid(row=5, column=0, padx=2, pady=2)
-        self.c_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="C (constant):").grid(row=5, column=0, padx=2, pady=2)
+        self.c_entry = ttk.Entry(self.frame)
         self.c_entry.grid(row=5, column=1, padx=2, pady=2)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
@@ -984,10 +985,10 @@ class OtsuThresholdFrame(ProcessFrameBase):
 
     def create_widgets(self):
 
-        tk.Label(self.frame, text="OTSU Threshold:").grid(
+        ttk.Label(self.frame, text="OTSU Threshold:").grid(
             row=1, column=0, padx=2, pady=2
         )
-        self.otsu_threshold_label = tk.Label(self.frame)
+        self.otsu_threshold_label = ttk.Label(self.frame)
         self.otsu_threshold_label.grid(row=1, column=1, padx=2, pady=2)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
@@ -1017,7 +1018,7 @@ class FindContoursFrame(ProcessFrameBase):
 
     def create_widgets(self):
         # Combobox for contour retrieval mode (e.g., external or all)
-        tk.Label(self.frame, text="Retrieval Mode:").grid(
+        ttk.Label(self.frame, text="Retrieval Mode:").grid(
             row=1, column=0, padx=2, pady=2
         )
         self.retrieval_mode_combobox = ttk.Combobox(
@@ -1026,7 +1027,7 @@ class FindContoursFrame(ProcessFrameBase):
         self.retrieval_mode_combobox.grid(row=1, column=1, padx=2, pady=2)
 
         # Combobox for contour approximation method (e.g., simple or accurate)
-        tk.Label(self.frame, text="Approximation Method:").grid(
+        ttk.Label(self.frame, text="Approximation Method:").grid(
             row=2, column=0, padx=2, pady=2
         )
         self.approximation_method_combobox = ttk.Combobox(
@@ -1034,7 +1035,7 @@ class FindContoursFrame(ProcessFrameBase):
         )
         self.approximation_method_combobox.grid(row=2, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Color:").grid(row=3, column=0, padx=2, pady=2)
+        ttk.Label(self.frame, text="Color:").grid(row=3, column=0, padx=2, pady=2)
         self.color_combobox = ttk.Combobox(self.frame, values=["Red", "Green", "Blue"])
         self.color_combobox.grid(row=3, column=1, padx=2, pady=2)
 
@@ -1081,13 +1082,13 @@ class DrawContoursFrame(ProcessFrameBase):
 
     def create_widgets(self):
         # Entry for contour thickness (thickness of contour lines)
-        tk.Label(self.frame, text="Contour Thickness:").grid(
+        ttk.Label(self.frame, text="Contour Thickness:").grid(
             row=1, column=0, padx=2, pady=2
         )
-        self.thickness_entry = tk.Entry(self.frame)
+        self.thickness_entry = ttk.Entry(self.frame)
         self.thickness_entry.grid(row=1, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Color:").grid(row=3, column=0, padx=2, pady=2)
+        ttk.Label(self.frame, text="Color:").grid(row=3, column=0, padx=2, pady=2)
         self.color_combobox = ttk.Combobox(self.frame, values=["Red", "Green", "Blue"])
         self.color_combobox.grid(row=3, column=1, padx=2, pady=2)
 
@@ -1125,24 +1126,24 @@ class HoughLinesFrame(ProcessFrameBase):
 
     def create_widgets(self):
         # Entry for rho (distance resolution of the accumulator in pixels)
-        tk.Label(self.frame, text="Rho (Distance Resolution):").grid(
+        ttk.Label(self.frame, text="Rho (Distance Resolution):").grid(
             row=1, column=0, padx=2, pady=2
         )
-        self.rho_entry = tk.Entry(self.frame)
+        self.rho_entry = ttk.Entry(self.frame)
         self.rho_entry.grid(row=1, column=1, padx=2, pady=2)
 
         # Entry for theta (angle resolution of the accumulator in radians)
-        tk.Label(self.frame, text="Theta (Angle Resolution):").grid(
+        ttk.Label(self.frame, text="Theta (Angle Resolution):").grid(
             row=2, column=0, padx=2, pady=2
         )
-        self.theta_entry = tk.Entry(self.frame)
+        self.theta_entry = ttk.Entry(self.frame)
         self.theta_entry.grid(row=2, column=1, padx=2, pady=2)
 
         # Entry for threshold (threshold for line detection)
-        tk.Label(self.frame, text="Threshold (Line Detection Threshold):").grid(
+        ttk.Label(self.frame, text="Threshold (Line Detection Threshold):").grid(
             row=3, column=0, padx=2, pady=2
         )
-        self.threshold_entry = tk.Entry(self.frame)
+        self.threshold_entry = ttk.Entry(self.frame)
         self.threshold_entry.grid(row=3, column=1, padx=2, pady=2)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
@@ -1185,12 +1186,12 @@ class DFTFrame(ProcessFrameBase):
 
     def create_widgets(self):
         # Entry for the size of the image (size of the DFT result)
-        tk.Label(self.frame, text="DFT Size:").grid(row=1, column=0, padx=2, pady=2)
-        self.size_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="DFT Size:").grid(row=1, column=0, padx=2, pady=2)
+        self.size_entry = ttk.Entry(self.frame)
         self.size_entry.grid(row=1, column=1, padx=2, pady=2)
 
         # Combobox for selecting whether to shift the zero frequency component
-        tk.Label(self.frame, text="Shift Zero Frequency (Yes/No):").grid(
+        ttk.Label(self.frame, text="Shift Zero Frequency (Yes/No):").grid(
             row=2, column=0, padx=2, pady=2
         )
         self.shift_combobox = ttk.Combobox(self.frame, values=["Yes", "No"])
@@ -1248,12 +1249,12 @@ class IDFTFrame(ProcessFrameBase):
     def create_widgets(self):
 
         # Entry for the size of the image (size of the IDFT result)
-        tk.Label(self.frame, text="IDFT Size:").grid(row=1, column=0, padx=2, pady=2)
-        self.size_entry = tk.Entry(self.frame)
+        ttk.Label(self.frame, text="IDFT Size:").grid(row=1, column=0, padx=2, pady=2)
+        self.size_entry = ttk.Entry(self.frame)
         self.size_entry.grid(row=1, column=1, padx=2, pady=2)
 
         # Combobox for selecting whether to shift the zero frequency component
-        tk.Label(self.frame, text="Shift Zero Frequency (Yes/No):").grid(
+        ttk.Label(self.frame, text="Shift Zero Frequency (Yes/No):").grid(
             row=2, column=0, padx=2, pady=2
         )
         self.shift_combobox = ttk.Combobox(self.frame, values=["Yes", "No"])
@@ -1300,7 +1301,7 @@ class NumpyFFTFrame(ProcessFrameBase):
 
     def create_widgets(self):
         # Combobox for selecting FFT or IFFT
-        tk.Label(self.frame, text="Transform Type:").grid(
+        ttk.Label(self.frame, text="Transform Type:").grid(
             row=1, column=0, padx=2, pady=2
         )
         self.transform_combobox = ttk.Combobox(self.frame, values=["FFT", "IFFT"])
@@ -1385,13 +1386,13 @@ class CLAHEFrame(ProcessFrameBase):
     name = "CLAHE (Contrast Limited Adaptive Histogram Equalization)"
 
     def create_widgets(self):
-        self.clip_limit = tk.DoubleVar(value=2.0)
-        self.tile_grid_size = tk.IntVar(value=8)
+        self.clip_limit = ttk.DoubleVar(value=2.0)
+        self.tile_grid_size = ttk.IntVar(value=8)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
-        tk.Label(self.frame, text="Clip Limit:").grid(row=1, column=0, padx=2, pady=2)
-        tk.Scale(
+        ttk.Label(self.frame, text="Clip Limit:").grid(row=1, column=0, padx=2, pady=2)
+        ttk.Scale(
             self.frame,
             from_=1.0,
             to=16.0,
@@ -1400,10 +1401,10 @@ class CLAHEFrame(ProcessFrameBase):
             orient="horizontal",
         ).grid(row=1, column=1, padx=2, pady=2)
 
-        tk.Label(self.frame, text="Tile Grid Size:").grid(
+        ttk.Label(self.frame, text="Tile Grid Size:").grid(
             row=2, column=0, padx=2, pady=2
         )
-        tk.Scale(
+        ttk.Scale(
             self.frame,
             from_=1,
             to=32,

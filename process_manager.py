@@ -1,10 +1,12 @@
-import tkinter as tk
+import tkinter as ttk
 from tkinter import ttk, filedialog
 import cv2
 from PIL import Image, ImageTk
 from methods import *
 import matplotlib.pyplot as plt
 from utils import Utils
+import ttkbootstrap as ttk
+from ttkbootstrap.constants import *
 
 class ADD_ComboBox:
     
@@ -224,17 +226,17 @@ class ADD_ComboBox:
         img_type = "Grayscale" if channels == 1 else "Color"
         
         # Create a new tkinter window
-        details_window = tk.Toplevel()
+        details_window = ttk.Toplevel()
         details_window.title("Image Details")
         details_window.resizable(False, False)
         
         # Display image details
-        details_label = tk.Label(details_window, justify="left" , font=("Ariel",14) ,text=f"Image Details:\n"
+        details_label = ttk.Label(details_window, justify="left" , font=("Ariel",14) ,text=f"Image Details:\n"
                                                        f"{'Width:':<15}{width} px\n"
                                                        f"{'Height:':<15}{height} px\n"
                                                        f"{'Channels:':<15}{channels}\n"
                                                        f"{'Type:':<15}{img_type}")
-        details_label.pack(padx = 20, pady=10, side=tk.RIGHT)
+        details_label.pack(padx = 20, pady=10, side=ttk.RIGHT)
         
         image_ratio = width / height
         img = cv2.resize(img, (256, int(256/image_ratio)))
@@ -246,6 +248,6 @@ class ADD_ComboBox:
         img_tk = ImageTk.PhotoImage(img_pil)
         
         # Display the image
-        img_label = tk.Label(details_window, image=img_tk)
+        img_label = ttk.Label(details_window, image=img_tk)
         img_label.image = img_tk  # Keep a reference to avoid garbage collection
-        img_label.pack(padx = 10, pady=10, side=tk.LEFT)
+        img_label.pack(padx = 10, pady=10, side=ttk.LEFT)

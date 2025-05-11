@@ -1,9 +1,11 @@
-import tkinter as tk
+
 from tkinter import Toplevel
 from PIL import Image, ImageTk
 import sys
 import os
 from utils import Utils
+import ttkbootstrap as ttk
+from ttkbootstrap.constants import *
 
 class ImageButtonApp:
     def __init__(self, frame, text):
@@ -30,7 +32,7 @@ class ImageButtonApp:
 
     def create_image_button(self):
         """Resimli butonu oluşturur."""
-        self.button = tk.Button(
+        self.button = ttk.Button(
             self.frame,
             image=self.button_image,
             command=self.open_top_layer
@@ -42,7 +44,7 @@ class ImageButtonApp:
         top = Toplevel(self.frame)
         top.title("Info Window")
         
-        tk.Label(top, text=self.text, font=("Arial", 12, "bold"), wraplength=750, justify="left").pack(padx=20, pady=20)
+        ttk.Label(top, text=self.text, font=("Arial", 12, "bold"), wraplength=750, justify="left").pack(padx=20, pady=20)
     
     @classmethod
     def resource_path(cls, relative_path):
@@ -54,6 +56,6 @@ class ImageButtonApp:
 
 
 if __name__ == "__main__":
-    root = tk.Tk()
+    root = ttk.ttk()
     app = ImageButtonApp(root)
     root.mainloop()
