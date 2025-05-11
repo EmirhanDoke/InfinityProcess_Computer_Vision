@@ -33,22 +33,6 @@ class ProcessFrameBase:
 
 class ThresholdingFrame(ProcessFrameBase):
     name = "Thresholding"
-    info_text_tr = (
-        "📌 Threshold Bilgisi\n\n"
-        "• Threshold: 0 ile 255 arasında bir değerdir. Bu eşik değeri, görüntüdeki piksellerin ikili hale getirilmesinde kullanılır.\n\n"
-        "• Threshold Type:\n"
-        "  - Binary: Piksel değeri eşikten büyükse 255 (beyaz), küçükse 0 (siyah) yapılır.\n"
-        "  - Binary Inverse: Piksel değeri eşikten büyükse 0 (siyah), küçükse 255 (beyaz) yapılır.\n\n"
-        "🎯 Not: Bu işlem sadece gri tonlamalı (grayscale) görüntüler için geçerlidir."
-    )
-    info_text_en = (
-        "📌 Threshold Info\n\n"
-        "• Threshold: A value between 0 and 255. It is used to convert pixels into binary form based on this threshold.\n\n"
-        "• Threshold Type:\n"
-        "  - Binary: If the pixel value is greater than the threshold, it becomes 255 (white); otherwise, it becomes 0 (black).\n"
-        "  - Binary Inverse: If the pixel value is greater than the threshold, it becomes 0 (black); otherwise, it becomes 255 (white).\n\n"
-        "🎯 Note: This operation only works on grayscale images."
-    )
 
     def create_widgets(self):
         tk.Label(self.frame, text="Threshold:").grid(row=1, column=0, padx=2, pady=2)
@@ -83,26 +67,6 @@ class ThresholdingFrame(ProcessFrameBase):
 
 class GaborFilterFrame(ProcessFrameBase):
     name = "Gabor Filter"
-    info_text_tr = (
-        "📌 Gabor Filtresi Parametreleri\n\n"
-        "• Ksize: Çekirdeğin (kernel) boyutu. Tek sayı ve pozitif olmalıdır. Örn: 3, 5, 7...\n"
-        "• Sigma: Gauss dağılımının standart sapması. Tipik aralık: 1.0 - 10.0\n"
-        "• Theta: Filtrenin yönü (radyan cinsinden). 0 ile pi arasında bir değerdir.\n"
-        "• Lambda: Sinüzoidal bileşenin dalga boyu. Pozitif bir değerdir. Örn: 4.0\n"
-        "• Gamma: En-boy oranı. Genellikle 0 ile 1 arasında olur. 1: dairesel, <1: eliptik yapı.\n"
-        "• Phi: Faz kayması. 0 ile 2*pi arasında değer alabilir.\n\n"
-        "🎯 Not: Gri seviyeli görsellerle daha iyi sonuç verir."
-    )
-    info_text_en = (
-        "📌 Gabor Filter Parameters\n\n"
-        "• Ksize: Kernel size. Must be a positive odd number. E.g., 3, 5, 7...\n"
-        "• Sigma: Standard deviation of the Gaussian envelope. Typical range: 1.0 - 10.0\n"
-        "• Theta: Orientation of the filter in radians. Should be between 0 and pi.\n"
-        "• Lambda: Wavelength of the sinusoidal component. Must be positive. E.g., 4.0\n"
-        "• Gamma: Aspect ratio. Usually between 0 and 1. 1: circular, <1: elliptical shape.\n"
-        "• Phi: Phase offset. Should be between 0 and 2*pi.\n\n"
-        "🎯 Note: Works best with grayscale images."
-    )
 
     def create_widgets(self):
         tk.Label(self.frame, text="Ksize:").grid(row=1, column=0, padx=2, pady=2)
@@ -149,36 +113,6 @@ class GaborFilterFrame(ProcessFrameBase):
 
 class MorphologicalFrame(ProcessFrameBase):
     name = "Morphological"
-    info_text_tr = (
-        "📌 Morfolojik İşlemler Parametreleri\n\n"
-        "• Kernel Size: Yapısal elemanın boyutudur. Pozitif ve tek sayı olmalıdır. Örn: 3, 5, 7...\n"
-        "• Kernel Shape: Çekirdek şeklidir. Rectangular (dikdörtgen), Ellipse (elips), veya Cross (çapraz) olabilir.\n"
-        "• Operations: Uygulanacak morfolojik işlemi seçin:\n"
-        "  - Erode: Nesneleri küçültür.\n"
-        "  - Dilation: Nesneleri genişletir.\n"
-        "  - Opening: Gürültü temizleme (erode ardından dilation).\n"
-        "  - Closing: Küçük boşlukları kapatma (dilation ardından erode).\n"
-        "  - Gradient: Kenarları çıkarır (dilation - erode).\n"
-        "  - Top Hat: Orijinal görüntü - Opening sonucu.\n"
-        "  - Black Hat: Closing sonucu - Orijinal görüntü.\n"
-        "• Iterations: İşlemin kaç kez uygulanacağını belirtir. Genellikle 1-5 arası kullanılır.\n\n"
-        "🎯 Not: Gri seviyeli görüntülerle daha etkili sonuçlar elde edilir."
-    )
-    info_text_en = (
-        "📌 Morphological Operations Parameters\n\n"
-        "• Kernel Size: Size of the structuring element. Must be a positive odd number. E.g., 3, 5, 7...\n"
-        "• Kernel Shape: Shape of the kernel. Can be Rectangular, Ellipse, or Cross.\n"
-        "• Operations: Select the desired morphological operation:\n"
-        "  - Erode: Shrinks objects.\n"
-        "  - Dilation: Expands objects.\n"
-        "  - Opening: Removes small noise (erode followed by dilation).\n"
-        "  - Closing: Closes small holes (dilation followed by erode).\n"
-        "  - Gradient: Extracts edges (dilation - erode).\n"
-        "  - Top Hat: Original image - Opening result.\n"
-        "  - Black Hat: Closing result - Original image.\n"
-        "• Iterations: Number of times the operation is repeated. Usually between 1 and 5.\n\n"
-        "🎯 Note: Grayscale images give better results for most morphological operations."
-    )
 
     def create_widgets(self):
         tk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
@@ -273,20 +207,6 @@ class MorphologicalFrame(ProcessFrameBase):
 #!Not working
 class GammaTransformFrame(ProcessFrameBase):
     name = "Gamma Transform"
-    info_text_tr = (
-        "📌 Gamma Dönüşümü Parametreleri\n\n"
-        "• Gamma Value: Görüntünün parlaklığını ayarlayan pozitif bir değerdir. Genellikle 0.1 ile 5.0 arasında olur.\n"
-        "  - Gamma < 1: Görüntü kararmaya başlar (daha koyu).\n"
-        "  - Gamma > 1: Görüntü aydınlanır (daha parlak).\n\n"
-        "🎯 Not: Görüntüdeki kontrastı değiştirebilir, ancak aşırı değerler görsel bozulmalara yol açabilir."
-    )
-    info_text_en = (
-        "📌 Gamma Correction Parameters\n\n"
-        "• Gamma Value: A positive value that adjusts the brightness of the image. It usually ranges between 0.1 and 5.0.\n"
-        "  - Gamma < 1: The image becomes darker.\n"
-        "  - Gamma > 1: The image becomes brighter.\n\n"
-        "🎯 Note: It can change the contrast of the image, but extreme values may cause visual distortions."
-    )
 
     def create_widgets(self):
 
@@ -313,24 +233,6 @@ class GammaTransformFrame(ProcessFrameBase):
 
 class CannyEdgeDetectorFrame(ProcessFrameBase):
     name = "Canny Edge Detection"
-    info_text_tr = (
-        "📌 Canny Kenar Algılama Parametreleri\n\n"
-        "• Kernel Size: Canny algılama çekirdeğinin boyutudur. Pozitif ve tek sayı olmalıdır. Örn: 3, 5, 7...\n"
-        "• Low Threshold: Canny algoritmasındaki düşük eşik değeridir. 0 ile 255 arasında olmalıdır.\n"
-        "• Max Threshold: Canny algoritmasındaki yüksek eşik değeridir. 0 ile 255 arasında olmalıdır.\n"
-        "• L2gradient: L2 normunun kullanılıp kullanılmayacağını belirtir. True ya da False olarak seçilebilir.\n\n"
-        "🎯 Not: Düşük eşik değeri, kenarları daha hassas bir şekilde tespit eder. Yüksek eşik değeri, sadece belirgin kenarları alır.\n\n"
-        "• Giriş Görseli: Gri seviyeli bir görüntü olmalıdır. Renkli görüntülerde de işlem yapılabilir ancak en iyi sonuçlar **gri seviyeli** görüntülerde alınır."
-    )
-    info_text_en = (
-        "📌 Canny Edge Detection Parameters\n\n"
-        "• Kernel Size: Size of the Canny detection kernel. Must be a positive odd number. E.g., 3, 5, 7...\n"
-        "• Low Threshold: The low threshold value for Canny algorithm. It should be between 0 and 255.\n"
-        "• Max Threshold: The high threshold value for Canny algorithm. It should be between 0 and 255.\n"
-        "• L2gradient: Whether to use the L2 norm. Can be True or False.\n\n"
-        "🎯 Note: A lower threshold captures finer edges, while a higher threshold detects more prominent edges.\n\n"
-        "• Input Image: The image should be in grayscale. It can also work with color images, but the best results are achieved with **grayscale** images."
-    )
 
     def create_widgets(self):
 
@@ -380,30 +282,6 @@ class CannyEdgeDetectorFrame(ProcessFrameBase):
 
 class HoughTransformFrame(ProcessFrameBase):
     name = "Hough Transform"
-    info_text_tr = (
-        "📌 Hough dönüşümü ile çember algılama parametreleri\n\n"
-        "• Dp: Hough dönüşümünde kullanılan çözünürlük parametresidir. Genellikle 1.0 veya daha büyük bir değer olmalıdır.\n"
-        "• Minimum Distance: Tespit edilen daireler arasındaki minimum mesafedir. Pozitif bir tamsayı olmalıdır.\n"
-        "• Param1: Canny kenar algılama algoritmasındaki yüksek eşik değeridir. 0 ile 255 arasında olmalıdır.\n"
-        "• Param2: Dairelerin merkezinin bulunabilmesi için gereken eşik değeridir. 0 ile 100 arasında olmalıdır.\n"
-        "• Minimum Radius: Tespit edilecek dairelerin minimum çapıdır. 0 ile 100 arasında olmalıdır.\n"
-        "• Maximum Radius: Tespit edilecek dairelerin maksimum çapıdır. 0 ile 100 arasında olmalıdır.\n"
-        "• Mark Color: Tespit edilen dairelerin işaretleneceği renk. Seçenekler: Kırmızı (Red) veya Mavi (Blue).\n\n"
-        "• Giriş Görseli: Giriş görseli, gri seviyeli veya renkli olabilir, ancak genellikle gri seviyeli görsellerde daha net sonuçlar alınır.\n"
-        "🎯 Not: Dairelerin net bir şekilde tespit edilebilmesi için giriş görselinin yüksek kontrast ve net olması önerilir."
-    )
-    info_text_en = (
-        "📌 Hough Transform Circle Detection Parameters\n\n"
-        "• Dp: The resolution parameter used in Hough transform. It should be a positive integer, usually 1.0 or higher.\n"
-        "• Minimum Distance: The minimum distance between detected circles. It should be a positive integer.\n"
-        "• Param1: The high threshold value for the Canny edge detection algorithm. It should be between 0 and 255.\n"
-        "• Param2: The threshold for center detection of the circles. It should be between 0 and 100.\n"
-        "• Minimum Radius: The minimum radius of circles to be detected. It should be between 0 and 100.\n"
-        "• Maximum Radius: The maximum radius of circles to be detected. It should be between 0 and 100.\n"
-        "• Mark Color: The color to mark detected circles. Options: Red or Blue.\n\n"
-        "• Input Image: The input image can be grayscale or colored, but grayscale images generally produce sharper results.\n"
-        "🎯 Note: For better results, the input image should have high contrast and sharp edges."
-    )
 
     def create_widgets(self):
 
@@ -492,32 +370,8 @@ class HoughTransformFrame(ProcessFrameBase):
 
 class GaussianBlurFrame(ProcessFrameBase):
     name = "Gaussian Blur"
-    info_text_tr = (
-        "📌 Hough Dönüşümü ile Çevre Algılama Parametreleri\n\n"
-        "• Dp: Hough dönüşümünde kullanılan çözünürlük parametresidir. Genellikle 1.0 veya daha büyük bir değer olmalıdır.\n"
-        "• Minimum Distance: Tespit edilen daireler arasındaki minimum mesafedir. Pozitif bir tamsayı olmalıdır.\n"
-        "• Param1: Canny kenar algılama algoritmasındaki yüksek eşik değeridir. 0 ile 255 arasında olmalıdır.\n"
-        "• Param2: Dairelerin merkezinin bulunabilmesi için gereken eşik değeridir. 0 ile 100 arasında olmalıdır.\n"
-        "• Minimum Radius: Tespit edilecek dairelerin minimum çapıdır. 0 ile 100 arasında olmalıdır.\n"
-        "• Maximum Radius: Tespit edilecek dairelerin maksimum çapıdır. 0 ile 100 arasında olmalıdır.\n"
-        "• Mark Color: Tespit edilen dairelerin işaretleneceği renk. Seçenekler: Kırmızı (Red) veya Mavi (Blue).\n\n"
-        "🎯 Not: Dairelerin net bir şekilde tespit edilebilmesi için giriş görselinin yüksek kontrast ve net olması önerilir."
-    )
-    
-    info_text_en = (
-        "📌 Hough Transform Circle Detection Parameters\n\n"
-        "• Dp: The resolution parameter used in Hough transform. It should be a positive integer, usually 1.0 or higher.\n"
-        "• Minimum Distance: The minimum distance between detected circles. It should be a positive integer.\n"
-        "• Param1: The high threshold value for the Canny edge detection algorithm. It should be between 0 and 255.\n"
-        "• Param2: The threshold for center detection of the circles. It should be between 0 and 100.\n"
-        "• Minimum Radius: The minimum radius of circles to be detected. It should be between 0 and 100.\n"
-        "• Maximum Radius: The maximum radius of circles to be detected. It should be between 0 and 100.\n"
-        "• Mark Color: The color to mark detected circles. Options: Red or Blue.\n\n"
-        "🎯 Note: For better results, the input image should have high contrast and sharp edges."
-    )
 
     def create_widgets(self):
-
         tk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
         self.ksize_entry = tk.Entry(self.frame)
         self.ksize_entry.grid(row=1, column=1, padx=2, pady=2)
@@ -545,19 +399,6 @@ class GaussianBlurFrame(ProcessFrameBase):
 
 class KitterIllingworthFrame(ProcessFrameBase):
     name = "Kittler-Illingworth"
-    info_text_tr = (
-        "📌 Kittler-Illingworth Optimum Eşik Değeri Parametreleri\n\n"
-        "• Optimum Threshold: Kittler-Illingworth yöntemine dayalı olarak görüntüdeki optimum eşik değeri.\n"
-        "• Kittler-Illingworth yöntemi, görüntü histogramındaki iki sınıfı (arka plan ve ön plan) ayıran eşik değerini bulur.\n"
-        "• Bu yöntem, sınıfların varyanslarını dikkate alarak en düşük maliyeti veren eşik değerini belirler.\n\n"
-        "🎯 Not: Kittler-Illingworth yöntemi, özellikle aydınlık ve karanlık bölgelerin net bir şekilde ayrıldığı görüntülerde daha iyi sonuç verir."
-    )
-    info_text_en = (
-        "📌 Kittler-Illingworth Optimum Threshold Parameters\n\n"
-        "• Optimum Threshold: The optimum threshold based on the Kittler-Illingworth method for separating background and foreground.\n"
-        "• The Kittler-Illingworth method determines the threshold value that minimizes the cost function, considering the variance of both classes (background and foreground).\n\n"
-        "🎯 Note: The Kittler-Illingworth method works best for images where the background and foreground are clearly separated."
-    )
 
     def create_widgets(self):
 
@@ -607,20 +448,6 @@ class KitterIllingworthFrame(ProcessFrameBase):
 
 class DrawHistogramFrame(ProcessFrameBase):
     name = "Draw Histogram"
-    info_text_tr = (
-        "📌 Görüntü Histogramı Çizimi Parametreleri\n\n"
-        "• Görüntü Histogramı: Görüntüdeki piksellerin renk yoğunluklarını gösteren bir grafiktir.\n"
-        "• Histogram, görüntüdeki farklı renk yoğunluklarının dağılımını analiz etmek için kullanılır.\n"
-        "• Bu işlem, her pikselin gri ton değeri için frekansları hesaplar ve bir histogram oluşturur.\n\n"
-        "🎯 Not: Histogram analizi, kontrast, parlaklık ayarları veya görüntü iyileştirme tekniklerini belirlemek için faydalıdır."
-    )
-    info_text_en = (
-        "📌 Image Histogram Drawing Parameters\n\n"
-        "• Image Histogram: A graph that shows the frequency of pixel intensities in an image.\n"
-        "• The histogram represents the distribution of pixel values across the image, useful for image analysis.\n"
-        "• This operation calculates the frequency of each grayscale value and creates a histogram.\n\n"
-        "🎯 Note: Histogram analysis is useful for determining contrast, brightness settings, or image enhancement techniques."
-    )
 
     def create_widgets(self):
 
@@ -661,22 +488,6 @@ class DrawHistogramFrame(ProcessFrameBase):
 class ColorConvertFrame(ProcessFrameBase):
 
     name = "Color Conversion"
-    info_text_tr = (
-        "📌 Renk Dönüşümü Parametreleri\n\n"
-        "• RGB'den Grayscale'e: Renkli bir görüntüyü gri tonlara dönüştürür. Her pikselin gri ton değeri hesaplanır.\n"
-        "• Grayscale'den RGB'ye: Gri tonlu bir görüntüyü renklendirilmiş (RGB) görüntüye dönüştürür. Ancak orijinal renk bilgisi kaybolur.\n"
-        "• RGB'den HSV'ye: Renkli bir görüntüyü, renk (Hue), doygunluk (Saturation) ve parlaklık (Value) bileşenlerine ayırır.\n"
-        "• HSV'den RGB'ye: HSV formatındaki bir görüntüyü, kırmızı-yeşil-mavi (RGB) formatına dönüştürür.\n\n"
-        "🎯 Not: Görüntü işleme ve renk analizi için uygun renk dönüşümünü seçmek önemlidir."
-    )
-    info_text_en = (
-        "📌 Color Conversion Parameters\n\n"
-        "• RGB to Grayscale: Converts a color image to grayscale. Each pixel is converted to a corresponding grayscale value.\n"
-        "• Grayscale to RGB: Converts a grayscale image back to RGB. The original color information is lost.\n"
-        "• RGB to HSV: Converts an image from RGB to HSV, separating hue, saturation, and value components.\n"
-        "• HSV to RGB: Converts an image from HSV back to RGB.\n\n"
-        "🎯 Note: Selecting the appropriate color conversion is crucial for image processing and color analysis."
-    )
 
     def create_widgets(self):
         tk.Label(self.frame, text="Select Color Conversion:").grid(
@@ -718,18 +529,6 @@ class ColorConvertFrame(ProcessFrameBase):
 
 class ResizeFrame(ProcessFrameBase):
     name = "Resize"
-    info_text_tr = (
-        "📌 Görüntü Yeniden Boyutlandırma Parametreleri\n\n"
-        "• Width (Genişlik): Görüntünün yeni genişliği. Pozitif bir tamsayı değeri olmalıdır.\n"
-        "• Height (Yükseklik): Görüntünün yeni yüksekliği. Pozitif bir tamsayı değeri olmalıdır.\n\n"
-        "🎯 Not: Görüntü boyutları değiştirilirken orijinal görüntünün en-boy oranı korunmaz, bu da distorsiyona neden olabilir."
-    )
-    info_text_en = (
-        "📌 Image Resizing Parameters\n\n"
-        "• Width: The new width of the image. It should be a positive integer.\n"
-        "• Height: The new height of the image. It should be a positive integer.\n\n"
-        "🎯 Note: Resizing the image may cause distortion as the original aspect ratio is not preserved."
-    )
 
     def create_widgets(self):
         tk.Label(self.frame, text="Width:").grid(row=1, column=0, padx=2, pady=2)
@@ -754,16 +553,6 @@ class ResizeFrame(ProcessFrameBase):
 
 class RotateFrame(ProcessFrameBase):
     name = "Rotate"
-    info_text_tr = (
-        "📌 Görüntü Döndürme Parametreleri\n\n"
-        "• Rotation Angle (Dönme Açısı): Görüntünün döneceği açı. Seçenekler: 90°, 180°, 270°.\n\n"
-        "🎯 Not: Seçilen döndürme açısı, görüntüyü saat yönünde veya saat yönünün tersine döndürür."
-    )
-    info_text_en = (
-        "📌 Image Rotation Parameters\n\n"
-        "• Rotation Angle: The angle by which the image will be rotated. Options: 90°, 180°, 270°.\n\n"
-        "🎯 Note: The selected rotation angle will rotate the image clockwise or counterclockwise."
-    )
 
     def create_widgets(self):
         tk.Label(self.frame, text="Select Rotation Angle:").grid(
@@ -795,16 +584,6 @@ class RotateFrame(ProcessFrameBase):
 
 class FlipFrame(ProcessFrameBase):
     name = "Flip"
-    info_text_tr = (
-        "📌 Görüntü Çevirme Parametreleri\n\n"
-        "• Flip Direction (Çevirme Yönü): Görüntünün hangi yönde çevrileceği. Seçenekler: Yatay (Horizontal), Dikey (Vertical), Her İki Yön (Both).\n\n"
-        "🎯 Not: Yatay çevirme, görüntüyü soldan sağa ters çevirir; dikey çevirme, görüntüyü yukarıdan aşağıya ters çevirir. Her iki yön seçildiğinde, hem yatay hem de dikey olarak tersine döner."
-    )
-    info_text_en = (
-        "📌 Image Flip Parameters\n\n"
-        "• Flip Direction: The direction in which the image will be flipped. Options: Horizontal, Vertical, Both.\n\n"
-        "🎯 Note: Horizontal flip reverses the image left to right; vertical flip reverses the image top to bottom. Choosing both flips will reverse the image in both directions."
-    )
 
     def create_widgets(self):
         tk.Label(self.frame, text="Select Flip Direction:").grid(
@@ -840,16 +619,6 @@ class FlipFrame(ProcessFrameBase):
 
 class MedianBlurFrame(ProcessFrameBase):
     name = "Median Blur"
-    info_text_tr = (
-        "📌 Median Blur (Medyan Bulanıklığı) Parametreleri\n\n"
-        "• Kernel Size (Çekirdek Boyutu): Median bulanıklık algoritmasında kullanılan çekirdek boyutudur. Genellikle tek sayılar (3, 5, 7 vb.) kullanılır.\n\n"
-        "🎯 Not: Çekirdek boyutunu arttırmak, daha fazla bulanıklık sağlar, ancak detayların kaybolmasına da yol açabilir. Görüntüdeki gürültüleri yumuşatmak için uygundur."
-    )
-    info_text_en = (
-        "📌 Median Blur Parameters\n\n"
-        "• Kernel Size: The size of the kernel used in the median blur algorithm. Typically, odd numbers (3, 5, 7, etc.) are used.\n\n"
-        "🎯 Note: Increasing the kernel size results in more blur, but it may also cause the loss of finer details. It's useful for smoothing out noise in an image."
-    )
 
     def create_widgets(self):
         tk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
@@ -870,20 +639,6 @@ class MedianBlurFrame(ProcessFrameBase):
 #! May be not working
 class BilateralFilterFrame(ProcessFrameBase):
     name = "Bilateral Filter"
-    info_text_tr = (
-        "📌 Bilateral Filter (İki Taraflı Filtre) Parametreleri\n\n"
-        "• Diameter: Filtreleme sırasında her pikselin çevresinde kullanılacak piksel komşuluğunun çapı. Pozitif bir tamsayı olmalıdır.\n"
-        "• Sigma Color: Renk uzayındaki standart sapmadır. Bu değer arttıkça, benzer renklerdeki pikseller daha fazla etkilenir.\n"
-        "• Sigma Space: Uzamsal koordinatlar arasındaki mesafeye göre olan standart sapmadır. Bu değer arttıkça, daha uzak pikseller filtreye dahil edilir.\n\n"
-        "🎯 Not: Bilateral filtre, kenarları koruyarak gürültüyü azaltmak için idealdir. Bu nedenle kenar netliğinin korunması istenen görüntülerde tercih edilir."
-    )
-    info_text_en = (
-        "📌 Bilateral Filter Parameters\n\n"
-        "• Diameter: Diameter of each pixel neighborhood used during filtering. Should be a positive integer.\n"
-        "• Sigma Color: Standard deviation in the color space. Higher values mean that farther colors within the neighborhood will be mixed together.\n"
-        "• Sigma Space: Standard deviation in the coordinate space. Higher values mean that farther pixels will influence each other.\n\n"
-        "🎯 Note: Bilateral filter is ideal for reducing noise while preserving edges. It’s commonly used when edge sharpness must be maintained."
-    )
 
     def create_widgets(self):
         tk.Label(self.frame, text="Diameter:").grid(row=1, column=0, padx=2, pady=2)
@@ -913,22 +668,6 @@ class BilateralFilterFrame(ProcessFrameBase):
 
 class Filter2DFrame(ProcessFrameBase):
     name = "Filter2D"
-    info_text_tr = (
-        "📌 filter2D Konvolüsyon İşlemi Parametreleri\n\n"
-        "• 3x3 Kernel: Görüntü üzerine uygulanacak çekirdek (kernel) değerlerini ifade eder.\n"
-        "  Bu değerler, konvolüsyon işleminde her pikselin komşularıyla nasıl birleştirileceğini belirler.\n"
-        "  Örneğin, kenar algılama, bulanıklaştırma veya keskinleştirme işlemleri için farklı çekirdekler kullanılabilir.\n\n"
-        "🎯 Not: Girdi görüntüsü net ve kontrastlı olursa konvolüsyon etkisi daha belirgin olur.\n"
-        "      Kernel değerlerinin toplamı yüksekse görüntü aydınlanabilir; negatif değerler keskinleştirme sağlar."
-    )
-    info_text_en = (
-        "📌 filter2D Convolution Parameters\n\n"
-        "• 3x3 Kernel: Represents the kernel values to be applied over the image.\n"
-        "  These values define how each pixel is combined with its neighbors during the convolution operation.\n"
-        "  Different kernels are used for edge detection, blurring, or sharpening.\n\n"
-        "🎯 Note: A sharp and high-contrast input image will yield more visible convolution effects.\n"
-        "      If the kernel values sum up to a high value, the output image may become brighter; negative values enhance edges."
-    )
 
     def create_widgets(self):
         tk.Label(self.frame, text="3x3 Kernel Values (row-wise):").grid(
@@ -967,20 +706,6 @@ class Filter2DFrame(ProcessFrameBase):
 
 class SobelFrame(ProcessFrameBase):
     name = "Sobel Edge Detection"
-    info_text_tr = (
-        "📌 Sobel Kenar Algılama Parametreleri\n\n"
-        "• dx: x ekseni yönünde türev alınıp alınmayacağını belirtir. 1 ise x yönlü kenarları algılar.\n"
-        "• dy: y ekseni yönünde türev alınıp alınmayacağını belirtir. 1 ise y yönlü kenarları algılar.\n"
-        "• Kernel Size: Sobel filtresinde kullanılacak çekirdek boyutudur. Pozitif tek sayı (örneğin: 1, 3, 5) olmalıdır.\n\n"
-        "🎯 Not: dx ve dy birlikte 1 olarak seçilirse hem yatay hem dikey kenarlar algılanır."
-    )
-    info_text_en = (
-        "📌 Sobel Edge Detection Parameters\n\n"
-        "• dx: Specifies whether to take the derivative in the x-direction. 1 detects horizontal edges.\n"
-        "• dy: Specifies whether to take the derivative in the y-direction. 1 detects vertical edges.\n"
-        "• Kernel Size: The size of the kernel to be used in the Sobel filter. It must be an odd positive integer (e.g., 1, 3, 5).\n\n"
-        "🎯 Note: If both dx and dy are set to 1, both horizontal and vertical edges are detected."
-    )
 
     def create_widgets(self):
         # dx selecting
@@ -1018,18 +743,6 @@ class SobelFrame(ProcessFrameBase):
 
 class ScharrFrame(ProcessFrameBase):
     name = "Scharr Edge Detection"
-    info_text_tr = (
-        "📌 Scharr Kenar Algılama Parametreleri\n\n"
-        "• dx: x ekseni yönünde türev alınıp alınmayacağını belirtir. 1 seçilirse yatay kenarları algılar.\n"
-        "• dy: y ekseni yönünde türev alınıp alınmayacağını belirtir. 1 seçilirse dikey kenarları algılar.\n\n"
-        "🎯 Not: Scharr filtresi, özellikle küçük çekirdek boyutlarında (örneğin 3x3) Sobel filtresine göre daha hassas sonuçlar verir."
-    )
-    info_text_en = (
-        "📌 Scharr Edge Detection Parameters\n\n"
-        "• dx: Indicates whether to compute the derivative in the x-direction. 1 detects horizontal edges.\n"
-        "• dy: Indicates whether to compute the derivative in the y-direction. 1 detects vertical edges.\n\n"
-        "🎯 Note: The Scharr filter provides more accurate results than the Sobel filter, especially for small kernel sizes like 3x3."
-    )
 
     def create_widgets(self):
         # dx selecting
@@ -1059,18 +772,6 @@ class ScharrFrame(ProcessFrameBase):
 
 class LaplacianFrame(ProcessFrameBase):
     name = "Laplacian Edge Detection"
-    info_text_tr = (
-        "📌 Laplace Kenar Algılama Parametreleri\n\n"
-        "• Kernel Size: Türevi alırken kullanılan çekirdek (kernel) boyutu. Tek sayı ve pozitif olmalıdır (örn. 1, 3, 5).\n"
-        "Daha büyük değerler daha fazla kenar detayı çıkarabilir fakat aynı zamanda görüntüde bulanıklığa da yol açabilir.\n\n"
-        "🎯 Not: Laplace operatörü, görüntüdeki ikinci türev bilgisini kullanarak kenarları simetrik olarak algılar."
-    )
-    info_text_en = (
-        "📌 Laplacian Edge Detection Parameter\n\n"
-        "• Kernel Size: The size of the filter kernel used for computing the derivative. Must be a positive odd number (e.g., 1, 3, 5).\n"
-        "Larger values may enhance edge details but also introduce blurring.\n\n"
-        "🎯 Note: The Laplacian operator uses the second derivative of the image to detect edges simmetrically."
-    )
 
     def create_widgets(self):
         # Entry for kernel size (must be odd and positive)
@@ -1096,20 +797,6 @@ class LaplacianFrame(ProcessFrameBase):
 
 class CornerHarrisFrame(ProcessFrameBase):
     name = "Harris Corner Detection"
-    info_text_tr = (
-        "📌 Harris Köşe Algılama Parametreleri\n\n"
-        "• Block Size: Her piksel için köşe algılamada kullanılan komşuluk boyutu.\n"
-        "• Sobel Kernel Size: Türevlerin hesaplandığı Sobel filtresinin boyutu.\n"
-        "• k Değeri: Harris denkleminde kullanılan serbest parametre (genellikle 0.04 - 0.06 arası).\n\n"
-        "🟥 Yüksek cevap veren alanlar kırmızı ile işaretlenir, bu alanlar köşe içeriyor olabilir."
-    )
-    info_text_en = (
-        "📌 Harris Corner Detection Parameters\n\n"
-        "• Block Size: Neighborhood size considered for corner detection around each pixel.\n"
-        "• Sobel Kernel Size: Aperture size for the Sobel derivative.\n"
-        "• k Value: Harris detector free parameter, typically between 0.04 and 0.06.\n\n"
-        "🟥 Areas with high corner response are marked in red, indicating potential corners."
-    )
 
     def create_widgets(self):
         # Entry for block size (neighborhood size)
@@ -1167,20 +854,6 @@ class CornerHarrisFrame(ProcessFrameBase):
 
 class GoodFeaturesToTrackFrame(ProcessFrameBase):
     name = "Shi-Tomasi Corner Detection"
-    info_text_tr = (
-        "📌 Köşe Algılama: goodFeaturesToTrack\n\n"
-        "• Max Corners: Algılanacak maksimum köşe sayısı.\n"
-        "• Quality Level: Algılanan köşelerin minimum kalite eşiği (0 ile 1 arasında).\n"
-        "• Min Distance: Algılanan köşeler arasındaki minimum mesafe (piksel cinsinden).\n\n"
-        "🟢 Algılanan köşeler yeşil dairelerle gösterilir."
-    )
-    info_text_en = (
-        "📌 Corner Detection: goodFeaturesToTrack\n\n"
-        "• Max Corners: Maximum number of corners to detect.\n"
-        "• Quality Level: Minimum quality threshold for corners (between 0 and 1).\n"
-        "• Min Distance: Minimum Euclidean distance between detected corners.\n\n"
-        "🟢 Detected corners are drawn as green circles."
-    )
 
     def create_widgets(self):
         # Entry for maxCorners (maximum number of corners to return)
@@ -1235,24 +908,6 @@ class GoodFeaturesToTrackFrame(ProcessFrameBase):
 
 class AdaptiveThresholdFrame(ProcessFrameBase):
     name = "Adaptive Thresholding"
-    info_text_tr = (
-        "📌 Adaptif Eşikleme: adaptiveThreshold\n\n"
-        "• Max Value: Eşik üstündeki piksellere verilecek maksimum değer.\n"
-        "• Adaptive Method: Yerel ortalama (Mean) veya Gauss ağırlıklı ortalama (Gaussian).\n"
-        "• Threshold Type: Binary (beyaz-siyah) ya da Binary Inverted (siyah-beyaz).\n"
-        "• Block Size: Yerel eşikleme için pencere boyutu (tek sayı ve >1 olmalı).\n"
-        "• C: Ortalama değerden çıkarılacak sabit.\n\n"
-        "📄 Bu işlem yalnızca gri seviye görüntülerde çalışır."
-    )
-    info_text_en = (
-        "📌 Adaptive Thresholding: adaptiveThreshold\n\n"
-        "• Max Value: Maximum value to assign to thresholded pixels.\n"
-        "• Adaptive Method: Local Mean or Gaussian-weighted mean.\n"
-        "• Threshold Type: Binary or Binary Inverted.\n"
-        "• Block Size: Size of the local window (odd number > 1).\n"
-        "• C: Constant subtracted from the mean or weighted mean.\n\n"
-        "📄 Works only on grayscale images."
-    )
 
     def create_widgets(self):
         # Entry for max value (maximum intensity value to be assigned to pixels)
@@ -1326,20 +981,6 @@ class AdaptiveThresholdFrame(ProcessFrameBase):
 
 class OtsuThresholdFrame(ProcessFrameBase):
     name = "Otsu Thresholding"
-    info_text_tr = (
-        "📌 Otsu Eşikleme: cv2.threshold + THRESH_OTSU\n\n"
-        "• Max Value: Eşik üstü piksellere atanacak maksimum değer.\n"
-        "• Threshold Type: Binary (beyaz-siyah) ya da Binary Inverted (siyah-beyaz).\n\n"
-        "📄 Otsu yöntemi, ideal eşiği otomatik olarak belirler.\n"
-        "📄 Sadece gri seviye görüntülerle çalışır."
-    )
-    info_text_en = (
-        "📌 Otsu Thresholding: cv2.threshold + THRESH_OTSU\n\n"
-        "• Max Value: Maximum value to assign to thresholded pixels.\n"
-        "• Threshold Type: Binary or Binary Inverted.\n\n"
-        "📄 Otsu's method automatically computes the optimal threshold.\n"
-        "📄 Works only on grayscale images."
-    )
 
     def create_widgets(self):
 
@@ -1373,29 +1014,6 @@ class OtsuThresholdFrame(ProcessFrameBase):
 #! Needed update for contours
 class FindContoursFrame(ProcessFrameBase):
     name = "Find Contours"
-    info_text_tr = (
-        "📌 Kenar Bulma (FindContours): cv2.findContours\n\n"
-        "• Retrieval Mode:\n"
-        "   - RETR_EXTERNAL: Sadece dış konturları bulur.\n"
-        "   - RETR_LIST: Tüm konturları düz bir liste olarak verir.\n"
-        "   - RETR_TREE: Konturların hiyerarşisini verir.\n\n"
-        "• Approximation Method:\n"
-        "   - CHAIN_APPROX_SIMPLE: Gereksiz noktaları atar (daha hafif).\n"
-        "   - CHAIN_APPROX_NONE: Tüm noktaları döndürür.\n\n"
-        "📄 Giriş görseli griye çevrilir ve ardından ikili eşikleme uygulanır."
-    )
-    
-    info_text_en = (
-        "📌 Contour Detection (FindContours): cv2.findContours\n\n"
-        "• Retrieval Mode:\n"
-        "   - RETR_EXTERNAL: Retrieves only external contours.\n"
-        "   - RETR_LIST: Retrieves all contours without hierarchy.\n"
-        "   - RETR_TREE: Retrieves all contours and reconstructs hierarchy.\n\n"
-        "• Approximation Method:\n"
-        "   - CHAIN_APPROX_SIMPLE: Compresses segments to save memory.\n"
-        "   - CHAIN_APPROX_NONE: Stores all contour points.\n\n"
-        "📄 Input image is converted to grayscale and thresholded to binary."
-    )
 
     def create_widgets(self):
         # Combobox for contour retrieval mode (e.g., external or all)
@@ -1460,23 +1078,6 @@ class FindContoursFrame(ProcessFrameBase):
 
 class DrawContoursFrame(ProcessFrameBase):
     name = "Draw Contours"
-    info_text_tr = (
-        "📌 Konturları Çizme (DrawContours): cv2.drawContours\n\n"
-        "• Kontur Kalınlığı:\n"
-        "   - Kontur çizgilerinin kalınlığını belirtir.\n\n"
-        "• Kontur Rengi:\n"
-        "   - Seçilen renge göre konturlar çizilir (Yeşil, Kırmızı, Mavi).\n\n"
-        "📄 Görsel önce gri tonlamaya dönüştürülür, ardından ikili eşikleme uygulanarak konturlar bulunur."
-    )
-
-    info_text_en = (
-        "📌 Drawing Contours (DrawContours): cv2.drawContours\n\n"
-        "• Contour Thickness:\n"
-        "   - Specifies the thickness of contour lines.\n\n"
-        "• Contour Color:\n"
-        "   - Contours are drawn in the selected color (Green, Red, Blue).\n\n"
-        "📄 The image is first converted to grayscale, followed by binary thresholding to detect contours."
-    )
 
     def create_widgets(self):
         # Entry for contour thickness (thickness of contour lines)
@@ -1521,26 +1122,6 @@ class DrawContoursFrame(ProcessFrameBase):
 # ? Del canny side of houghlines
 class HoughLinesFrame(ProcessFrameBase):
     name = "Hough Line Transform"
-    info_text_tr = (
-        "📌 Hough Doğrusu Dönüşümü (HoughLines): cv2.HoughLines\n\n"
-        "• Rho (Mesafe Çözünürlüğü):\n"
-        "   - Çizgilerin depolandığı çözünürlük, genellikle piksel cinsindendir.\n\n"
-        "• Theta (Açı Çözünürlüğü):\n"
-        "   - Açı çözünürlüğü, genellikle radian cinsindendir.\n\n"
-        "• Threshold (Eşik Değeri):\n"
-        "   - Algılanan çizgilerin geçmesi gereken minimum puan sayısını belirtir.\n\n"
-        "📄 Giriş görüntüsü mutlaka gri seviyeli olmalı ve canny edge detector görüntüsü olmalı."
-    )
-    info_text_en = (
-        "📌 Hough Line Transform (HoughLines): cv2.HoughLines\n\n"
-        "• Rho (Distance Resolution):\n"
-        "   - Specifies the resolution of the accumulator, typically in pixels.\n\n"
-        "• Theta (Angle Resolution):\n"
-        "   - Specifies the angle resolution, usually in radians.\n\n"
-        "• Threshold:\n"
-        "   - Defines the minimum number of points required to detect a line.\n\n"
-        "📄 The input image must be grayscale and must be a canny edge detector image."
-    )
 
     def create_widgets(self):
         # Entry for rho (distance resolution of the accumulator in pixels)
@@ -1601,22 +1182,6 @@ class HoughLinesFrame(ProcessFrameBase):
 
 class DFTFrame(ProcessFrameBase):
     name = "Discrete Fourier Transform (DFT)"
-    info_text_tr = (
-        "📌 Discrete Fourier Transform (DFT): cv2.dft\n\n"
-        "• DFT Boyutu:\n"
-        "   - DFT sonucu için görüntü boyutunu belirler. Görüntü gerekirse sıfırlarla doldurulur.\n\n"
-        "• Sıfır Frekansını Ortaya Taşı (Evet/Hayır):\n"
-        "   - Eğer seçilirse, DFT sonucu sıfır frekans bileşeni spektrumun ortasına kaydırılır.\n\n"
-        "📄 Görsel önce gri tonlamaya dönüştürülür, ardından DFT uygulanır ve sıfır frekans bileşeni belirtilen şekilde kaydırılır. Sonuç, genlik değerlerine dönüştürülüp normalleştirilir ve görüntülenir."
-    )
-    info_text_en = (
-        "📌 Discrete Fourier Transform (DFT): cv2.dft\n\n"
-        "• DFT Size:\n"
-        "   - Specifies the size of the DFT result. The image is padded with zeros if necessary.\n\n"
-        "• Shift Zero Frequency (Yes/No):\n"
-        "   - If selected, shifts the zero frequency component to the center of the spectrum.\n\n"
-        "📄 The image is first converted to grayscale, followed by DFT. The zero frequency component is shifted if required, and the result is converted to magnitude and normalized for display."
-    )
 
     def create_widgets(self):
         # Entry for the size of the image (size of the DFT result)
@@ -1679,24 +1244,6 @@ class DFTFrame(ProcessFrameBase):
 
 class IDFTFrame(ProcessFrameBase):
     name = "Inverse Discrete Fourier Transform (IDFT)"
-    info_text_tr = (
-        "📌 Inverse Discrete Fourier Transform (IDFT): cv2.idft\n\n"
-        "• IDFT Boyutu:\n"
-        "   - IDFT sonucu için görüntü boyutunu belirler. Görüntü gerekirse sıfırlarla doldurulur.\n\n"
-        "• Sıfır Frekansını Ortaya Taşı (Evet/Hayır):\n"
-        "   - Eğer seçilirse, IDFT sonucu sıfır frekans bileşeni spektrumun ortasına kaydırılır.\n\n"
-        "📄 Görsel önce gri seviyeli olmalı ve Canny kenar algılama görüntüsü gereklidir. \n\n"
-        " Sonrasında DFT işlemi yapılır ve IDFT uygulanarak görsel geri dönüştürülür. Sıfır frekans bileşeni belirtilen şekilde kaydırılır. Sonuç, genlik değerlerine dönüştürülüp normalleştirilir ve görüntülenir."
-    )
-    info_text_en = (
-        "📌 Inverse Discrete Fourier Transform (IDFT): cv2.idft\n\n"
-        "• IDFT Size:\n"
-        "   - Specifies the size of the IDFT result. The image is padded with zeros if necessary.\n\n"
-        "• Shift Zero Frequency (Yes/No):\n"
-        "   - If selected, shifts the zero frequency component to the center of the spectrum.\n\n"
-        "📄 The image must first be grayscale and Canny edge detection image is required.\n\n"
-        "Then DFT operation is performed and IDFT is applied to transform the image back. Zero frequency component is shifted as specified. The result is converted to amplitude values, normalized and displayed."
-    )
 
     def create_widgets(self):
 
@@ -1725,9 +1272,6 @@ class IDFTFrame(ProcessFrameBase):
         else:
             gray = img.copy()
 
-        # Apply Canny edge detection to get edges for line detection
-        # edges = cv2.Canny(gray, 50, 150, apertureSize=3)
-
         # Perform DFT
         dft = cv2.dft(np.float32(gray), flags=cv2.DFT_COMPLEX_OUTPUT)
 
@@ -1753,22 +1297,6 @@ class IDFTFrame(ProcessFrameBase):
 
 class NumpyFFTFrame(ProcessFrameBase):
     name = "Numpy FFT (Fast Fourier Transform)"
-    info_text_tr = (
-        "📌 Fourier Dönüşümü (FFT) ve Ters Fourier Dönüşümü (IFFT): np.fft.fft2, np.fft.ifft2\n\n"
-        "• Dönüşüm Tipi:\n"
-        "   - Görüntüye uygulanacak dönüşüm tipi seçilir: FFT (Fourier Dönüşümü) veya IFFT (Ters Fourier Dönüşümü).\n\n"
-        "📄 Görsel önce gri tonlamaya dönüştürülür ve float32 formatına çevrilir. Seçilen dönüşüm türüne göre işlem yapılır:\n"
-        "   - FFT: Görüntü Fourier Dönüşümüne uygulanır ve sıfır frekansı merkeze kaydırılır. Sonuç, genlik spektrumu olarak normalleştirilip görüntülenir.\n"
-        "   - IFFT: Görüntü önce Fourier Dönüşümüne sonra ise Ters Fourier Dönüşümüne tabi tutulur, bu işlemle görsel geri dönüştürülür ve normalleştirilir."
-    )
-    info_text_en = (
-        "📌 Fourier Transform (FFT) and Inverse Fourier Transform (IFFT): np.fft.fft2, np.fft.ifft2\n\n"
-        "• Transform Type:\n"
-        "   - Select the transformation type to apply on the image: FFT (Fourier Transform) or IFFT (Inverse Fourier Transform).\n\n"
-        "📄 The image is first converted to grayscale and then to float32 format. Based on the selected transform type:\n"
-        "   - FFT: The image is transformed using the Fourier Transform, and the zero frequency is shifted to the center. The result is the magnitude spectrum, normalized for display.\n"
-        "   - IFFT: The image is first transformed by FFT and then by Inverse FFT to reconstruct the original image, normalized for display."
-    )
 
     def create_widgets(self):
         # Combobox for selecting FFT or IFFT
@@ -1822,24 +1350,6 @@ class NumpyFFTFrame(ProcessFrameBase):
 
 class EqualizeHistFrame(ProcessFrameBase):
     name = "Histogram Equalization"
-    info_text_tr = (
-        "📌 Histogram Eşitleme (EqualizeHist): cv2.equalizeHist\n\n"
-        "• Görüntü Gri Tonlamaya Dönüştürülür:\n"
-        "   - Eğer giriş görseli renkli ise, önce gri tonlamaya dönüştürülür.\n\n"
-        "• Histogram Eşitleme:\n"
-        "   - Görüntüdeki parlaklık değerlerinin dağılımını eşitlemek için histogram eşitleme uygulanır.\n"
-        "   - Bu işlem, görselin kontrastını artırarak daha iyi görsel detaylar elde edilmesini sağlar.\n\n"
-        "📄 Histogram eşitleme, genellikle daha iyi görsel kontrastı elde etmek ve parlaklık seviyelerini dengelemek için kullanılır."
-    )
-    info_text_en = (
-        "📌 Histogram Equalization (EqualizeHist): cv2.equalizeHist\n\n"
-        "• Grayscale Conversion:\n"
-        "   - If the input image is colored, it is first converted to grayscale.\n\n"
-        "• Histogram Equalization:\n"
-        "   - Histogram equalization is applied to equalize the distribution of pixel intensities.\n"
-        "   - This enhances the contrast and improves visual details in the image.\n\n"
-        "📄 Histogram equalization is commonly used to improve image contrast and balance brightness levels."
-    )
 
     def create_widgets(self):
 
@@ -1873,22 +1383,6 @@ class EqualizeHistFrame(ProcessFrameBase):
 #! may be malfunctioning
 class CLAHEFrame(ProcessFrameBase):
     name = "CLAHE (Contrast Limited Adaptive Histogram Equalization)"
-    info_text_tr = (
-        "📌 CLAHE (Contrast Limited Adaptive Histogram Equalization): cv2.createCLAHE\n\n"
-        "• Clip Limit:\n"
-        "   - Kontrast sınırlamasının derecesini belirtir. Yüksek değerler daha keskin kontrastlar sağlar.\n\n"
-        "• Tile Grid Size:\n"
-        "   - Eşitleme işlemi için kullanılan bölgesel ızgaranın boyutunu belirtir. Küçük ızgaralar daha ayrıntılı sonuçlar verir.\n\n"
-        "📄 CLAHE, özellikle aydınlatma koşullarının düzensiz olduğu görüntülerde kontrastı artırmak için kullanılır."
-    )
-    info_text_en = (
-        "📌 CLAHE (Contrast Limited Adaptive Histogram Equalization): cv2.createCLAHE\n\n"
-        "• Clip Limit:\n"
-        "   - Specifies the contrast limiting factor. Higher values produce sharper contrasts.\n\n"
-        "• Tile Grid Size:\n"
-        "   - Defines the size of the grid for local histogram equalization. Smaller grid sizes result in more detailed equalization.\n\n"
-        "📄 CLAHE is commonly used to improve contrast in images with uneven lighting conditions."
-    )
 
     def create_widgets(self):
         self.clip_limit = tk.DoubleVar(value=2.0)
