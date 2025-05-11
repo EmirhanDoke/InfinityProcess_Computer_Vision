@@ -1,4 +1,4 @@
 {
     "show_image_flag": false,
-    "language": "Turkish"
+    "language": "English"
 }
