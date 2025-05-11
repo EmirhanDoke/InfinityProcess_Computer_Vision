@@ -1,4 +1,6 @@
 {
     "show_image_flag": false,
-    "language": "English"
+    "language": "English",
+    "process_position": "5",
+    "infinity_one_line": false
 }
