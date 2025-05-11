@@ -98,7 +98,7 @@ class GaborFilterFrame(ProcessFrameBase):
     def apply(self, img):
 
         ksize = int(self.ksize_entry.get())
-        sigma = int(self.sigma_entry.get())
+        sigma = float(self.sigma_entry.get())
         theta = int(self.theta_entry.get())
         lamda = float(self.lambda_frame.get())
         gamma = float(self.gamma_entry.get())
@@ -324,7 +324,7 @@ class HoughTransformFrame(ProcessFrameBase):
 
     def apply(self, img):
 
-        dp = int(self.dp_entry.get())
+        dp = float(self.dp_entry.get())
         minimum_distance = int(self.minimum_distance_entry.get())
         param1 = int(self.param1_entry.get())
         param2 = int(self.param2_entry.get())
@@ -878,7 +878,7 @@ class GoodFeaturesToTrackFrame(ProcessFrameBase):
     def apply(self, img):
         max_corners = int(self.max_corners_entry.get())
         quality_level = float(self.quality_level_entry.get())
-        min_distance = float(self.min_distance_entry.get())
+        min_distance = int(self.min_distance_entry.get())
 
         # Convert to grayscale if needed
         if len(img.shape) == 3:
