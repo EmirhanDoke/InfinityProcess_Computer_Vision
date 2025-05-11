@@ -1240,9 +1240,12 @@ class CornerHarrisFrame(ProcessFrameBase):
         # Dilate result for marking the corners (visual enhancement)
         dst = cv2.dilate(dst, None)
 
-        # Create a copy of original image for marking corners
+        # Create a copy of original image for marking corners and convert to BGR
         result_img = img.copy()
-
+        
+        if len(result_img.shape) == 2:
+            result_img = cv2.cvtColor(result_img, cv2.COLOR_GRAY2BGR)
+        
         # Threshold to mark strong corners in red
         result_img[dst > 0.01 * dst.max()] = [0, 0, 255]
 
