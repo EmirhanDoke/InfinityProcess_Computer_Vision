@@ -1690,19 +1690,19 @@ class HoughLinesFrame(ProcessFrameBase):
         threshold = int(self.threshold_entry.get())
 
         # Convert to grayscale if needed
-        # if len(img.shape) == 3:
-        #     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        # else:
-        #     gray = img.copy()
-
-        # Apply Canny edge detection to get edges for line detection
-        # edges = cv2.Canny(gray, 50, 150, apertureSize=3)
+        if len(img.shape) == 3:
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        else:
+            gray = img.copy()
 
         # Use HoughLines to detect lines
-        lines = cv2.HoughLines(img, rho, theta, threshold)
+        lines = cv2.HoughLines(gray, rho, theta, threshold)
 
         # Draw the detected lines on the original image
         result_img = img.copy()
+        
+        if len(result_img.shape) == 2:
+            result_img = cv2.cvtColor(result_img, cv2.COLOR_GRAY2BGR)
 
         if lines is not None:
             for line in lines:
