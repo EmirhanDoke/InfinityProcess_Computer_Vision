@@ -63,12 +63,6 @@ class ThresholdingFrame(ProcessFrameBase):
             self.frame, values=threshold_types, width=17
         )
         self.threshold_type_combobox.grid(row=2, column=1, padx=2, pady=2)
-
-        # info_text = (
-        #     ThresholdingFrame.info_text_en
-        #     if self.language == "English"
-        #     else ThresholdingFrame.info_text_tr
-        # )
         
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
@@ -135,12 +129,7 @@ class GaborFilterFrame(ProcessFrameBase):
         self.phi_entry = tk.Entry(self.frame)
         self.phi_entry.grid(row=6, column=1, padx=2, pady=2)
 
-        info_text = (
-            GaborFilterFrame.info_text_en
-            if self.language == "English"
-            else GaborFilterFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
 
@@ -218,12 +207,7 @@ class MorphologicalFrame(ProcessFrameBase):
         self.iterations = tk.Entry(self.frame)
         self.iterations.grid(row=4, column=1, padx=2, pady=2)
 
-        info_text = (
-            MorphologicalFrame.info_text_en
-            if self.language == "English"
-            else MorphologicalFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         kernel_shape = self.shapes_combobox.get()
@@ -310,12 +294,7 @@ class GammaTransformFrame(ProcessFrameBase):
         self.gamma_transform_entry = tk.Entry(self.frame)
         self.gamma_transform_entry.grid(row=1, column=1, padx=2, pady=2)
 
-        info_text = (
-            GammaTransformFrame.info_text_en
-            if self.language == "English"
-            else GammaTransformFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         gamma_transform_entry = float(self.gamma_transform_entry.get())
@@ -376,12 +355,7 @@ class CannyEdgeDetectorFrame(ProcessFrameBase):
         self.l2gradient_combobox = ttk.Combobox(self.frame, values=shape, width=17)
         self.l2gradient_combobox.grid(row=4, column=1, padx=2, pady=2)
 
-        info_text = (
-            CannyEdgeDetectorFrame.info_text_en
-            if self.language == "English"
-            else CannyEdgeDetectorFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
 
@@ -468,12 +442,7 @@ class HoughTransformFrame(ProcessFrameBase):
         self.mark_color_combobox = ttk.Combobox(self.frame, values=ope2, width=17)
         self.mark_color_combobox.grid(row=7, column=1, padx=2, pady=2)
 
-        info_text = (
-            HoughTransformFrame.info_text_en
-            if self.language == "English"
-            else HoughTransformFrame.info_text
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
 
@@ -561,12 +530,7 @@ class GaussianBlurFrame(ProcessFrameBase):
         self.sigmay_entry = tk.Entry(self.frame)
         self.sigmay_entry.grid(row=3, column=1, padx=2, pady=2)
 
-        info_text = (
-            GaussianBlurFrame.info_text_en
-            if self.language == "English"
-            else GaussianBlurFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
 
@@ -602,14 +566,8 @@ class KitterIllingworthFrame(ProcessFrameBase):
         )
         self.optimum_threshold_label = tk.Label(self.frame)
         self.optimum_threshold_label.grid(row=1, column=1, padx=2, pady=2)
-
-        info_text = (
-            KitterIllingworthFrame.info_text_en
-            if self.language == "English"
-            else KitterIllingworthFrame.info_text_tr
-        )
         
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
 
@@ -665,12 +623,8 @@ class DrawHistogramFrame(ProcessFrameBase):
     )
 
     def create_widgets(self):
-        info_text = (
-            DrawHistogramFrame.info_text_en
-            if self.language == "English"
-            else DrawHistogramFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
 
@@ -737,12 +691,7 @@ class ColorConvertFrame(ProcessFrameBase):
         self.color_convert_combobox.grid(row=1, column=1, padx=2, pady=2)
         self.color_convert_combobox.set("RGB to Grayscale")
 
-        info_text = (
-            ColorConvertFrame.info_text_en
-            if self.language == "English"
-            else ColorConvertFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         conversion_type = self.color_convert_combobox.get()
@@ -791,12 +740,7 @@ class ResizeFrame(ProcessFrameBase):
         self.height_entry = tk.Entry(self.frame)
         self.height_entry.grid(row=2, column=1, padx=2, pady=2)
 
-        info_text = (
-            ResizeFrame.info_text_en
-            if self.language == "English"
-            else ResizeFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         width = int(self.width_entry.get())
@@ -831,12 +775,7 @@ class RotateFrame(ProcessFrameBase):
         self.rotation_combobox.grid(row=1, column=1, padx=2, pady=2)
         self.rotation_combobox.set("90")
 
-        info_text = (
-            RotateFrame.info_text_en
-            if self.language == "English"
-            else RotateFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         rotation_angle = int(self.rotation_combobox.get())
@@ -879,12 +818,7 @@ class FlipFrame(ProcessFrameBase):
         self.flip_combobox.grid(row=1, column=1, padx=2, pady=2)
         self.flip_combobox.set("Horizontal")
 
-        info_text = (
-            FlipFrame.info_text_en
-            if self.language == "English"
-            else FlipFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         flip_direction = self.flip_combobox.get()
@@ -922,12 +856,7 @@ class MedianBlurFrame(ProcessFrameBase):
         self.kernel_size_entry = tk.Entry(self.frame)
         self.kernel_size_entry.grid(row=1, column=1, padx=2, pady=2)
 
-        info_text = (
-            MedianBlurFrame.info_text_en
-            if self.language == "English"
-            else MedianBlurFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         kernel_size = int(self.kernel_size_entry.get())
@@ -969,12 +898,7 @@ class BilateralFilterFrame(ProcessFrameBase):
         self.sigma_space_entry = tk.Entry(self.frame)
         self.sigma_space_entry.grid(row=3, column=1, padx=2, pady=2)
 
-        info_text = (
-            BilateralFilterFrame.info_text_en
-            if self.language == "English"
-            else BilateralFilterFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         d = int(self.d_entry.get())
@@ -1011,13 +935,7 @@ class Filter2DFrame(ProcessFrameBase):
             row=1, column=0, columnspan=2, padx=2, pady=2
         )
 
-        info_text = (
-            Filter2DFrame.info_text_en
-            if self.language == "English"
-            else BilateralFilterFrame.info_text_tr
-        )
-
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
         inner_frame = tk.Frame(self.frame)
         inner_frame.grid(row=2, column=0)
@@ -1082,12 +1000,7 @@ class SobelFrame(ProcessFrameBase):
         self.ksize_entry = tk.Entry(self.frame)
         self.ksize_entry.grid(row=3, column=1, padx=2, pady=2)
 
-        info_text = (
-            SobelFrame.info_text_en
-            if self.language == "English"
-            else SobelFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         dx = int(self.dx_combobox.get())
@@ -1129,12 +1042,7 @@ class ScharrFrame(ProcessFrameBase):
         self.dy_combobox = ttk.Combobox(self.frame, values=[0, 1])
         self.dy_combobox.grid(row=2, column=1, padx=2, pady=2)
 
-        info_text = (
-            ScharrFrame.info_text_en
-            if self.language == "English"
-            else ScharrFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         dx = int(self.dx_combobox.get())
@@ -1172,12 +1080,7 @@ class LaplacianFrame(ProcessFrameBase):
         self.ksize_entry = tk.Entry(self.frame)
         self.ksize_entry.grid(row=1, column=1, padx=2, pady=2)
 
-        info_text = (
-            LaplacianFrame.info_text_en
-            if self.language == "English"
-            else LaplacianFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         ksize = int(self.ksize_entry.get())
@@ -1228,12 +1131,7 @@ class CornerHarrisFrame(ProcessFrameBase):
         self.k_entry = tk.Entry(self.frame)
         self.k_entry.grid(row=3, column=1, padx=2, pady=2)
 
-        info_text = (
-            CornerHarrisFrame.info_text_en
-            if self.language == "English"
-            else CornerHarrisFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         block_size = int(self.block_size_entry.get())
@@ -1302,12 +1200,7 @@ class GoodFeaturesToTrackFrame(ProcessFrameBase):
         self.min_distance_entry = tk.Entry(self.frame)
         self.min_distance_entry.grid(row=3, column=1, padx=2, pady=2)
 
-        info_text = (
-            GoodFeaturesToTrackFrame.info_text_en
-            if self.language == "English"
-            else GoodFeaturesToTrackFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         max_corners = int(self.max_corners_entry.get())
@@ -1397,12 +1290,7 @@ class AdaptiveThresholdFrame(ProcessFrameBase):
         self.c_entry = tk.Entry(self.frame)
         self.c_entry.grid(row=5, column=1, padx=2, pady=2)
 
-        info_text = (
-            AdaptiveThresholdFrame.info_text_en
-            if self.language == "English"
-            else AdaptiveThresholdFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         max_value = int(self.max_value_entry.get())
@@ -1461,12 +1349,7 @@ class OtsuThresholdFrame(ProcessFrameBase):
         self.otsu_threshold_label = tk.Label(self.frame)
         self.otsu_threshold_label.grid(row=1, column=1, padx=2, pady=2)
 
-        info_text = (
-            OtsuThresholdFrame.info_text_en
-            if self.language == "English"
-            else OtsuThresholdFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         # Griye çevir (gerekiyorsa)
@@ -1537,12 +1420,7 @@ class FindContoursFrame(ProcessFrameBase):
         self.color_combobox = ttk.Combobox(self.frame, values=["Red", "Green", "Blue"])
         self.color_combobox.grid(row=3, column=1, padx=2, pady=2)
 
-        info_text = (
-            FindContoursFrame.info_text_en
-            if self.language == "English"
-            else FindContoursFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         # Get user selections for retrieval mode and approximation method
@@ -1612,12 +1490,7 @@ class DrawContoursFrame(ProcessFrameBase):
         self.color_combobox = ttk.Combobox(self.frame, values=["Red", "Green", "Blue"])
         self.color_combobox.grid(row=3, column=1, padx=2, pady=2)
 
-        info_text = (
-            DrawContoursFrame.info_text_en
-            if self.language == "English"
-            else DrawContoursFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         # Get user input for thickness and color
@@ -1691,12 +1564,7 @@ class HoughLinesFrame(ProcessFrameBase):
         self.threshold_entry = tk.Entry(self.frame)
         self.threshold_entry.grid(row=3, column=1, padx=2, pady=2)
 
-        info_text = (
-            HoughLinesFrame.info_text_en
-            if self.language == "English"
-            else HoughLinesFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         # Get user input for rho, theta, and threshold
@@ -1763,12 +1631,7 @@ class DFTFrame(ProcessFrameBase):
         self.shift_combobox = ttk.Combobox(self.frame, values=["Yes", "No"])
         self.shift_combobox.grid(row=2, column=1, padx=2, pady=2)
 
-        info_text = (
-            DFTFrame.info_text_en
-            if self.language == "English"
-            else DFTFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         # Get user input for the size and shift option
@@ -1849,12 +1712,7 @@ class IDFTFrame(ProcessFrameBase):
         self.shift_combobox = ttk.Combobox(self.frame, values=["Yes", "No"])
         self.shift_combobox.grid(row=2, column=1, padx=2, pady=2)
 
-        info_text = (
-            IDFTFrame.info_text_en
-            if self.language == "English"
-            else IDFTFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         # Get user input for the size and shift option
@@ -1920,12 +1778,7 @@ class NumpyFFTFrame(ProcessFrameBase):
         self.transform_combobox = ttk.Combobox(self.frame, values=["FFT", "IFFT"])
         self.transform_combobox.grid(row=1, column=1, padx=2, pady=2)
 
-        info_text = (
-            NumpyFFTFrame.info_text_en
-            if self.language == "English"
-            else NumpyFFTFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
         # Get transform type from combobox
@@ -1989,12 +1842,8 @@ class EqualizeHistFrame(ProcessFrameBase):
     )
 
     def create_widgets(self):
-        info_text = (
-            EqualizeHistFrame.info_text_en
-            if self.language == "English"
-            else EqualizeHistFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
 
@@ -2045,12 +1894,7 @@ class CLAHEFrame(ProcessFrameBase):
         self.clip_limit = tk.DoubleVar(value=2.0)
         self.tile_grid_size = tk.IntVar(value=8)
 
-        info_text = (
-            EqualizeHistFrame.info_text_en
-            if self.language == "English"
-            else EqualizeHistFrame.info_text_tr
-        )
-        self.info_buttom = ImageButtonApp(self.frame, text=info_text)
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
         tk.Label(self.frame, text="Clip Limit:").grid(row=1, column=0, padx=2, pady=2)
         tk.Scale(
