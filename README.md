@@ -52,12 +52,7 @@
 
 ### 📌 Main Interface - `Main_GUI`
 
-<!-- <img src="images/Main_GUI.png" width="610" height="512"> -->
-
-<div class="image-fade">
-  <img src="images\light_main_menu.png" />
-  <img src="images\dark_main_menu.png" />
-</div>
+<img src="images\light_main_menu.png" width="610" height="512">
 
 This is where the magic begins! A clean and intuitive main window welcomes you to load images, apply operations, and kick off your vision workflows. Drag, select, apply — it's all at your fingertips.
 
@@ -82,11 +77,8 @@ This smart little popup gives you a quick rundown of what each process does. Not
 
 ### 🛠️ Settings Menu - `Settings_Menu`
 
-<div class="image-fade">
-  <img src="images\light_settings_menu.png" />
-  <img src="images\dark_settings_menu.png" />
-</div>
-
+<img src="images\dark_settings_menu.png" width="450" height="400" >
+ 
 This is your control room!  
 Think of it as your secret lab — this is where you fine-tune the app’s behavior. Need to switch the language? Adjust startup preferences? It’s all here. Simple yet powerful! Tweak a few things and suddenly you’re in full-on Matrix mode. 😎 Oh, and don’t worry — your genius tweaks are saved, like digital breadcrumbs leading back to your personal utopia. 🧠💾
 
@@ -131,29 +123,3 @@ python main.py
 
 ## 📋 License
 - This project is licensed under the Apache License 2.0.
-
-
-
-<style>
-.image-fade {
-  position: relative;
-  width: 450px;
-  height: 400px;
-}
-.image-fade img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  animation: fade 4s infinite alternate;
-  width: 100%;
-  height: 100%;
-}
-.image-fade img:last-child {
-  animation-delay: 2s;
-}
-
-@keyframes fade {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
-}
-</style>
