@@ -1987,6 +1987,7 @@ class EqualizeHistFrame(ProcessFrameBase):
             img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         equalized_img = cv2.equalizeHist(img)
+        
         return equalized_img
 
     def update_result(self, img):

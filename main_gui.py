@@ -75,11 +75,15 @@ class Application:
         ADD_ComboBox.images[-(len(ADD_ComboBox.images) - 1):] = []
         # print(f"Number of eleman in images list: {len(ADD_ComboBox.images)}")
         for process_box in self.process_frame_data:
-            if process_box.processor is None and process_box.processor_np is None:  # if OFF process is selected, skip it
+            if process_box.processor is None and process_box.processor_np is None and process_box.processor_both is None:  # if OFF process is selected, skip it
                 continue
             process_box.apply_process()
             if process_box.processor and hasattr(process_box.processor, 'name'):
                 process_names.append(process_box.processor.name)
+            
+            elif process_box.processor_both and hasattr(process_box.processor_both, 'name'):
+                process_names.append(process_box.processor_both.name)
+            
             else:
                 process_names.append("Nameless")
 

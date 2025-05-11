@@ -42,6 +42,7 @@ class ADD_ComboBox:
 
         self.processor = None
         self.processor_np = None
+        self.processor_both = None
         # print("Deleted the old process.")
 
         # Remove old widgets
@@ -110,13 +111,14 @@ class ADD_ComboBox:
             case "FFT with Numpy":
                 self.processor = NumpyFFTFrame(self.frame)
             case "Equalize Histogram":
-                self.processor_np = EqualizeHistFrame(self.frame)
+                self.processor_both = EqualizeHistFrame(self.frame)
             case "CLAHE Adaptive Equalization":
                 self.processor = CLAHEFrame(self.frame)
             case "OFF":
                     
                 self.processor = None
                 self.processor_np = None
+                self.processor_both = None
                 print("Deleted the process.")
                 
                 # Clear widgets of the process
@@ -126,17 +128,23 @@ class ADD_ComboBox:
                                         
     def apply_process(self):
         if self.processor:
-            
             result = self.processor.apply(self.read_img())
             ADD_ComboBox.images.append(result)
 
-        elif hasattr(self, 'processor_np'):
-            if self.processor_np:
-                self.processor_np.update_result(self.read_img())
-                # ADD_ComboBox.images.append(self.read_img())
+
+        elif self.processor_np:
+            self.processor_np.update_result(self.read_img())
+            # ADD_ComboBox.images.append(self.read_img())
         
+
+        elif self.processor_both:
+            result = self.processor_both.apply(self.read_img())
+            ADD_ComboBox.images.append(result)
+            self.processor_both.update_result(self.read_img())
+                
         else:
-            print("No valid processor found.")
+            print("No process selected.")
+
 
 #! Utils
 
