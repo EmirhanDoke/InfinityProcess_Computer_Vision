@@ -1312,6 +1312,9 @@ class GoodFeaturesToTrackFrame(ProcessFrameBase):
 
         # Copy image to draw results
         result_img = img.copy()
+        
+        if len(result_img.shape) == 2:
+            result_img = cv2.cvtColor(result_img, cv2.COLOR_GRAY2BGR)
 
         # Draw detected corners
         if corners is not None:
