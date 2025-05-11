@@ -271,7 +271,7 @@ class MorphologicalFrame(ProcessFrameBase):
         return img
 
 
-#! May be Not working
+#!Not working
 class GammaTransformFrame(ProcessFrameBase):
     name = "Gamma Transform"
     info_text_tr = (
@@ -303,7 +303,7 @@ class GammaTransformFrame(ProcessFrameBase):
         self.info_buttom = ImageButtonApp(self.frame, text=info_text)
 
     def apply(self, img):
-        gamma_transform_entry = int(self.gamma_transform_entry.get())
+        gamma_transform_entry = float(self.gamma_transform_entry.get())
 
         # Normalize the image to the range [0, 1]
         normalized_image = img / 255.0
@@ -470,6 +470,8 @@ class HoughTransformFrame(ProcessFrameBase):
         maximum_radius = int(self.maximum_radius_entry.get())
         mark_color = str(self.mark_color_combobox.get())
         copy_img = img.copy()
+  
+        copy_img = cv2.cvtColor(copy_img, cv2.COLOR_GRAY2BGR)
 
         if mark_color == "Red":
             mark_color1 = 0
@@ -657,16 +659,31 @@ class DrawHistogramFrame(ProcessFrameBase):
 
     def apply(self, img):
 
-        histogram, bins = np.histogram(img.flatten(), bins=256, range=[0, 256])
-
+        if img.ndim == 2: 
+            histogram, bins = np.histogram(img.flatten(), bins=256, range=[0, 256])
+        else:
+            histogram = []
+            bins = np.arange(256)
+            for i in range(3):
+                hist = cv2.calcHist([img], [i], None, [256], [0, 256])
+                histogram.append(hist)
+                
         return histogram, bins
+     
 
     def update_result(self, img):
 
         histogram, bins = self.apply(img)
 
         plt.figure(figsize=(10, 6))
-        plt.plot(bins[:-1], histogram, color="black")
+        
+        if img.ndim == 2:
+            plt.plot(bins[:-1], histogram, color="black")
+        else:
+            colors = ('b', 'g', 'r')
+            for i, color in enumerate(colors):
+                plt.plot(histogram[i], color=color)
+        
         plt.title("Image Histogram")
         plt.xlabel("Pixel Intensity")
         plt.ylabel("Frequency")
