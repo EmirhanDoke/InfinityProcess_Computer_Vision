@@ -54,7 +54,7 @@
 
 <img src="images\light_main_menu.png" width="610" height="512">
 
-This is where the magic begins! A clean and intuitive main window welcomes you to load images, apply operations, and kick off your vision workflows. Drag, select, apply — it's all at your fingertips.
+This is where the magic begins! A clean and intuitive main window welcomes you to load images, apply operations, and kick off your vision workflows. Select, apply — it's all at your fingertips.
 
 ---
 
