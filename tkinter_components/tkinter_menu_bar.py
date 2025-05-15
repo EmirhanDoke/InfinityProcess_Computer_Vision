@@ -9,15 +9,18 @@ import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 
 class menu_bar():
-    def __init__(self, root):
+    def __init__(self, root, folder, subfolder):
         
         self.root = root
         self.settings_file = "user_settings.txt"  # Path to the settings file
+        self.folder = folder
+        self.subfolder = subfolder
         self.show_image_flag = ttk.BooleanVar()
         self.language_select = ttk.StringVar()
         self.process_position = ttk.StringVar()
         self.infinity_one_line = ttk.BooleanVar()
         self.theme_select = ttk.StringVar()
+        self.select_folder_type = ttk.StringVar()
         self.load_user_settings()
         
         
@@ -34,7 +37,7 @@ class menu_bar():
         menu_line.add_cascade(label="Restart", menu=restart_menu)
         
         tools_menu = ttk.Menu(menu_line, tearoff=0)
-        tools_menu.add_command(label="Tool 1")
+        tools_menu.add_command(label="Prepare Dataset", command=self.open_dataset_window)
         menu_line.add_cascade(label="Tools", menu=tools_menu)
         
         # Info Menu
@@ -90,6 +93,36 @@ class menu_bar():
         save_buttom = ttk.Button(settings_win, text="Save", command=self.save_user_settings)
         save_buttom.pack(side=ttk.BOTTOM, padx=5, pady=5)
         
+    def open_dataset_window(self):
+        dataset_win = ttk.Toplevel(self.root)
+        dataset_win.title("Prepare Dataset")
+        dataset_win.geometry("600x400")
+        dataset_win.resizable(False, False)
+        
+        pd_upper_frame = ttk.Frame(dataset_win)
+        pd_upper_frame.pack(side="top", padx=2, pady=2, fill=ttk.X)
+        ttk.Label(pd_upper_frame, text="Prepare Dataset Settings").pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
+        
+        #-----------------------
+        
+        lowwer_frame = ttk.Frame(dataset_win, borderwidth=2, relief="solid")
+        lowwer_frame.pack(side = "top", padx=2, pady=2, fill=ttk.X)
+        
+        ttk.Label(lowwer_frame, text="Select Folder Layout").grid(row=1, column=0, padx=5, pady=5)
+        select_folder_type_combobox = ttk.Combobox(lowwer_frame, values=["Single Folder", "Subfolder"], textvariable=self.select_folder_type)
+        select_folder_type_combobox.grid(row=1, column=1, padx=5, pady=5)
+        
+        #-----------------------
+        
+        bottom_frame = ttk.Frame(dataset_win)
+        bottom_frame.pack(side = "bottom", padx=2, pady=2, fill=ttk.X)
+        
+        save_buttom = ttk.Button(bottom_frame, text="Save", command=self.save_user_settings)
+        save_buttom.pack(side=ttk.LEFT, padx=5, pady=5)
+        
+        apply_buttom = ttk.Button(bottom_frame, text="Prepare Dataset", command=self.apply_dataset_action)
+        apply_buttom.pack(side=ttk.LEFT, padx=5, pady=5)
+        
     def restart_app(self):
         # Restart the application
         python = sys.executable
@@ -110,7 +143,8 @@ class menu_bar():
             "language": self.language_select.get(),
             "process_position": self.process_position.get(),
             "infinity_one_line": self.infinity_one_line.get(),
-            "theme": self.theme_select.get()
+            "theme": self.theme_select.get(),
+            "folder_type": self.select_folder_type.get()
         }
         with open(path, "w") as file:
             json.dump(settings, file, indent=4)
@@ -128,3 +162,13 @@ class menu_bar():
                 self.process_position.set(settings.get("process_position", "5"))
                 self.infinity_one_line.set(settings.get("infinity_one_line", False))
                 self.theme_select.set(settings.get("theme", "litera"))
+                self.select_folder_type.set(settings.get("folder_type", "Single Folder"))
+
+    def apply_dataset_action(self):
+        folder_type = Utils.load_user_settings("folder_type")
+        if folder_type == "Single Folder":
+            self.folder() # batch_apply_processes callback
+        elif folder_type == "Subfolder":
+            self.subfolder() # batch_apply_processes_alt callback
+        else:
+            messagebox.showwarning("Warning", "Please select a folder type.")

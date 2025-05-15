@@ -21,7 +21,7 @@ class Application:
         
         self.process_frame_data = []
         
-        self.menu_bar = menu_bar(self.root)
+        self.menu_bar = menu_bar(self.root, folder = self.batch_apply_processes, subfolder = self.batch_apply_processes_alt)
         
         self.buttom_frame = ttk.Frame(self.root)
         self.buttom_frame.pack(side = "top", fill=ttk.X, ipadx=20, ipady=20)
