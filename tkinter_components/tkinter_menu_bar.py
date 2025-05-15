@@ -58,6 +58,9 @@ class menu_bar():
         upper_frame.pack(side="top", padx=2, pady=2, fill=ttk.X)
         ttk.Label(upper_frame, text="User Settings").pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
         
+        self.warning_label = ttk.Label(settings_win, text="If you make changes to the settings, press the 'save' button.", foreground="red", font=font.Font(size=10))
+        self.warning_label.pack(side="top")
+        
         #-----------------------
         
         lowwer_frame = ttk.Frame(settings_win, borderwidth=2, relief="solid")
@@ -102,6 +105,9 @@ class menu_bar():
         pd_upper_frame = ttk.Frame(dataset_win)
         pd_upper_frame.pack(side="top", padx=2, pady=2, fill=ttk.X)
         ttk.Label(pd_upper_frame, text="Prepare Dataset Settings").pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
+        
+        self.warning_label = ttk.Label(dataset_win, text="If you make changes to the settings, press the 'save' button.", foreground="red", font=font.Font(size=10))
+        self.warning_label.pack(side="top")
         
         #-----------------------
         

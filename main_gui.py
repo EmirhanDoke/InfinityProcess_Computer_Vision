@@ -26,20 +26,19 @@ class Application:
         self.buttom_frame = ttk.Frame(self.root)
         self.buttom_frame.pack(side = "top", fill=ttk.X, ipadx=20, ipady=20)
         
-        # GUI bileşenlerini oluştur
-        self.button = ttk.Button(self.buttom_frame, text="Create New Process", command = self.create_frames)
+        style = ttk.Style()
+        style.configure("Custom.TButton", font=("Helvetica", 14))
+        
+        # Create GUI elements
+        self.button = ttk.Button(self.buttom_frame, text="Create New Process", command = self.create_frames, style="Custom.TButton")
         self.button.pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
         
-        self.button = ttk.Button(self.buttom_frame, text="Load Image", command= ADD_ComboBox.file_path_selecter)
+        self.button = ttk.Button(self.buttom_frame, text="Load Image", command= ADD_ComboBox.file_path_selecter, style="Custom.TButton")
         self.button.pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
    
-        # "Uygula" butonunu ekliyoruz
-        self.apply_button = ttk.Button(self.buttom_frame, text="Apply", command=self.apply_all_processes)
+        # Added Apply Buttom
+        self.apply_button = ttk.Button(self.buttom_frame, text="Apply", command=self.apply_all_processes, style="Custom.TButton")
         self.apply_button.pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
-   
-        # "Batch Apply" butonunu ekliyoruz
-        self.batch_apply_button = ttk.Button(self.buttom_frame, text="Batch Apply", command=self.batch_apply_processes_alt)
-        self.batch_apply_button.pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
    
         #? Process Frame Area
    
