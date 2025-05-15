@@ -4,6 +4,9 @@ from tkinter_components.tkinter_menu_bar import menu_bar
 from utils import Utils
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
+import os
+from tkinter import filedialog
+import cv2
 
 # Ana uygulama sınıfı
 class Application:
@@ -34,6 +37,9 @@ class Application:
         self.apply_button = ttk.Button(self.buttom_frame, text="Apply", command=self.apply_all_processes)
         self.apply_button.pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
    
+        # "Batch Apply" butonunu ekliyoruz
+        self.batch_apply_button = ttk.Button(self.buttom_frame, text="Batch Apply", command=self.batch_apply_processes)
+        self.batch_apply_button.pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
    
         #? Process Frame Area
    
@@ -90,6 +96,47 @@ class Application:
 
         ADD_ComboBox.show_image(names = process_names)
         
+    def batch_apply_processes(self):
+        # Select source and destination directories
+        src_dir = filedialog.askdirectory(title="Select source directory")
+        if not src_dir:
+            return
+        dst_dir = filedialog.askdirectory(title="Select destination directory")
+        if not dst_dir:
+            return
+
+        # Suported image formats
+        extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.gif')
+        files = [f for f in os.listdir(src_dir) if f.lower().endswith(extensions)]
+
+
+        for filename in files:
+            src_path = os.path.join(src_dir, filename)
+            img = cv2.imread(src_path)
+
+            if img is None:
+                print(f"Invalid image file: {filename}")
+                continue  # If the image is not valid, skip it
+
+            temp_img = img.copy()
+            for process_box in self.process_frame_data:
+                if process_box.processor is None and process_box.processor_np is None and process_box.processor_both is None:
+                    continue
+
+                if process_box.processor_np:
+                    # temp_img = process_box.processor_np.apply(temp_img)
+                    continue
+                elif process_box.processor:
+                    temp_img = process_box.processor.apply(temp_img)
+                elif process_box.processor_both:
+                    temp_img = process_box.processor_both.apply(temp_img)
+
+            # Save the processed image
+            dst_path = os.path.join(dst_dir, filename)
+            cv2.imwrite(dst_path, temp_img)
+
+        print("Batch processing completed.")
+
     @classmethod
     def frame_placer(cls):
         
