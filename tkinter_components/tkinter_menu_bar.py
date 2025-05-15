@@ -156,7 +156,7 @@ class menu_bar():
         about_text = """
         
         Developer: Said Emirhan Döke
-        Version: 1.1.0b
+        Version: 1.1.2b
         Github: https://github.com/EmirhanDoke
         
         """
