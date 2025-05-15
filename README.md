@@ -68,7 +68,7 @@ Here's where all the magic shows itself! This panel displays the output of each 
 
 ### 📂Prepare Dataset - `Dataset Preparation Settings`
 
-<img src="images/dataset.gif" width="600" height="500">
+![Dataset GIF](images/dataset.gif)
 
 Turn your image dataset folders into a playground! With just a few clicks, you can batch-process your pictures and get them ready for your next big project — fast, easy, and fun!
 
