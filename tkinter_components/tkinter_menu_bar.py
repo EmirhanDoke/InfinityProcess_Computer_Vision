@@ -99,7 +99,7 @@ class menu_bar():
     def open_dataset_window(self):
         dataset_win = ttk.Toplevel(self.root)
         dataset_win.title("Dataset Preparation Settings")
-        dataset_win.geometry("600x400")
+        dataset_win.geometry("600x500")
         dataset_win.resizable(False, False)
         
         pd_upper_frame = ttk.Frame(dataset_win)
@@ -133,9 +133,12 @@ class menu_bar():
             └── 1.png
             """
         
-        ttk.Label(lowwer_frame, text=single_folder_type_str, justify="left").grid(row=2, column=0, padx=5, pady=5)
-        ttk.Label(lowwer_frame, text=subfolder_type_str, justify="left").grid(row=2, column=1, padx=5, pady=5)
-        ttk.Label(lowwer_frame, text="Image or subfolder names are not important", foreground="red", font=font.Font(size=12)).grid(row=3, column=0, padx=5, pady=5, columnspan=2)
+        ttk.Label(lowwer_frame, text="Single Folder Type", justify="left").grid(row=2, column=0, padx=5, pady=5)
+        ttk.Label(lowwer_frame, text=single_folder_type_str, justify="left").grid(row=3, column=0, padx=5, pady=5)
+        
+        ttk.Label(lowwer_frame, text="Subfolder Type", justify="left").grid(row=2, column=1, padx=5, pady=5)
+        ttk.Label(lowwer_frame, text=subfolder_type_str, justify="left").grid(row=3, column=1, padx=5, pady=5)
+        ttk.Label(lowwer_frame, text="Image or subfolder names are not important", foreground="red", font=font.Font(size=12)).grid(row=4, column=0, padx=5, pady=5, columnspan=2)
         
         #-----------------------
         
@@ -156,7 +159,7 @@ class menu_bar():
         about_text = """
         
         Developer: Said Emirhan Döke
-        Version: 1.1.2b
+        Version: 1.1.3b
         Github: https://github.com/EmirhanDoke
         
         """
