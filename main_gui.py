@@ -7,7 +7,7 @@ from ttkbootstrap.constants import *
 import os
 from tkinter import filedialog
 import cv2
-
+from tkinter import messagebox
 
 # Ana uygulama sınıfı
 class Application:
@@ -168,6 +168,9 @@ class Application:
             cv2.imwrite(dst_path, temp_img)
 
         print("Batch processing completed.")
+        messagebox.showinfo(
+            "Batch Processing", "Batch processing completed successfully."
+        )
 
     def batch_apply_processes_alt(self):
         # Select source and destination directories
@@ -218,6 +221,10 @@ class Application:
                 cv2.imwrite(dst_path, temp_img)
 
         print("Batch processing completed.")
+        
+        messagebox.showinfo(
+            "Batch Processing", "Batch processing completed successfully."
+        )
 
     @classmethod
     def frame_placer(cls):
