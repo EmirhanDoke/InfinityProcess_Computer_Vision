@@ -91,7 +91,7 @@ class menu_bar():
         #-----------------------
         
         save_buttom = ttk.Button(settings_win, text="Save", command=self.save_user_settings)
-        save_buttom.pack(side=ttk.BOTTOM, padx=5, pady=5)
+        save_buttom.pack(side=ttk.LEFT, padx=5, pady=5)
         
     def open_dataset_window(self):
         dataset_win = ttk.Toplevel(self.root)
