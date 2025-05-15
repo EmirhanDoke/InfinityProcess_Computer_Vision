@@ -38,7 +38,7 @@ class Application:
         self.apply_button.pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
    
         # "Batch Apply" butonunu ekliyoruz
-        self.batch_apply_button = ttk.Button(self.buttom_frame, text="Batch Apply", command=self.batch_apply_processes)
+        self.batch_apply_button = ttk.Button(self.buttom_frame, text="Batch Apply", command=self.batch_apply_processes_alt)
         self.batch_apply_button.pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
    
         #? Process Frame Area
@@ -134,6 +134,52 @@ class Application:
             # Save the processed image
             dst_path = os.path.join(dst_dir, filename)
             cv2.imwrite(dst_path, temp_img)
+
+        print("Batch processing completed.")
+
+    def batch_apply_processes_alt(self):
+        # Select source and destination directories
+        src_dir = filedialog.askdirectory(title="Select source directory")
+        if not src_dir:
+            return
+        dst_dir = filedialog.askdirectory(title="Select destination directory")
+        if not dst_dir:
+            return
+
+        # Supported image formats
+        extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.gif')
+
+        for root, _, files in os.walk(src_dir):
+            for filename in files:
+                if not filename.lower().endswith(extensions):
+                    continue
+
+                src_path = os.path.join(root, filename)
+                img = cv2.imread(src_path)
+
+                if img is None:
+                    print(f"Invalid image file: {filename}")
+                    continue  # If the image is not valid, skip it
+
+                temp_img = img.copy()
+                for process_box in self.process_frame_data:
+                    if process_box.processor is None and process_box.processor_np is None and process_box.processor_both is None:
+                        continue
+
+                    if process_box.processor_np:
+                        # temp_img = process_box.processor_np.apply(temp_img)
+                        continue
+                    elif process_box.processor:
+                        temp_img = process_box.processor.apply(temp_img)
+                    elif process_box.processor_both:
+                        temp_img = process_box.processor_both.apply(temp_img)
+
+                # Save the processed image
+                rel_path = os.path.relpath(root, src_dir)
+                save_dir = os.path.join(dst_dir, rel_path)
+                os.makedirs(save_dir, exist_ok=True)
+                dst_path = os.path.join(save_dir, filename)
+                cv2.imwrite(dst_path, temp_img)
 
         print("Batch processing completed.")
 
