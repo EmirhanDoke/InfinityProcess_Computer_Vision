@@ -8,93 +8,123 @@ import os
 from tkinter import filedialog
 import cv2
 
+
 # Ana uygulama sınıfı
 class Application:
-    
+
     counter = 0
     column = 0
-    
+
     def __init__(self, root):
         self.root = root
         self.root.title("Quick Setup for Computer Vision")
         self.root.geometry("800x600")
-        
+
         self.process_frame_data = []
-        
-        self.menu_bar = menu_bar(self.root, folder = self.batch_apply_processes, subfolder = self.batch_apply_processes_alt)
-        
+
+        self.menu_bar = menu_bar(
+            self.root,
+            folder=self.batch_apply_processes,
+            subfolder=self.batch_apply_processes_alt,
+        )
+
         self.buttom_frame = ttk.Frame(self.root)
-        self.buttom_frame.pack(side = "top", fill=ttk.X, ipadx=20, ipady=20)
-        
+        self.buttom_frame.pack(side="top", fill=ttk.X, ipadx=20, ipady=20)
+
         style = ttk.Style()
         style.configure("Custom.TButton", font=("Helvetica", 14))
-        
+
         # Create GUI elements
-        self.button = ttk.Button(self.buttom_frame, text="Create New Process", command = self.create_frames, style="Custom.TButton")
+        self.button = ttk.Button(
+            self.buttom_frame,
+            text="Create New Process",
+            command=self.create_frames,
+            style="Custom.TButton",
+        )
         self.button.pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
-        
-        self.button = ttk.Button(self.buttom_frame, text="Load Image", command= ADD_ComboBox.file_path_selecter, style="Custom.TButton")
+
+        self.button = ttk.Button(
+            self.buttom_frame,
+            text="Load Image",
+            command=ADD_ComboBox.file_path_selecter,
+            style="Custom.TButton",
+        )
         self.button.pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
-   
+
         # Added Apply Buttom
-        self.apply_button = ttk.Button(self.buttom_frame, text="Apply", command=self.apply_all_processes, style="Custom.TButton")
-        self.apply_button.pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
-   
-        #? Process Frame Area
-   
+        self.apply_button = ttk.Button(
+            self.buttom_frame,
+            text="Apply",
+            command=self.apply_all_processes,
+            style="Custom.TButton",
+        )
+        self.apply_button.pack(
+            side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10
+        )
+
+        # ? Process Frame Area
+
         # Canvas
         self.canvas = ttk.Canvas(self.root)
         self.canvas.pack(side=ttk.LEFT, fill=ttk.BOTH, expand=True)
-        
+
         # Scrollbar
-        scrollbar = ttk.Scrollbar(self.root, orient="vertical", command=self.canvas.yview)
+        scrollbar = ttk.Scrollbar(
+            self.root, orient="vertical", command=self.canvas.yview
+        )
         scrollbar.pack(side=ttk.RIGHT, fill=ttk.Y)
         self.canvas.bind("<MouseWheel>", self._on_mousewheel)
-   
+
         self.canvas.configure(yscrollcommand=scrollbar.set)
-   
+
         self.process_frame = ttk.Frame(self.canvas, borderwidth=2, relief="solid")
         self.canvas.create_window((0, 0), window=self.process_frame, anchor="nw")
         self.process_frame.bind("<Configure>", self.on_frame_configure)
-    
+
     def on_frame_configure(self, event):
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
-        
+
     def _on_mousewheel(self, event):
         self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-       
+
     def create_frames(self):
-        
+
         row, column = Application.frame_placer()
-        
+
         # Frame oluştur
         self.frame = ttk.Frame(self.process_frame, borderwidth=2, relief="solid")
-        self.frame.grid(row= row, column= column, padx=5, pady=10)
-        
+        self.frame.grid(row=row, column=column, padx=5, pady=10)
+
         self.combobox_frame = ADD_ComboBox(self.frame)
         self.process_frame_data.append(self.combobox_frame)
-    
+
     def apply_all_processes(self):
-        
+
         process_names = ["Original Image"]
-        
-        ADD_ComboBox.images[-(len(ADD_ComboBox.images) - 1):] = []
+
+        ADD_ComboBox.images[-(len(ADD_ComboBox.images) - 1) :] = []
         # print(f"Number of eleman in images list: {len(ADD_ComboBox.images)}")
         for process_box in self.process_frame_data:
-            if process_box.processor is None and process_box.processor_np is None and process_box.processor_both is None:  # if OFF process is selected, skip it
+            if (
+                process_box.processor is None
+                and process_box.processor_np is None
+                and process_box.processor_both is None
+            ):  # if OFF process is selected, skip it
                 continue
             process_box.apply_process()
-            if process_box.processor and hasattr(process_box.processor, 'name'):
+            if process_box.processor and hasattr(process_box.processor, "name"):
                 process_names.append(process_box.processor.name)
-            
-            elif process_box.processor_both and hasattr(process_box.processor_both, 'name'):
+
+            elif process_box.processor_both and hasattr(
+                process_box.processor_both, "name"
+            ):
                 process_names.append(process_box.processor_both.name)
-            
+
             else:
                 process_names.append("Nameless")
 
-        ADD_ComboBox.show_image(names = process_names)
-        
+        ADD_ComboBox.show_image(names=process_names)
+
     def batch_apply_processes(self):
         # Select source and destination directories
         src_dir = filedialog.askdirectory(title="Select source directory")
@@ -105,9 +135,8 @@ class Application:
             return
 
         # Suported image formats
-        extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.gif')
+        extensions = (".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".gif")
         files = [f for f in os.listdir(src_dir) if f.lower().endswith(extensions)]
-
 
         for filename in files:
             src_path = os.path.join(src_dir, filename)
@@ -119,7 +148,11 @@ class Application:
 
             temp_img = img.copy()
             for process_box in self.process_frame_data:
-                if process_box.processor is None and process_box.processor_np is None and process_box.processor_both is None:
+                if (
+                    process_box.processor is None
+                    and process_box.processor_np is None
+                    and process_box.processor_both is None
+                ):
                     continue
 
                 if process_box.processor_np:
@@ -146,7 +179,7 @@ class Application:
             return
 
         # Supported image formats
-        extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.gif')
+        extensions = (".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".gif")
 
         for root, _, files in os.walk(src_dir):
             for filename in files:
@@ -162,7 +195,11 @@ class Application:
 
                 temp_img = img.copy()
                 for process_box in self.process_frame_data:
-                    if process_box.processor is None and process_box.processor_np is None and process_box.processor_both is None:
+                    if (
+                        process_box.processor is None
+                        and process_box.processor_np is None
+                        and process_box.processor_both is None
+                    ):
                         continue
 
                     if process_box.processor_np:
@@ -184,10 +221,10 @@ class Application:
 
     @classmethod
     def frame_placer(cls):
-        
+
         process_position = Utils.load_user_settings("process_position")
         infinity_one_line = Utils.load_user_settings("infinity_one_line")
-        
+
         if process_position:
             Height = int(process_position[0])
         else:
@@ -198,10 +235,10 @@ class Application:
             if cls.counter % (Height + 1) == 0:
                 cls.column += 1
                 cls.counter = 1
-            
+
             cls.counter += 1
-        
+
         else:
             cls.counter += 1
-        
+
         return cls.counter, cls.column
