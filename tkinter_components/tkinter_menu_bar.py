@@ -42,7 +42,7 @@ class menu_bar():
         
         # Info Menu
         about_menu = ttk.Menu(menu_line, tearoff=0)
-        about_menu.add_command(label="About")
+        about_menu.add_command(label="About", command=self.about_window)
         # Add the "About" menu to the main menu
         menu_line.add_cascade(label="About", menu=about_menu)
 
@@ -148,6 +148,22 @@ class menu_bar():
         apply_buttom = ttk.Button(bottom_frame, text="Prepare Dataset", command=self.apply_dataset_action)
         apply_buttom.pack(side=ttk.LEFT, padx=5, pady=5)
         
+    def about_window(self):
+        about_win = ttk.Toplevel(self.root)
+        about_win.title("About")
+        about_win.geometry("500x200")
+        
+        about_text = """
+        
+        Developer: Said Emirhan Döke
+        Version: 1.1.0b
+        Github: https://github.com/EmirhanDoke
+        
+        """
+        
+        about_label = ttk.Label(about_win, text= about_text, font=font.Font(size=12))
+        about_label.pack(side="top")
+
     def restart_app(self):
         # Restart the application
         python = sys.executable
