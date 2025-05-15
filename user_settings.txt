@@ -1,6 +1,6 @@
 {
-    "show_image_flag": true,
-    "language": "English",
+    "show_image_flag": false,
+    "language": "Turkish",
     "process_position": "5",
     "infinity_one_line": false,
     "theme": "flatly",
