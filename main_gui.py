@@ -19,7 +19,7 @@ class Application:
 
     def __init__(self, root):
         self.root = root
-        self.root.title("Quick Setup for Computer Vision")
+        self.root.title("InfinityProcess Computer Vision GUI")
         self.root.geometry("800x600")
 
         self.process_frame_data = []
