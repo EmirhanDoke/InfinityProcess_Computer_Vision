@@ -201,6 +201,8 @@ class menu_bar():
         }
         with open(path, "w") as file:
             json.dump(settings, file, indent=4)
+        
+        messagebox.showinfo("Settings Saved", "Saved successfully. Please restart the application to apply changes.")
     
     def load_user_settings(self):
         
