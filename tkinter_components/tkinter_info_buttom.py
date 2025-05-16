@@ -10,10 +10,12 @@ import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 
 class ImageButtonApp:
-    def __init__(self, frame, text):
+    def __init__(self, frame, text, row=0, col=1):
         
         self.frame = frame
         self.text = text
+        self.row = row
+        self.col = col
         # Görüntüyü yükle
         self.load_image(r"tkinter_components\info.png")  # Bu dosyanın yolunu uygun şekilde güncelle
         # Resimli butonu oluştur
@@ -37,9 +39,12 @@ class ImageButtonApp:
         self.button = ttk.Button(
             self.frame,
             image=self.button_image,
-            command=self.open_top_layer
+            command=self.open_top_layer,
+            bootstyle="default-outline",
+            text= " Info",
+            compound="left"
         )
-        self.button.grid(row=0, column=1, padx=2, pady=2)
+        self.button.grid(row=self.row, column=self.col, padx=2, pady=2)
 
     def open_top_layer(self):
         """Yeni bir üst pencere (top-level) açar."""

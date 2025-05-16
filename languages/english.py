@@ -251,4 +251,10 @@ translations = {
         "• Clip Limit: Specifies the degree of contrast limiting. Higher values result in sharper contrasts.\n"
         "• Tile Grid Size: Specifies the size of the grid for local histogram equalization. Smaller grids yield more detailed results.\n\n"
         "🎯 Note: CLAHE is particularly useful for enhancing contrast in images with uneven lighting conditions.",
+    
+    "DatasetProcessInfo": "📌 Dataset Processing Steps\n\n"
+        "1- Create Process and fill the parameters.\n"
+        "2- Select the source folder.\n"
+        "3- Select the destination folder.\n"
+        "4- Click the **Prepare Dataset** button.",
 }

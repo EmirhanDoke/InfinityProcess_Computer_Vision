@@ -253,4 +253,10 @@ translations = {
         "• Clip Limit: Kontrast sınırlamasının derecesini belirtir. Yüksek değerler daha keskin kontrastlar sağlar.\n"
         "• Tile Grid Size: Eşitleme işlemi için kullanılan bölgesel ızgaranın boyutunu belirtir. Küçük ızgaralar daha ayrıntılı sonuçlar verir.\n\n"
         "🎯 Not: CLAHE, özellikle aydınlatma koşullarının düzensiz olduğu görüntülerde kontrastı artırmak için kullanılır.",
+        
+    "DatasetProcessInfo": "📌 Dataset İşleme Aımları:\n\n"
+        "1- İşlem oluşturun ve parametleri dolurun.\n"
+        "2- Kaynak dosyası seçin.\n"
+        "3- Hedef dosyası seçin\n"
+        "4- **Prepare Dataset** butonuna tıklayın.\n",
 }

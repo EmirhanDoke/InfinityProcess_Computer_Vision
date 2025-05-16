@@ -10,6 +10,8 @@ import json
 from utils import Utils
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
+import importlib
+from tkinter_components.tkinter_info_buttom import *
 
 class menu_bar():
     def __init__(self, root, folder, subfolder):
@@ -18,6 +20,8 @@ class menu_bar():
         self.settings_file = "user_settings.txt"  # Path to the settings file
         self.folder = folder
         self.subfolder = subfolder
+        self.language = Utils.load_user_settings("language")
+        self.translations = self.load_translations()
         self.show_image_flag = ttk.BooleanVar()
         self.language_select = ttk.StringVar()
         self.process_position = ttk.StringVar()
@@ -101,13 +105,15 @@ class menu_bar():
         
     def open_dataset_window(self):
         dataset_win = ttk.Toplevel(self.root)
-        dataset_win.title("Dataset Preparation Settings")
+        dataset_win.title("Dataset Process Settings")
         dataset_win.geometry("600x500")
         dataset_win.resizable(False, False)
         
         pd_upper_frame = ttk.Frame(dataset_win)
         pd_upper_frame.pack(side="top", padx=2, pady=2, fill=ttk.X)
-        ttk.Label(pd_upper_frame, text="Dataset Preparation Settings").pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
+        
+        ttk.Label(pd_upper_frame, text="Dataset Preparation Settings").grid(row=0, column=0, padx=10, pady=10)
+        ImageButtonApp(pd_upper_frame, text=self.get_translation("DatasetProcessInfo"), row=0, col=1)
         
         self.warning_label = ttk.Label(dataset_win, text="If you make changes to the settings, press the 'save' button", foreground="red", font=font.Font(size=12))
         self.warning_label.pack(side="top")
@@ -219,3 +225,16 @@ class menu_bar():
             self.subfolder() # batch_apply_processes_alt callback
         else:
             messagebox.showwarning("Warning", "Please select a folder type.")
+
+    def load_translations(self):
+        # Load translations based on the selected language
+        try:
+            lang_module = importlib.import_module(f"languages.{self.language.lower()}")
+            return lang_module.translations
+        except ModuleNotFoundError:
+            print(f"Translation file for language '{self.language}' not found.")
+            return {}
+
+    def get_translation(self, key):
+        # Get the translation for the given key
+        return self.translations.get(key, "Translation not available.")
