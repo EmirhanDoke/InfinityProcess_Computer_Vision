@@ -1,3 +1,5 @@
+# Copyright 2025 Said Emirhan Döke
+# Licensed under the Apache License, Version 2.0
 translations = {
     "ThresholdingFrame": "📌 Threshold Bilgisi\n\n"
         "Giriş Görüntüsü: Gri seviyeli bir görüntü olmalıdır. Renkli görüntülerde de işlem yapılabilir ancak en iyi sonuçlar **gri seviyeli** görüntülerde alınır.\n"

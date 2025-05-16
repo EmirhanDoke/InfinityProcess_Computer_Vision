@@ -1,3 +1,6 @@
+# Copyright 2025 Said Emirhan Döke
+# Licensed under the Apache License, Version 2.0
+
 import tkinter as ttk
 from tkinter import messagebox
 from tkinter import font

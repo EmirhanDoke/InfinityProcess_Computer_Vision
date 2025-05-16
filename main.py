@@ -1,3 +1,6 @@
+# Copyright 2025 Said Emirhan Döke
+# Licensed under the Apache License, Version 2.0
+
 import tkinter as tk
 from main_gui import Application
 import ttkbootstrap as ttk

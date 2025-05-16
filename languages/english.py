@@ -1,3 +1,5 @@
+# Copyright 2025 Said Emirhan Döke
+# Licensed under the Apache License, Version 2.0
 translations = {
     "ThresholdingFrame": "📌 Threshold Information\n\n"
         "Input Image: Must be a grayscale image. It can also work on colored images, but the best results are obtained with **grayscale** images.\n"
