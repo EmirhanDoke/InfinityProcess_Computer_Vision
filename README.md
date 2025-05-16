@@ -122,6 +122,20 @@ python main.py
 2. Extract the folder.
 3. Run InfinityProcess.exe to start using it immediately — no installation needed!
 
+---
+
+### ⚠️ About SmartScreen Warning
+
+This application is open source and distributed individually. Windows SmartScreen may show a warning because it does not automatically recognize unsigned new applications.
+
+**Solution:** If you see a warning when opening the app:
+1. Click on `More info` on the "Your PC is protected" screen.
+2. Then select `Run anyway`.
+
+This warning will temporarily appear until the application becomes recognized as trusted.
+
+---
+
 ## 📊 Usage
 
 - **Load Image**: Click the **Load Image** button to select an image.
