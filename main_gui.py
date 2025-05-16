@@ -1,7 +1,6 @@
 # Copyright 2025 Said Emirhan Döke
 # Licensed under the Apache License, Version 2.0
 
-import tkinter as ttk
 from process_manager import ADD_ComboBox
 from tkinter_components.tkinter_menu_bar import menu_bar
 from utils import Utils
@@ -61,9 +60,7 @@ class Application:
             command=self.apply_all_processes,
             style="Custom.TButton",
         )
-        self.apply_button.pack(
-            side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10
-        )
+        self.apply_button.pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
 
         # ? Process Frame Area
 
@@ -71,18 +68,27 @@ class Application:
         self.canvas = ttk.Canvas(self.root)
         self.canvas.pack(side=ttk.LEFT, fill=ttk.BOTH, expand=True)
 
-        # Scrollbar
+        # Vertical Scrollbar
         scrollbar = ttk.Scrollbar(
-            self.root, orient="vertical", command=self.canvas.yview
+            self.root, orient="vertical", command=self.canvas.yview, bootstyle="primary"
         )
         scrollbar.pack(side=ttk.RIGHT, fill=ttk.Y)
         self.canvas.bind("<MouseWheel>", self._on_mousewheel)
+        
+        # Horizontal Scrollbar
+        scrollbarX = ttk.Scrollbar(
+            self.root, orient="horizontal", command=self.canvas.xview, bootstyle="primary"
+        )
+        scrollbarX.pack(side=ttk.BOTTOM, fill=ttk.X, before=self.canvas)
 
         self.canvas.configure(yscrollcommand=scrollbar.set)
+        self.canvas.configure(xscrollcommand=scrollbarX.set)
 
         self.process_frame = ttk.Frame(self.canvas, borderwidth=2, relief="solid")
         self.canvas.create_window((0, 0), window=self.process_frame, anchor="nw")
         self.process_frame.bind("<Configure>", self.on_frame_configure)
+
+
 
     def on_frame_configure(self, event):
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
