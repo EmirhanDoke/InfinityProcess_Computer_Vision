@@ -221,16 +221,19 @@ class GammaTransformFrame(ProcessFrameBase):
     def apply(self, img):
         gamma_transform_entry = float(self.gamma_transform_entry.get())
 
+        # Inverse gamma value
+        inv_gamma = 1.0 / gamma_transform_entry
+
         # Normalize the image to the range [0, 1]
         normalized_image = img / 255.0
 
         # Apply gamma transform
-        gamma_corrected = np.power(normalized_image, gamma_transform_entry)
+        gamma_corrected = np.power(normalized_image, inv_gamma)
 
         # Convert back to range [0, 255] and convert to uint8
         gamma_corrected = np.uint8(gamma_corrected * 255)
 
-        return img
+        return gamma_corrected
 
 
 class CannyEdgeDetectorFrame(ProcessFrameBase):
