@@ -23,6 +23,7 @@ class menu_bar():
         self.language = Utils.load_user_settings("language")
         self.translations = self.load_translations()
         self.show_image_flag = ttk.BooleanVar()
+        self.check_image_settings = ttk.BooleanVar()
         self.language_select = ttk.StringVar()
         self.process_position = ttk.StringVar()
         self.infinity_one_line = ttk.BooleanVar()
@@ -76,6 +77,9 @@ class menu_bar():
         show_image = ttk.Checkbutton(lowwer_frame, text=self.get_translation("Show_Load_Image_Details_Settings"), variable=self.show_image_flag, bootstyle="round-toggle")
         show_image.grid(row=1, column=0, padx=5, pady=5)
         
+        check_image = ttk.Checkbutton(lowwer_frame, text=self.get_translation("Check_Image_Settings"), variable=self.check_image_settings, bootstyle="round-toggle")
+        check_image.grid(row=1, column=1, padx=5, pady=5)
+        
         ttk.Label(lowwer_frame, text=self.get_translation("Language_Select_Settings")).grid(row=2, column=0, padx=0, pady=5)
         language_select = ttk.Combobox(lowwer_frame, values=["English", "Turkish"], textvariable=self.language_select)
         language_select.grid(row=2, column=1, padx=5, pady=5)
@@ -87,6 +91,7 @@ class menu_bar():
         ttk.Label(lowwer_frame, text=self.get_translation("Theme_Select_Settings")).grid(row=3, column=0, padx=0, pady=5)
         theme_select = ttk.Combobox(lowwer_frame, values=themes, textvariable=self.theme_select)
         theme_select.grid(row=3, column=1, padx=5, pady=5)
+        
         #-----------------------
         
         process_position_frame = ttk.LabelFrame(settings_win, text=self.get_translation("Process_Position_Settings"), borderwidth=2, relief="solid")
@@ -196,7 +201,8 @@ class menu_bar():
             "process_position": self.process_position.get(),
             "infinity_one_line": self.infinity_one_line.get(),
             "theme": self.theme_select.get(),
-            "folder_type": self.select_folder_type.get()
+            "folder_type": self.select_folder_type.get(),
+            "check_image_settings": self.check_image_settings.get()
         }
         with open(path, "w") as file:
             json.dump(settings, file, indent=4)
@@ -217,6 +223,7 @@ class menu_bar():
                 self.infinity_one_line.set(settings.get("infinity_one_line", False))
                 self.theme_select.set(settings.get("theme", "litera"))
                 self.select_folder_type.set(settings.get("folder_type", "Single Folder"))
+                self.check_image_settings.set(settings.get("check_image_settings", True))
 
     def apply_dataset_action(self):
         folder_type = Utils.load_user_settings("folder_type")

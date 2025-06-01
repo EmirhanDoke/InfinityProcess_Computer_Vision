@@ -299,4 +299,6 @@ translations = {
     
     "Folder_Type_MessageBox_Text": "Please select a folder type.",
     
+    "Check_Image_Settings": "Check Image Setting",
+    
 }

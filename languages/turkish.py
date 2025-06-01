@@ -299,4 +299,6 @@ translations = {
     "Folder_Type_MessageBox_Title": "Uyarı",
     
     "Folder_Type_MessageBox_Text": "Lütfen bir klasör türü seçiniz.",
+    
+    "Check_Image_Settings": "Görsel Kontrol Ayarı",
 }

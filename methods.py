@@ -956,10 +956,15 @@ class AdaptiveThresholdFrame(ProcessFrameBase):
         block_size = int(self.block_size_entry.get())
         c = int(self.c_entry.get())
 
-        # Convert to grayscale if needed
-        if len(img.shape) == 3:
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        if Utils.load_user_settings("check_image_settings") == True:
+            # Convert to grayscale if needed
+            
+            if len(img.shape) == 3:
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            else:
+                gray = img.copy()
         else:
+            # If the image is already grayscale, no conversion is needed
             gray = img.copy()
 
         # Apply adaptive thresholding
@@ -995,13 +1000,19 @@ class OtsuThresholdFrame(ProcessFrameBase):
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
-        # Griye çevir (gerekiyorsa)
-        if len(img.shape) == 3:
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+        if Utils.load_user_settings("check_image_settings") == True:
+            # Convert to grayscale if needed
+            
+            if len(img.shape) == 3:
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            else:
+                gray = img.copy()
         else:
+            # If the image is already grayscale, no conversion is needed
             gray = img.copy()
 
-        # Otsu'nun yöntemini uygula, yalnızca eşik değeri döndürülür
+        
         otsu_thresh_value, _ = cv2.threshold(
             gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU
         )
@@ -1054,9 +1065,15 @@ class FindContoursFrame(ProcessFrameBase):
         img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
 
         # Convert to grayscale if needed
-        if len(img.shape) == 3:
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        if Utils.load_user_settings("check_image_settings") == True:
+            # Convert to grayscale if needed
+            
+            if len(img.shape) == 3:
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            else:
+                gray = img.copy()
         else:
+            # If the image is already grayscale, no conversion is needed
             gray = img.copy()
 
         # Apply binary thresholding to create a binary image for contour detection
@@ -1105,10 +1122,15 @@ class DrawContoursFrame(ProcessFrameBase):
         # Add layer for drawing contours
         img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
 
-        # Convert to grayscale if needed
-        if len(img.shape) == 3:
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        if Utils.load_user_settings("check_image_settings") == True:
+            # Convert to grayscale if needed
+            
+            if len(img.shape) == 3:
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            else:
+                gray = img.copy()
         else:
+            # If the image is already grayscale, no conversion is needed
             gray = img.copy()
 
         # Find contours
@@ -1155,10 +1177,15 @@ class HoughLinesFrame(ProcessFrameBase):
         theta = float(self.theta_entry.get())
         threshold = int(self.threshold_entry.get())
 
-        # Convert to grayscale if needed
-        if len(img.shape) == 3:
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        if Utils.load_user_settings("check_image_settings") == True:
+            # Convert to grayscale if needed
+            
+            if len(img.shape) == 3:
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            else:
+                gray = img.copy()
         else:
+            # If the image is already grayscale, no conversion is needed
             gray = img.copy()
 
         # Use HoughLines to detect lines
@@ -1205,10 +1232,15 @@ class DFTFrame(ProcessFrameBase):
         dft_size = int(self.size_entry.get())
         shift_zero_freq = self.shift_combobox.get() == "Yes"
 
-        # Convert to grayscale if needed
-        if len(img.shape) == 3:
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        if Utils.load_user_settings("check_image_settings") == True:
+            # Convert to grayscale if needed
+            
+            if len(img.shape) == 3:
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            else:
+                gray = img.copy()
         else:
+            # If the image is already grayscale, no conversion is needed
             gray = img.copy()
 
         # Perform Discrete Fourier Transform (DFT)
@@ -1268,10 +1300,15 @@ class IDFTFrame(ProcessFrameBase):
         idft_size = int(self.size_entry.get())
         shift_zero_freq = self.shift_combobox.get() == "Yes"
 
-        # Convert to grayscale if needed
-        if len(img.shape) == 3:
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        if Utils.load_user_settings("check_image_settings") == True:
+            # Convert to grayscale if needed
+            
+            if len(img.shape) == 3:
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            else:
+                gray = img.copy()
         else:
+            # If the image is already grayscale, no conversion is needed
             gray = img.copy()
 
         # Perform DFT
@@ -1314,12 +1351,17 @@ class NumpyFFTFrame(ProcessFrameBase):
         # Get transform type from combobox
         transform_type = self.transform_combobox.get()
 
-        # Convert image to grayscale if needed
-        if len(img.shape) == 3:
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        if Utils.load_user_settings("check_image_settings") == True:
+            # Convert to grayscale if needed
+            
+            if len(img.shape) == 3:
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            else:
+                gray = img.copy()
         else:
+            # If the image is already grayscale, no conversion is needed
             gray = img.copy()
-
+            
         # Convert image to float32
         gray_float = np.float32(gray)
 
@@ -1359,10 +1401,18 @@ class EqualizeHistFrame(ProcessFrameBase):
 
     def apply(self, img):
 
-        if len(img.shape) == 3:
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        if Utils.load_user_settings("check_image_settings") == True:
+            # Convert to grayscale if needed
+            
+            if len(img.shape) == 3:
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            else:
+                gray = img.copy()
+        else:
+            # If the image is already grayscale, no conversion is needed
+            gray = img.copy()
 
-        equalized_img = cv2.equalizeHist(img)
+        equalized_img = cv2.equalizeHist(gray)
         
         return equalized_img
 
