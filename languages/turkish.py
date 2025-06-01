@@ -259,4 +259,44 @@ translations = {
         "2- Kaynak dosyası seçin.\n"
         "3- Hedef dosyası seçin\n"
         "4- **Prepare Dataset** butonuna tıklayın.\n",
+        
+    "Settings_Title": "Ayarlar",
+    
+    "User_Settings": "Kullanıcı Ayarları",
+    
+    "Warning_Label": "Ayarları değiştirirseniz, 'kaydet' butonuna basınız.",
+    
+    "Show_Load_Image_Details_Settings": "Yüklenen Görüntü Detaylarını Göster",
+    
+    "Language_Select_Settings": "Dil Seçimi",
+    
+    "Theme_Select_Settings": "Tema Seçimi",
+    
+    "Process_Position_Settings": "İşlem Pozisyonu",
+    
+    "Height_Settings": "Yükseklik",
+    
+    "Infinity_One_Lines_Settings": "Sonsuz Tek Satırlar",
+    
+    "Save_Button_Settings": "Kaydet",
+    
+    "Dataset_Process_Settings_Title": "Veri Kümesi İşlem Ayarları",
+    
+    "Dataset_Process_Settings": "Veri Kümesi İşlem Ayarları",
+    
+    "Dataset_Process_Settings_Warning_Label": "Ayarları değiştirirseniz, 'kaydet' butonuna basınız\nve ardından 'Veri Kümesini İşle' butonuna tıklayınız.",
+    
+    "Select_Folder_Layout_Settings": "Klasör Düzeni Seç",
+    
+    "Select_Folder_Layout_Settings_Warning_Label": "Görsel veya alt klasör isimleri önemli değildir",
+    
+    "Process_Dataset_Button": "Veri Kümesini İşle",
+    
+    "Save_Button_MessageBox_Title": "Ayarlar Kaydedildi",
+    
+    "Save_Button_MessageBox_Text": "Başarıyla kaydedildi. Bazı değişikliklerin uygulanması için lütfen uygulamayı yeniden başlatın.",
+    
+    "Folder_Type_MessageBox_Title": "Uyarı",
+    
+    "Folder_Type_MessageBox_Text": "Lütfen bir klasör türü seçiniz.",
 }

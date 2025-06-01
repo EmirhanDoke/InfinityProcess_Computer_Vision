@@ -257,4 +257,46 @@ translations = {
         "2- Select the source folder.\n"
         "3- Select the destination folder.\n"
         "4- Click the **Prepare Dataset** button.",
+    
+    "Settings_Title": "Settings",
+    
+    "User_Settings": "User Settings",
+    
+    "Warning_Label": "If you make changes to the settings, press the 'save' button.",
+    
+    "Show_Load_Image_Details_Settings": "Show Load Image Details",
+    
+    "Language_Select_Settings": "Language Select",
+    
+    "Theme_Select_Settings": "Theme Select",
+    
+    "Process_Position_Settings": "Process Position",
+    
+    "Height_Settings": "Height",
+    
+    "Infinity_One_Lines_Settings": "Infinity One Lines",
+    
+    "Save_Button_Settings": "Save",
+    
+    "Dataset_Process_Settings_Title": "Dataset Process Settings",
+    
+    "Dataset_Process_Settings": "Dataset Process Settings",
+    
+    "Dataset_Process_Settings_Warning_Label": "If you make changes to the settings, press the 'save' button\n"
+        "then click the 'Process Dataset' button.",
+        
+    "Select_Folder_Layout_Settings": "Select Folder Layout",
+    
+    "Select_Folder_Layout_Settings_Warning_Label": "Image or subfolder names are not important",
+    
+    "Process_Dataset_Button": "Process Dataset",
+    
+    "Save_Button_MessageBox_Title": "Settings Saved",
+    
+    "Save_Button_MessageBox_Text": "Saved successfully. Please restart the application to apply some changes.",
+    
+    "Folder_Type_MessageBox_Title": "Warning",
+    
+    "Folder_Type_MessageBox_Text": "Please select a folder type.",
+    
 }

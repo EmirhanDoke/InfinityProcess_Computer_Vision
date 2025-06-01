@@ -57,15 +57,15 @@ class menu_bar():
         
     def open_settings_window(self):
         settings_win = ttk.Toplevel(self.root)
-        settings_win.title("Settings")
+        settings_win.title(self.get_translation("Settings_Title"))
         settings_win.geometry("600x400")
         settings_win.resizable(False, False)
         
         upper_frame = ttk.Frame(settings_win)
         upper_frame.pack(side="top", padx=2, pady=2, fill=ttk.X)
-        ttk.Label(upper_frame, text="User Settings").pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
+        ttk.Label(upper_frame, text=self.get_translation("User_Settings")).pack(side=ttk.LEFT, expand=True, fill=ttk.BOTH, padx=10, pady=10)
         
-        self.warning_label = ttk.Label(settings_win, text="If you make changes to the settings, press the 'save' button.", foreground="red", font=font.Font(size=12))
+        self.warning_label = ttk.Label(settings_win, text=self.get_translation("Warning_Label"), foreground="red", font=font.Font(size=12))
         self.warning_label.pack(side="top")
         
         #-----------------------
@@ -73,10 +73,10 @@ class menu_bar():
         lowwer_frame = ttk.Frame(settings_win, borderwidth=2, relief="solid")
         lowwer_frame.pack(side = "top", padx=2, pady=2, fill=ttk.X)
         
-        show_image = ttk.Checkbutton(lowwer_frame, text="Show Load Image Details", variable=self.show_image_flag, bootstyle="round-toggle")
+        show_image = ttk.Checkbutton(lowwer_frame, text=self.get_translation("Show_Load_Image_Details_Settings"), variable=self.show_image_flag, bootstyle="round-toggle")
         show_image.grid(row=1, column=0, padx=5, pady=5)
         
-        ttk.Label(lowwer_frame, text="Language Select").grid(row=2, column=0, padx=0, pady=5)
+        ttk.Label(lowwer_frame, text=self.get_translation("Language_Select_Settings")).grid(row=2, column=0, padx=0, pady=5)
         language_select = ttk.Combobox(lowwer_frame, values=["English", "Turkish"], textvariable=self.language_select)
         language_select.grid(row=2, column=1, padx=5, pady=5)
         
@@ -84,38 +84,38 @@ class menu_bar():
         themes = ['cosmo', 'flatly', 'litera', 'minty', 'lumen', 'sandstone', 'yeti', 'pulse',
                   'united', 'morph', 'journal', 'darkly', 'superhero', 'solar', 'cyborg', 'vapor', 'simplex', 'cerculean']
         
-        ttk.Label(lowwer_frame, text="Theme Select").grid(row=3, column=0, padx=0, pady=5)
+        ttk.Label(lowwer_frame, text=self.get_translation("Theme_Select_Settings")).grid(row=3, column=0, padx=0, pady=5)
         theme_select = ttk.Combobox(lowwer_frame, values=themes, textvariable=self.theme_select)
         theme_select.grid(row=3, column=1, padx=5, pady=5)
         #-----------------------
         
-        process_position_frame = ttk.LabelFrame(settings_win, text="Process Position", borderwidth=2, relief="solid")
+        process_position_frame = ttk.LabelFrame(settings_win, text=self.get_translation("Process_Position_Settings"), borderwidth=2, relief="solid")
         process_position_frame.pack(side = "top", padx=2, pady=10, fill=ttk.X)
         
-        ttk.Label(process_position_frame, text="Height").grid(row=0, column=0, padx=0, pady=5)
+        ttk.Label(process_position_frame, text=self.get_translation("Height_Settings")).grid(row=0, column=0, padx=0, pady=5)
         process_position_entry = ttk.Entry(process_position_frame, textvariable=self.process_position, width=10)
         process_position_entry.grid(row=0, column=1, padx=5, pady=5)
     
-        infinity_one_line = ttk.Checkbutton(process_position_frame, text="Infinity One Line", variable=self.infinity_one_line, bootstyle="round-toggle")
+        infinity_one_line = ttk.Checkbutton(process_position_frame, text=self.get_translation("Infinity_One_Lines_Settings"), variable=self.infinity_one_line, bootstyle="round-toggle")
         infinity_one_line.grid(row=1, column=0, padx=5, pady=5)
         #-----------------------
         
-        save_buttom = ttk.Button(settings_win, text="Save", command=self.save_user_settings)
+        save_buttom = ttk.Button(settings_win, text=self.get_translation("Save_Button_Settings"), command=self.save_user_settings)
         save_buttom.pack(side=ttk.LEFT, padx=5, pady=5)
         
     def open_dataset_window(self):
         dataset_win = ttk.Toplevel(self.root)
-        dataset_win.title("Dataset Process Settings")
+        dataset_win.title(self.get_translation("Dataset_Process_Settings_Title"))
         dataset_win.geometry("600x500")
         dataset_win.resizable(False, False)
         
         pd_upper_frame = ttk.Frame(dataset_win)
         pd_upper_frame.pack(side="top", padx=2, pady=2, fill=ttk.X)
         
-        ttk.Label(pd_upper_frame, text="Dataset Preparation Settings").grid(row=0, column=0, padx=10, pady=10)
+        ttk.Label(pd_upper_frame, text=self.get_translation("Dataset_Process_Settings")).grid(row=0, column=0, padx=10, pady=10)
         ImageButtonApp(pd_upper_frame, text=self.get_translation("DatasetProcessInfo"), row=0, col=1)
         
-        self.warning_label = ttk.Label(dataset_win, text="If you make changes to the settings, press the 'save' button", foreground="red", font=font.Font(size=12))
+        self.warning_label = ttk.Label(dataset_win, text=self.get_translation("Dataset_Process_Settings_Warning_Label"), foreground="red", font=font.Font(size=12))
         self.warning_label.pack(side="top")
         
         #-----------------------
@@ -123,7 +123,7 @@ class menu_bar():
         lowwer_frame = ttk.Frame(dataset_win, borderwidth=2, relief="solid")
         lowwer_frame.pack(side = "top", padx=2, pady=2, fill=ttk.X)
         
-        ttk.Label(lowwer_frame, text="Select Folder Layout").grid(row=1, column=0, padx=5, pady=5)
+        ttk.Label(lowwer_frame, text=self.get_translation("Select_Folder_Layout_Settings")).grid(row=1, column=0, padx=5, pady=5)
         select_folder_type_combobox = ttk.Combobox(lowwer_frame, values=["Single Folder", "Subfolder"], textvariable=self.select_folder_type)
         select_folder_type_combobox.grid(row=1, column=1, padx=5, pady=5)
         
@@ -147,17 +147,17 @@ class menu_bar():
         
         ttk.Label(lowwer_frame, text="Subfolder Type", justify="left").grid(row=2, column=1, padx=5, pady=5)
         ttk.Label(lowwer_frame, text=subfolder_type_str, justify="left").grid(row=3, column=1, padx=5, pady=5)
-        ttk.Label(lowwer_frame, text="Image or subfolder names are not important", foreground="red", font=font.Font(size=12)).grid(row=4, column=0, padx=5, pady=5, columnspan=2)
+        ttk.Label(lowwer_frame, text=self.get_translation("Select_Folder_Layout_Settings_Warning_Label"), foreground="red", font=font.Font(size=12)).grid(row=4, column=0, padx=5, pady=5, columnspan=2)
         
         #-----------------------
         
         bottom_frame = ttk.Frame(dataset_win)
         bottom_frame.pack(side = "bottom", padx=2, pady=2, fill=ttk.X)
         
-        save_buttom = ttk.Button(bottom_frame, text="Save", command=self.save_user_settings)
+        save_buttom = ttk.Button(bottom_frame, text=self.get_translation("Save_Button_Settings"), command=self.save_user_settings)
         save_buttom.pack(side=ttk.LEFT, padx=5, pady=5)
         
-        apply_buttom = ttk.Button(bottom_frame, text="Prepare Dataset", command=self.apply_dataset_action)
+        apply_buttom = ttk.Button(bottom_frame, text=self.get_translation("Process_Dataset_Button"), command=self.apply_dataset_action)
         apply_buttom.pack(side=ttk.LEFT, padx=5, pady=5)
         
     def about_window(self):
@@ -190,7 +190,6 @@ class menu_bar():
         
         path = Utils.resource_path(Utils.settings_file)
         
-        # Checkbutton durumunu bir dict olarak kaydet
         settings = {
             "show_image_flag": self.show_image_flag.get(),
             "language": self.language_select.get(),
@@ -202,7 +201,7 @@ class menu_bar():
         with open(path, "w") as file:
             json.dump(settings, file, indent=4)
         
-        messagebox.showinfo("Settings Saved", "Saved successfully. Please restart the application to apply changes.")
+        messagebox.showinfo(self.get_translation("Save_Button_MessageBox_Title"), self.get_translation("Save_Button_MessageBox_Text"))
     
     def load_user_settings(self):
         
@@ -226,7 +225,7 @@ class menu_bar():
         elif folder_type == "Subfolder":
             self.subfolder() # batch_apply_processes_alt callback
         else:
-            messagebox.showwarning("Warning", "Please select a folder type.")
+            messagebox.showwarning(self.get_translation("Folder_Type_MessageBox_Title"), self.get_translation("Folder_Type_MessageBox_Text"))
 
     def load_translations(self):
         # Load translations based on the selected language
