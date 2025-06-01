@@ -74,11 +74,13 @@ class menu_bar():
         lowwer_frame = ttk.Frame(settings_win, borderwidth=2, relief="solid")
         lowwer_frame.pack(side = "top", padx=2, pady=2, fill=ttk.X)
         
-        show_image = ttk.Checkbutton(lowwer_frame, text=self.get_translation("Show_Load_Image_Details_Settings"), variable=self.show_image_flag, bootstyle="round-toggle")
-        show_image.grid(row=1, column=0, padx=5, pady=5)
+        ttk.Label(lowwer_frame, text=self.get_translation("Show_Load_Image_Details_Settings")).grid(row=1, column=0, padx=5, pady=5)
+        show_image = ttk.Checkbutton(lowwer_frame, variable=self.show_image_flag, bootstyle="round-toggle")
+        show_image.grid(row=1, column=1, padx=5, pady=5, sticky="w")
         
-        check_image = ttk.Checkbutton(lowwer_frame, text=self.get_translation("Check_Image_Settings"), variable=self.check_image_settings, bootstyle="round-toggle")
-        check_image.grid(row=1, column=1, padx=5, pady=5)
+        ttk.Label(lowwer_frame, text=self.get_translation("Check_Image_Settings")).grid(row=1, column=2, padx=5, pady=5)
+        check_image = ttk.Checkbutton(lowwer_frame, variable=self.check_image_settings, bootstyle="round-toggle")
+        check_image.grid(row=1, column=3, padx=5, pady=5)
         
         ttk.Label(lowwer_frame, text=self.get_translation("Language_Select_Settings")).grid(row=2, column=0, padx=0, pady=5)
         language_select = ttk.Combobox(lowwer_frame, values=["English", "Turkish"], textvariable=self.language_select)
