@@ -1511,3 +1511,18 @@ class CLAHEFrame(ProcessFrameBase):
         plt.axis("off")
 
         plt.tight_layout()
+
+# This is Special Method
+class Msezgin_MultiThresholdingFrame(ProcessFrameBase):
+    name = "Msezgin_MultiThresholding"
+    
+    def create_widgets(self):
+        
+        pass
+    
+    def apply(self, img):
+        
+        import special_methods.Msezgin_method
+        special_methods.Msezgin_method.multilevel_thresholding(img)
+        
+        return img
