@@ -34,7 +34,7 @@ class ADD_ComboBox:
                              "---Edge Detection and Linear Detection---", "Hough Circular Transform", "Hough Lines Transform",
                              "-----Fourier Transform-----", "DFT Transform", "Inverse DFT Transform", "FFT with Numpy",
                              "-----Histogram Operations-----", "Draw Histogram", "Equalize Histogram","CLAHE Adaptive Equalization",
-                             "-----Spec Methods-----", "Msezgin Method",
+                             "-----Spec Methods-----", "Msezgin_MultiThresholding",
                              ]
         
         self.combo = ttk.Combobox(self.frame, values=available_process, width=35, height=25)
@@ -119,7 +119,7 @@ class ADD_ComboBox:
                 self.processor_both = EqualizeHistFrame(self.frame)
             case "CLAHE Adaptive Equalization":
                 self.processor = CLAHEFrame(self.frame)
-            case "Msezgin Method":
+            case "Msezgin_MultiThresholding":
                 self.processor = Msezgin_MultiThresholdingFrame(self.frame)
             case "OFF":
                     
