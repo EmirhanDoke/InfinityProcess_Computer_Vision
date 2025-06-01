@@ -206,7 +206,6 @@ class MorphologicalFrame(ProcessFrameBase):
         return img
 
 
-#!Not working
 class GammaTransformFrame(ProcessFrameBase):
     name = "Gamma Transform"
 
