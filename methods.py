@@ -1518,7 +1518,7 @@ class Msezgin_MultiThresholdingFrame(ProcessFrameBase):
     
     def create_widgets(self):
         
-        pass
+        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
     
     def apply(self, img):
         

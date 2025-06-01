@@ -258,6 +258,10 @@ translations = {
         "3- Select the destination folder.\n"
         "4- Click the **Prepare Dataset** button.",
     
+    "Msezgin_MultiThresholdingFrame": "📌 Multi-Thresholding Parameters\n\n"
+        "Input Image: Must be a grayscale image.\n"
+        "Output Image: Returns input image.",
+    
     "Settings_Title": "Settings",
     
     "User_Settings": "User Settings",

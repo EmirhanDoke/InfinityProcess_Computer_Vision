@@ -259,6 +259,10 @@ translations = {
         "2- Kaynak dosyası seçin.\n"
         "3- Hedef dosyası seçin\n"
         "4- **Prepare Dataset** butonuna tıklayın.\n",
+    
+    "Msezgin_MultiThresholdingFrame": "📌 Multi-Thresholding Parametreleri\n\n"
+        "Giriş Görüntüsü: Gri seviyeli bir görüntü olmalıdır.\n"
+        "Çıkış Görüntüsü: Giriş görüntüsünü geri döndürür",
         
     "Settings_Title": "Ayarlar",
     
