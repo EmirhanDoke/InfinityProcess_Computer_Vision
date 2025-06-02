@@ -224,11 +224,6 @@ translations = {
     "DFTFrame": "📌 Discrete Fourier Transform (DFT) Parameters\n\n"
         "The image is first converted to grayscale, then DFT is applied. The result is normalized and displayed as a magnitude spectrum.",
         
-    "IDFTFrame": "📌 Inverse Discrete Fourier Transform (IDFT) Parameters\n\n"
-        "• IDFT Size: Specifies the size of the IDFT result. The image is padded with zeros if necessary.\n"
-        "• Shift Zero Frequency: If selected, the zero frequency component is shifted to the center of the spectrum.\n\n"
-        "🎯 Note: The image must be grayscale. After applying DFT, IDFT is performed to reconstruct the image.",
-        
     "NumpyFFTFrame": "📌 Fourier Transform (FFT) and Inverse Fourier Transform (IFFT) Parameters\n\n"
         "Input Image: Must be a grayscale image.\n\n"
         "Output Image: Returns a grayscale image with FFT or IFFT applied.\n"

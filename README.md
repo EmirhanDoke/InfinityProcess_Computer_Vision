@@ -43,8 +43,11 @@
 
 - **📈 Fourier Transformations**
   - DFT (Discrete Fourier Transform)
-  - IDFT (Inverse DFT)
   - FFT (Fast Fourier Transform)
+
+- **✨Special Methods**
+  - Mehmet Sezgin's MultiThresholding Method
+
 
 ---
 

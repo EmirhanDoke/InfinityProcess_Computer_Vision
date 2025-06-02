@@ -1274,64 +1274,6 @@ class DFTFrame(ProcessFrameBase):
         return magI
 
 
-class IDFTFrame(ProcessFrameBase):
-    name = "Inverse Discrete Fourier Transform (IDFT)"
-
-    def create_widgets(self):
-
-        # Entry for the size of the image (size of the IDFT result)
-        ttk.Label(self.frame, text="IDFT Size:").grid(row=1, column=0, padx=2, pady=2)
-        self.size_entry = ttk.Entry(self.frame)
-        self.size_entry.grid(row=1, column=1, padx=2, pady=2)
-
-        # Combobox for selecting whether to shift the zero frequency component
-        ttk.Label(self.frame, text="Shift Zero Frequency (Yes/No):").grid(
-            row=2, column=0, padx=2, pady=2
-        )
-        self.shift_combobox = ttk.Combobox(self.frame, values=["Yes", "No"])
-        self.shift_combobox.grid(row=2, column=1, padx=2, pady=2)
-
-        self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
-
-    def apply(self, img):
-        # Get user input for the size and shift option
-        idft_size = int(self.size_entry.get())
-        shift_zero_freq = self.shift_combobox.get() == "Yes"
-
-        if Utils.load_user_settings("check_image_settings") == True:
-            # Convert to grayscale if needed
-            
-            if len(img.shape) == 3:
-                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            else:
-                gray = img.copy()
-        else:
-            # If the image is already grayscale, no conversion is needed
-            gray = img.copy()
-
-        # Perform DFT
-        dft = cv2.dft(np.float32(gray), flags=cv2.DFT_COMPLEX_OUTPUT)
-
-        # Shift zero frequency to the center of the spectrum if needed
-        if shift_zero_freq:
-            dft_shift = np.fft.fftshift(dft)
-        else:
-            dft_shift = dft
-
-        # Inverse Discrete Fourier Transform (IDFT)
-        idft_shift = np.fft.ifftshift(dft_shift) if shift_zero_freq else dft_shift
-        idft = cv2.idft(idft_shift)
-        idft_magnitude = cv2.magnitude(idft[:, :, 0], idft[:, :, 1])
-
-        # Normalize the magnitude image for display
-        idft_magnitude = cv2.normalize(idft_magnitude, None, 0, 255, cv2.NORM_MINMAX)
-
-        # Convert magnitude to uint8 for display
-        result_img = np.uint8(idft_magnitude)
-
-        return result_img
-
-
 class NumpyFFTFrame(ProcessFrameBase):
     name = "Numpy FFT (Fast Fourier Transform)"
 

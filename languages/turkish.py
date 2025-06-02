@@ -226,11 +226,6 @@ translations = {
     "DFTFrame": "📌 Discrete Fourier Transform (DFT) Parametreleri\n\n"
         "Görsel önce gri tonlamaya dönüştürülür, ardından DFT uygulanır ve sıfır frekans bileşeni belirtilen şekilde kaydırılır. Sonuç, genlik değerlerine dönüştürülüp normalleştirilir ve görüntülenir.",
         
-    "IDFTFrame": "📌 Inverse Discrete Fourier Transform (IDFT) Parametreleri\n\n"
-        "• IDFT Boyutu: IDFT sonucu için görüntü boyutunu belirler. Görüntü gerekirse sıfırlarla doldurulurlar.\n"
-        "• Sıfır Frekansını Ortaya Taşı: Eğer seçilirse, IDFT sonucu sıfır frekans bileşeni spektrumun ortasına kaydırılır.\n\n"
-        "🎯 Not: Görsel önce gri seviyeli olmalı ve Canny kenar algılama görüntüsü gereklidir. Sonrasında DFT işlemi yapılır ve IDFT uygulanarak görsel geri dönüştürülür.",
-        
     "NumpyFFTFrame": "📌 Fourier Dönüşümü (FFT) ve Ters Fourier Dönüşümü (IFFT) Parametreleri\n\n"
         "Giriş Görüntüsü: Gri seviyeli bir görüntü olmalıdır.\n\n"
         "Çıkış Görüntüsü: FFT veya IFFT uygulanmış gri seviyeli görüntü döner.\n"

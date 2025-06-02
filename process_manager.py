@@ -32,7 +32,7 @@ class ADD_ComboBox:
                              "-----Thresholding Operations-----", "Thresholding", "Adaptive Thresholding", "Otsu Thresholding", "Kitter Illingworth", "Gamma Transform",
                              "-----Contour Operations-----", "Find Contours", "Draw Contours",
                              "---Edge Detection and Linear Detection---", "Hough Circular Transform", "Hough Lines Transform",
-                             "-----Fourier Transform-----", "DFT Transform", "Inverse DFT Transform", "FFT with Numpy",
+                             "-----Fourier Transform-----", "DFT Transform", "FFT with Numpy",
                              "-----Histogram Operations-----", "Draw Histogram", "Equalize Histogram","CLAHE Adaptive Equalization",
                              "-----Spec Methods-----", "Msezgin_MultiThresholding",
                              ]
@@ -110,9 +110,7 @@ class ADD_ComboBox:
             case "Hough Lines Transform":
                 self.processor = HoughLinesFrame(self.frame)
             case "DFT Transform":
-                self.processor = DFTFrame(self.frame)
-            case "Inverse DFT Transform":
-                self.processor = IDFTFrame(self.frame)  
+                self.processor = DFTFrame(self.frame) 
             case "FFT with Numpy":
                 self.processor = NumpyFFTFrame(self.frame)
             case "Equalize Histogram":
