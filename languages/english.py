@@ -253,7 +253,7 @@ translations = {
     
     "Msezgin_MultiThresholdingFrame": "📌 Multi-Thresholding Parameters\n\n"
         "Input Image: Must be a grayscale image.\n"
-        "Output Image: Returns input image.",
+        "Output Image: Returns grayscale image.",
     
     "Settings_Title": "Settings",
     

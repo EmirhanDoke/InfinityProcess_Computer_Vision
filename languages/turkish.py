@@ -255,7 +255,7 @@ translations = {
     
     "Msezgin_MultiThresholdingFrame": "📌 Multi-Thresholding Parametreleri\n\n"
         "Giriş Görüntüsü: Gri seviyeli bir görüntü olmalıdır.\n"
-        "Çıkış Görüntüsü: Giriş görüntüsünü geri döndürür",
+        "Çıkış Görüntüsü: Gri seviyeli bir görüntü döndürür",
         
     "Settings_Title": "Ayarlar",
     
