@@ -304,5 +304,7 @@ def multilevel_thresholding(image):
     # Display all results in one figure
     plot_all_results(image, hist, bins, TC_values, segmented, peaks)
 
+    return segmented
+
 if __name__ == "__main__":
     multilevel_thresholding()

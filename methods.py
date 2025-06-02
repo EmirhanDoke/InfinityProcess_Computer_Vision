@@ -1463,6 +1463,6 @@ class Msezgin_MultiThresholdingFrame(ProcessFrameBase):
     def apply(self, img):
         
         import special_methods.Msezgin_method
-        special_methods.Msezgin_method.multilevel_thresholding(img)
+        segmented_image = special_methods.Msezgin_method.multilevel_thresholding(img)
         
-        return img
+        return segmented_image
