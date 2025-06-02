@@ -1215,24 +1215,11 @@ class DFTFrame(ProcessFrameBase):
     name = "Discrete Fourier Transform (DFT)"
 
     def create_widgets(self):
-        # Entry for the size of the image (size of the DFT result)
-        ttk.Label(self.frame, text="DFT Size:").grid(row=1, column=0, padx=2, pady=2)
-        self.size_entry = ttk.Entry(self.frame)
-        self.size_entry.grid(row=1, column=1, padx=2, pady=2)
-
-        # Combobox for selecting whether to shift the zero frequency component
-        ttk.Label(self.frame, text="Shift Zero Frequency (Yes/No):").grid(
-            row=2, column=0, padx=2, pady=2
-        )
-        self.shift_combobox = ttk.Combobox(self.frame, values=["Yes", "No"])
-        self.shift_combobox.grid(row=2, column=1, padx=2, pady=2)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
-        # Get user input for the size and shift option
-        dft_size = int(self.size_entry.get())
-        shift_zero_freq = self.shift_combobox.get() == "Yes"
+
 
         if Utils.load_user_settings("check_image_settings") == True:
             # Convert to grayscale if needed
@@ -1245,37 +1232,46 @@ class DFTFrame(ProcessFrameBase):
             # If the image is already grayscale, no conversion is needed
             gray = img.copy()
 
-        # Perform Discrete Fourier Transform (DFT)
-        # Padding the image to a larger size if necessary
-        padded_img = cv2.copyMakeBorder(
-            gray,
-            0,
-            dft_size - gray.shape[0],
-            0,
-            dft_size - gray.shape[1],
-            cv2.BORDER_CONSTANT,
-            value=0,
-        )
+        rows, cols = gray.shape
+        m = cv2.getOptimalDFTSize( rows )
+        n = cv2.getOptimalDFTSize( cols )
+        padded = cv2.copyMakeBorder(gray, 0, m - rows, 0, n - cols, cv2.BORDER_CONSTANT, value=[0, 0, 0])
+        
+        planes = [np.float32(padded), np.zeros(padded.shape, np.float32)]
+        complexI = cv2.merge(planes)         # Add to the expanded another plane with zeros
+        
+        cv2.dft(complexI, complexI)         # this way the result may fit in the source matrix
+        
+        cv2.split(complexI, planes)                   # planes[0] = Re(DFT(I), planes[1] = Im(DFT(I))
+        cv2.magnitude(planes[0], planes[1], planes[0])# planes[0] = magnitude
+        magI = planes[0]
+        
+        matOfOnes = np.ones(magI.shape, dtype=magI.dtype)
+        cv2.add(matOfOnes, magI, magI) #  switch to logarithmic scale
+        cv2.log(magI, magI)
+        
+        magI_rows, magI_cols = magI.shape
+        # crop the spectrum, if it has an odd number of rows or columns
+        magI = magI[0:(magI_rows & -2), 0:(magI_cols & -2)]
+        cx = int(magI_rows/2)
+        cy = int(magI_cols/2)
+    
+        q0 = magI[0:cx, 0:cy]         # Top-Left - Create a ROI per quadrant
+        q1 = magI[cx:cx+cx, 0:cy]     # Top-Right
+        q2 = magI[0:cx, cy:cy+cy]     # Bottom-Left
+        q3 = magI[cx:cx+cx, cy:cy+cy] # Bottom-Right
+    
+        tmp = np.copy(q0)               # swap quadrants (Top-Left with Bottom-Right)
+        magI[0:cx, 0:cy] = q3
+        magI[cx:cx + cx, cy:cy + cy] = tmp
+    
+        tmp = np.copy(q1)               # swap quadrant (Top-Right with Bottom-Left)
+        magI[cx:cx + cx, 0:cy] = q2
+        magI[0:cx, cy:cy + cy] = tmp
+        
+        cv2.normalize(magI, magI, 0, 1, cv2.NORM_MINMAX)
 
-        # Perform DFT
-        dft = cv2.dft(np.float32(padded_img), flags=cv2.DFT_COMPLEX_OUTPUT)
-
-        # Shift zero frequency to the center of the spectrum if needed
-        if shift_zero_freq:
-            dft_shift = np.fft.fftshift(dft)
-        else:
-            dft_shift = dft
-
-        # Convert DFT result to magnitude for display
-        magnitude = cv2.magnitude(dft_shift[:, :, 0], dft_shift[:, :, 1])
-
-        # Normalize the magnitude image for display
-        magnitude = cv2.normalize(magnitude, None, 0, 255, cv2.NORM_MINMAX)
-
-        # Convert magnitude to uint8 for display
-        result_img = np.uint8(magnitude)
-
-        return result_img
+        return magI
 
 
 class IDFTFrame(ProcessFrameBase):
