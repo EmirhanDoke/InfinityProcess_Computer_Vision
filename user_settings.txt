@@ -1,7 +1,7 @@
 {
     "show_image_flag": true,
     "language": "English",
-    "process_position": "5",
+    "process_position": "13",
     "infinity_one_line": false,
     "theme": "flatly",
     "folder_type": "Subfolder",

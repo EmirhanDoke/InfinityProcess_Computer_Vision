@@ -14,7 +14,7 @@ from tkinter import messagebox
 # Ana uygulama sınıfı
 class Application:
 
-    counter = 0
+    row = 0
     column = 0
 
     def __init__(self, root):
@@ -242,19 +242,19 @@ class Application:
         infinity_one_line = Utils.load_user_settings("infinity_one_line")
 
         if process_position:
-            Height = int(process_position[0])
+            Height = int(process_position)
         else:
             Height = 5
             print("No height value found in settings, using default value of 5.")
 
         if infinity_one_line == False:
-            if cls.counter % (Height + 1) == 0:
+            if cls.row > (Height - 1):
                 cls.column += 1
-                cls.counter = 1
+                cls.row = 0
 
-            cls.counter += 1
+            cls.row += 1
 
         else:
-            cls.counter += 1
+            cls.row += 1
 
-        return cls.counter, cls.column
+        return cls.row, cls.column
