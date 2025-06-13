@@ -5,6 +5,7 @@ from tkinter import filedialog
 from tkinter import Tk
 from scipy.signal import argrelextrema
 import os
+import inspect
 
 def calculate_histogram(image):
     """Calculate normalized histogram of a grayscale image"""
@@ -40,43 +41,50 @@ def find_peaks(TC, L=6):
     return peaks
 
 def plot_all_results(image, hist, bins, TC_values, segmented, peaks):
-    """Display all results in a single figure"""
-    plt.figure(figsize=(20, 10))
     
-    # Original Image
-    plt.subplot(2, 2, 1)
-    plt.imshow(image, cmap='gray')
-    plt.title('Original Image')
-    plt.axis('off')
+    # Check caller function name
+    stack = inspect.stack()
+    caller_function_name = stack[1].function
     
-    # Image Histogram
-    plt.subplot(2, 2, 2)
-    plt.bar(bins[:-1], hist, width=1)
-    plt.title('Image Histogram')
-    plt.xlabel('Gray Level')
-    plt.ylabel('Frequency')
-    plt.grid(True)
+    if caller_function_name == ["batch_apply_processes","batch_apply_processes_alt"]:
     
-    # TC Function (First Dichotomization)
-    plt.subplot(2, 2, 3)
-    plt.plot(TC_values, 'b-', label='TC Function')
-    for peak in peaks:
-        plt.plot(peak, TC_values[peak], 'ro')
-        plt.text(peak, TC_values[peak], f' t={peak}', verticalalignment='bottom')
-    plt.title('Total Correlation Function (First Dichotomization)')
-    plt.xlabel('Gray Level')
-    plt.ylabel('Total Correlation')
-    plt.grid(True)
-    plt.legend()
-    
-    # Segmented Image
-    plt.subplot(2, 2, 4)
-    plt.imshow(segmented, cmap='gray')
-    plt.title('Segmented Image')
-    plt.axis('off')
-    
-    plt.tight_layout()
-    plt.show()
+        """Display all results in a single figure"""
+        plt.figure(figsize=(20, 10))
+        
+        # Original Image
+        plt.subplot(2, 2, 1)
+        plt.imshow(image, cmap='gray')
+        plt.title('Original Image')
+        plt.axis('off')
+        
+        # Image Histogram
+        plt.subplot(2, 2, 2)
+        plt.bar(bins[:-1], hist, width=1)
+        plt.title('Image Histogram')
+        plt.xlabel('Gray Level')
+        plt.ylabel('Frequency')
+        plt.grid(True)
+        
+        # TC Function (First Dichotomization)
+        plt.subplot(2, 2, 3)
+        plt.plot(TC_values, 'b-', label='TC Function')
+        for peak in peaks:
+            plt.plot(peak, TC_values[peak], 'ro')
+            plt.text(peak, TC_values[peak], f' t={peak}', verticalalignment='bottom')
+        plt.title('Total Correlation Function (First Dichotomization)')
+        plt.xlabel('Gray Level')
+        plt.ylabel('Total Correlation')
+        plt.grid(True)
+        plt.legend()
+        
+        # Segmented Image
+        plt.subplot(2, 2, 4)
+        plt.imshow(segmented, cmap='gray')
+        plt.title('Segmented Image')
+        plt.axis('off')
+        
+        plt.tight_layout()
+        # plt.show()
 
 def calculate_class_variance(hist, t):
     """Calculate variances of two classes created by threshold t"""
