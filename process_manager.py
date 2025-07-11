@@ -102,7 +102,11 @@ class ADD_ComboBox:
             case "Adaptive Thresholding":
                 self.processor = AdaptiveThresholdFrame(self.frame)
             case "Otsu Thresholding":
+<<<<<<< HEAD
                 self.processor_np = OtsuThresholdFrame(self.frame)
+=======
+                self.processor = OtsuThresholdFrame(self.frame)
+>>>>>>> b0282bc (update otsu method)
             case "Find Contours":
                 self.processor = FindContoursFrame(self.frame)
             case "Draw Contours":

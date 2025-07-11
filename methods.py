@@ -993,15 +993,28 @@ class OtsuThresholdFrame(ProcessFrameBase):
 
     def create_widgets(self):
 
-        ttk.Label(self.frame, text="OTSU Threshold:").grid(
+        self.threshold_type_label = ttk.Label(self.frame, text="Threshold Type:").grid(
             row=1, column=0, padx=2, pady=2
         )
+        self.threshold_mode_combobox = ttk.Combobox(
+            self.frame, values=["Binary", "Binary Inverted"]
+        )
+        self.threshold_mode_combobox.grid(row=1, column=1, padx=2, pady=2)
+
+        ttk.Label(self.frame, text="OTSU Threshold:").grid(
+            row=2, column=0, padx=2, pady=2
+        )
+
         self.otsu_threshold_label = ttk.Label(self.frame)
-        self.otsu_threshold_label.grid(row=1, column=1, padx=2, pady=2)
+        self.otsu_threshold_label.grid(row=2, column=1, padx=2, pady=2)
 
         self.info_buttom = ImageButtonApp(self.frame, text=self.get_translation(self.__class__.__name__))
 
     def apply(self, img):
+
+        threshold_type = self.threshold_mode_combobox.get()
+
+        threshold_type_cv = (cv2.THRESH_BINARY if threshold_type == "Binary" else cv2.THRESH_BINARY_INV)
 
         if Utils.load_user_settings("check_image_settings") == True:
             # Convert to grayscale if needed
@@ -1015,15 +1028,18 @@ class OtsuThresholdFrame(ProcessFrameBase):
             gray = img.copy()
 
         
-        otsu_thresh_value, _ = cv2.threshold(
-            gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU
+        otsu_thresh_value, otsu_img = cv2.threshold(
+            gray, 0, 255, threshold_type_cv + cv2.THRESH_OTSU
         )
 
-        return int(otsu_thresh_value)
+        # Update the label with the Otsu threshold value
+        self.otsu_threshold_label.config(text=str(otsu_thresh_value))
+    
+        return otsu_img
 
-    def update_result(self, img):
-        threshold = self.apply(img)
-        self.otsu_threshold_label.config(text=str(threshold))
+    # def update_result(self, img):
+    #     threshold = self.apply(img)
+    #     self.otsu_threshold_label.config(text=str(threshold))
 
 
 #! Needed update for contours
