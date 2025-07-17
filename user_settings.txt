@@ -1,9 +1,9 @@
 {
-    "show_image_flag": true,
+    "show_image_flag": false,
     "language": "English",
     "process_position": "5",
     "infinity_one_line": false,
     "theme": "flatly",
-    "folder_type": "Subfolder",
+    "folder_type": "Single Folder",
     "check_image_settings": true
 }
