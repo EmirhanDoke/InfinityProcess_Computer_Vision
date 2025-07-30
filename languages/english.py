@@ -23,7 +23,7 @@ translations = {
     "MorphologicalFrame": "📌 Morphological Operations Parameters\n\n"
         "Input Image: Must be a grayscale image. It can also work on colored images, but the best results are obtained with **grayscale** images.\n"
         "Output Image: Returns a grayscale or colored image with morphological operations applied.\n\n"
-        "• Kernel Size: Size of the structural element. Must be a positive odd number. E.g., 3, 5, 7...\n"
+        "• Kernel Size: Size of the structural element. Should be a positive odd number. E.g., 3, 5, 7...\n"
         "• Kernel Shape: Shape of the kernel. Can be Rectangular, Ellipse, or Cross.\n"
         "• Operations: Select the morphological operation to apply:\n"
         "  - Erode: Shrinks objects.\n"

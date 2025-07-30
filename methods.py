@@ -117,9 +117,19 @@ class MorphologicalFrame(ProcessFrameBase):
     name = "Morphological"
 
     def create_widgets(self):
-        ttk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
-        self.kernelsize = ttk.Entry(self.frame)
-        self.kernelsize.grid(row=1, column=1, padx=2, pady=2)
+        # ttk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
+        # self.kernelsize = ttk.Entry(self.frame)
+        # self.kernelsize.grid(row=1, column=1, padx=2, pady=2)
+
+        ttk.Label(self.frame, text="Width and Height of Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
+        
+        kernel_frame = ttk.Frame(self.frame)
+        kernel_frame.grid(row=1, column=1, columnspan=3)
+        
+        self.kernelsize_width = ttk.Entry(kernel_frame, width=5)
+        self.kernelsize_width.grid(row=1, column=1, padx=2, pady=2)
+        self.kernelsize_height = ttk.Entry(kernel_frame, width=5)
+        self.kernelsize_height.grid(row=1, column=2, padx=2, pady=2)
 
         ttk.Label(self.frame, text="Kernel Shape:").grid(row=2, column=0, padx=2, pady=2)
         shapes = ["Rectangular", "Ellipse", "Cross"]
@@ -148,23 +158,24 @@ class MorphologicalFrame(ProcessFrameBase):
     def apply(self, img):
         kernel_shape = self.shapes_combobox.get()
         operations = self.operations_combobox.get()
-        kernel_size = int(self.kernelsize.get())
+        kernel_size_width = int(self.kernelsize_width.get())
+        kernel_size_height = int(self.kernelsize_height.get())
         iterations_value = int(self.iterations.get())
 
         match kernel_shape:
             case "Rectangular":
                 kernel = cv2.getStructuringElement(
-                    cv2.MORPH_RECT, (kernel_size, kernel_size)
+                    cv2.MORPH_RECT, (kernel_size_width, kernel_size_height)
                 )
 
             case "Ellipse":
                 kernel = cv2.getStructuringElement(
-                    cv2.MORPH_ELLIPSE, (kernel_size, kernel_size)
+                    cv2.MORPH_ELLIPSE, (kernel_size_width, kernel_size_height)
                 )
 
             case "Cross":
                 kernel = cv2.getStructuringElement(
-                    cv2.MORPH_CROSS, (kernel_size, kernel_size)
+                    cv2.MORPH_CROSS, (kernel_size_width, kernel_size_height)
                 )
 
         match operations:

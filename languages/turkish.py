@@ -23,7 +23,7 @@ translations = {
     "MorphologicalFrame": "📌 Morfolojik İşlemler Parametreleri\n\n"
         "Giriş Görüntüsü: Gri seviyeli bir görüntü olmalıdır. Renkli görüntülerde de işlem yapılabilir ancak en iyi sonuçlar **gri seviyeli** görüntülerde alınır.\n"
         "Çıkış Görüntüsü: Morfolojik işlemler uygulanmış gri seviyeli veya renkli görüntü döner.\n\n"
-        "• Kernel Size: Yapısal elemanın boyutudur. Pozitif ve tek sayı olmalıdır. Örn: 3, 5, 7...\n"
+        "• Kernel Size: Yapısal elemanın boyutudur. Pozitif ve tek sayı olabilir. Örn: 3, 5, 7...\n"
         "• Kernel Shape: Çekirdek şeklidir. Rectangular (dikdörtgen), Ellipse (elips), veya Cross (çapraz) olabilir.\n"
         "• Operations: Uygulanacak morfolojik işlemi seçin:\n"
         "  - Erode: Nesneleri küçültür.\n"
