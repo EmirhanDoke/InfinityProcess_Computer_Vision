@@ -117,9 +117,6 @@ class MorphologicalFrame(ProcessFrameBase):
     name = "Morphological"
 
     def create_widgets(self):
-        # ttk.Label(self.frame, text="Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
-        # self.kernelsize = ttk.Entry(self.frame)
-        # self.kernelsize.grid(row=1, column=1, padx=2, pady=2)
 
         ttk.Label(self.frame, text="Width and Height of Kernel Size:").grid(row=1, column=0, padx=2, pady=2)
         
