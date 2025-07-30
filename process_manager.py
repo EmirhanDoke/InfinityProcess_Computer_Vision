@@ -187,6 +187,9 @@ class ADD_ComboBox:
         
         rows = (len(ADD_ComboBox.images) + cols - 1) // cols
         
+        # Close old figure if exists
+        cls.close_old_figure()
+        
         # Show with Subplot
         plt.figure(figsize=(10, 5))
         for i, img in enumerate(ADD_ComboBox.images):
@@ -200,7 +203,7 @@ class ADD_ComboBox:
                 
             elif len(img.shape) == 3 and img.shape[2] == 3:
                 if isinstance(img, np.ndarray) and img.size > 0:
-                    # Renkli görüntü
+                    # Color Image
                     img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
                     plt.imshow(img_rgb)
             
@@ -212,7 +215,7 @@ class ADD_ComboBox:
             plt.title(names[i])  
         
         plt.tight_layout()
-        plt.show()
+        plt.show(block=False)
     
     @classmethod
     def show_image_details(cls, path):
@@ -254,3 +257,9 @@ class ADD_ComboBox:
         img_label = ttk.Label(details_window, image=img_tk)
         img_label.image = img_tk  # Keep a reference to avoid garbage collection
         img_label.pack(padx = 10, pady=10, side=ttk.LEFT)
+
+    @classmethod
+    def close_old_figure(cls):
+        
+        if Utils.load_user_settings("close_old_figure_flag") == True:
+            plt.close("all")

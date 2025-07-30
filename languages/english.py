@@ -298,4 +298,6 @@ translations = {
     
     "Check_Image_Settings": "Check Image Setting",
     
+    "Figure_Settings": "Figure Show Settings",
+    
 }

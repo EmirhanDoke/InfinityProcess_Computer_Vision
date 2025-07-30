@@ -29,6 +29,7 @@ class menu_bar():
         self.infinity_one_line = ttk.BooleanVar()
         self.theme_select = ttk.StringVar()
         self.select_folder_type = ttk.StringVar()
+        self.figure_settings = ttk.BooleanVar()
         self.load_user_settings()
         
         
@@ -86,7 +87,10 @@ class menu_bar():
         language_select = ttk.Combobox(lowwer_frame, values=["English", "Turkish"], textvariable=self.language_select)
         language_select.grid(row=2, column=1, padx=5, pady=5)
         
-        
+        ttk.Label(lowwer_frame, text=self.get_translation("Figure_Settings")).grid(row=2, column=2, padx=0, pady=5)
+        figure_settings = ttk.Checkbutton(lowwer_frame, variable=self.figure_settings, bootstyle="round-toggle")
+        figure_settings.grid(row=2, column=3, padx=5, pady=5)
+
         themes = ['cosmo', 'flatly', 'litera', 'minty', 'lumen', 'sandstone', 'yeti', 'pulse',
                   'united', 'morph', 'journal', 'darkly', 'superhero', 'solar', 'cyborg', 'vapor', 'simplex', 'cerculean']
         
@@ -204,7 +208,8 @@ class menu_bar():
             "infinity_one_line": self.infinity_one_line.get(),
             "theme": self.theme_select.get(),
             "folder_type": self.select_folder_type.get(),
-            "check_image_settings": self.check_image_settings.get()
+            "check_image_settings": self.check_image_settings.get(),
+            "close_old_figure_flag": self.figure_settings.get()
         }
         with open(path, "w") as file:
             json.dump(settings, file, indent=4)
@@ -215,7 +220,7 @@ class menu_bar():
         
         path = Utils.resource_path(Utils.settings_file)
         
-        # Ayarları dosyadan yükle
+        # Load settings from the file
         if os.path.exists(path):
             with open(path, "r") as file:
                 settings = json.load(file)
@@ -226,6 +231,7 @@ class menu_bar():
                 self.theme_select.set(settings.get("theme", "litera"))
                 self.select_folder_type.set(settings.get("folder_type", "Single Folder"))
                 self.check_image_settings.set(settings.get("check_image_settings", True))
+                self.figure_settings.set(settings.get("close_old_figure_flag", False))
 
     def apply_dataset_action(self):
         folder_type = Utils.load_user_settings("folder_type")
